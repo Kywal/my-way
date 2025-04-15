@@ -6,60 +6,80 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_pessoa")
+@Table(name = "tb_person")
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "UUID")
-    private UUID idUsuario;
+    private UUID id;
 
-    private String pessoaNome;
+    @Column
+    private String name;
 
-    private int pessoaIdade;
+    @Column
+    private int age;
 
-    private GeneroPessoa pessoaGenero;
+    @Enumerated(EnumType.STRING)
+    private GeneroPessoa gender;
 
     private String historyDescription;
 
-    private String pessoaPais;
+    private String country;
 
-    private String pessoaEstado;
+    private String region;
 
-    public Person() {
+    public Person() {}
 
+    public Person(UUID id, String name, int age, GeneroPessoa genero, String historyDescription, String country, String region) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = genero;
+        this.historyDescription = historyDescription;
+        this.country = country;
+        this.region = region;
     }
 
-    public UUID getIdUsuario() {
-        return idUsuario;
+    public Person(PessoaDTO pessoaDTO){
+        this.name = pessoaDTO.pessoaNome();
+        this.age = pessoaDTO.pessoaIdade();
+        this.gender = pessoaDTO.pessoaGenero();
+        this.historyDescription = pessoaDTO.historyDescription();
+        this.country = pessoaDTO.pessoaPais();
+        this.region = pessoaDTO.pessoaEstado();
     }
 
-    public void setIdUsuario(UUID idUsuario) {
-        this.idUsuario = idUsuario;
+    public UUID getId() {
+        return id;
     }
 
-    public String getPessoaNome() {
-        return pessoaNome;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
-    public void setPessoaNome(String pessoaNome) {
-        this.pessoaNome = pessoaNome;
+    public String getName() {
+        return name;
     }
 
-    public int getPessoaIdade() {
-        return pessoaIdade;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPessoaIdade(int pessoaIdade) {
-        this.pessoaIdade = pessoaIdade;
+    public int getAge() {
+        return age;
     }
 
-    public GeneroPessoa getPessoaGenero() {
-        return pessoaGenero;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public void setPessoaGenero(GeneroPessoa pessoaGenero) {
-        this.pessoaGenero = pessoaGenero;
+    public GeneroPessoa getGender() {
+        return gender;
+    }
+
+    public void setGender(GeneroPessoa gender) {
+        this.gender = gender;
     }
 
     public String getHistoryDescription() {
@@ -70,28 +90,21 @@ public class Person {
         this.historyDescription = historyDescription;
     }
 
-    public String getPessoaPais() {
-        return pessoaPais;
+    public String getCountry() {
+        return country;
     }
 
-    public void setPessoaPais(String pessoaPais) {
-        this.pessoaPais = pessoaPais;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public String getPessoaEstado() {
-        return pessoaEstado;
+    public String getRegion() {
+        return region;
     }
 
-    public void setPessoaEstado(String pessoaEstado) {
-        this.pessoaEstado = pessoaEstado;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public Person(PessoaDTO pessoaDTO){
-        this.pessoaNome = pessoaDTO.pessoaNome();
-        this.pessoaIdade = pessoaDTO.pessoaIdade();
-        this.pessoaGenero = pessoaDTO.pessoaGenero();
-        this.historyDescription = pessoaDTO.historyDescription();
-        this.pessoaPais = pessoaDTO.pessoaPais();
-        this.pessoaEstado = pessoaDTO.pessoaEstado();
-    }
+
 }

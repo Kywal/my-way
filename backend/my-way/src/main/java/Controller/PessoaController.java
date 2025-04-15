@@ -1,7 +1,7 @@
 package Controller;
 
 import DTO.PessoaDTO;
-import Entities.PessoaClasse;
+import Entities.Person;
 import Service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,12 +18,12 @@ public class PessoaController {
     PessoaService pessoaService;
 
     @PostMapping
-    public ResponseEntity<PessoaClasse> criarPessoa(@RequestBody PessoaDTO novaPessoa){
-        PessoaClasse pessoaClasse = pessoaService.criarNovaPessoa(novaPessoa);
-        return new ResponseEntity<>(pessoaClasse, HttpStatus.CREATED);
+    public ResponseEntity<Person> criarPessoa(@RequestBody PessoaDTO novaPessoa){
+        Person person = pessoaService.criarNovaPessoa(novaPessoa);
+        return new ResponseEntity<>(person, HttpStatus.CREATED);
     }
     @GetMapping
-    public List<PessoaClasse> retornarPessoas(){
+    public List<Person> retornarPessoas(){
         return pessoaService.retornarPessoas();
     }
     @DeleteMapping("/{email}")
