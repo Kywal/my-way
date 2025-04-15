@@ -1,11 +1,10 @@
 package Service;
 
 import DTO.PessoaDTO;
-import Entities.PessoaClasse;
+import Entities.Person;
 import Repository.PessoaRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -20,27 +19,27 @@ public class PessoaService {
     public PessoaService(PessoaRepository pessoaRepository) {
         this.pessoaRepository = pessoaRepository;
     }
-    public void salvarModificacoesPessoa(PessoaClasse novaPessoa){
+    public void salvarModificacoesPessoa(Person novaPessoa){
         this.pessoaRepository.save(novaPessoa);
     }
-    public PessoaClasse criarNovaPessoa(PessoaDTO novaPessoa){
-        PessoaClasse pessoaClasse = new PessoaClasse(novaPessoa);
-        this.salvarModificacoesPessoa(pessoaClasse);
-        return pessoaClasse;
+    public Person criarNovaPessoa(PessoaDTO novaPessoa){
+        Person person = new Person(novaPessoa);
+        this.salvarModificacoesPessoa(person);
+        return person;
     }
-    public List <PessoaClasse> retornarPessoas(){
+    public List <Person> retornarPessoas(){
         return this.pessoaRepository.findAll();
     }
-    public PessoaClasse atualizarPessoa(String pessoaEmail, PessoaDTO atualizacao){
-        PessoaClasse pessoaClasse = pessoaRepository.findByPessoaEmail(pessoaEmail).orElseThrow(()->
+    public Person atualizarPessoa(String pessoaEmail, PessoaDTO atualizacao){
+        Person person = pessoaRepository.findByPessoaEmail(pessoaEmail).orElseThrow(()->
                 new RuntimeException("Pessoa não encontrada com o email: " + pessoaEmail));
 
-        BeanUtils.copyProperties(atualizacao,pessoaClasse, getNullPropertyNames(atualizacao));
+        BeanUtils.copyProperties(atualizacao, person, getNullPropertyNames(atualizacao));
 
-        return pessoaRepository.save(pessoaClasse);
+        return pessoaRepository.save(person);
     }
     public void deletarPessoaPorEmail(String pessoaEmail) {
-        PessoaClasse pessoa = pessoaRepository.findByPessoaEmail(pessoaEmail)
+        Person pessoa = pessoaRepository.findByPessoaEmail(pessoaEmail)
                 .orElseThrow(() -> new RuntimeException("Pessoa não encontrada com o email: " + pessoaEmail));
         pessoaRepository.delete(pessoa);
     }
