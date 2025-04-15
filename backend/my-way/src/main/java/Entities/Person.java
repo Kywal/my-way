@@ -7,7 +7,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "tb_pessoa")
-public class PessoaClasse {
+public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "UUID")
@@ -24,6 +25,10 @@ public class PessoaClasse {
     private String pessoaPais;
 
     private String pessoaEstado;
+
+    public Person() {
+
+    }
 
     public UUID getIdUsuario() {
         return idUsuario;
@@ -81,7 +86,7 @@ public class PessoaClasse {
         this.pessoaEstado = pessoaEstado;
     }
 
-    public PessoaClasse(PessoaDTO pessoaDTO){
+    public Person(PessoaDTO pessoaDTO){
         this.pessoaNome = pessoaDTO.pessoaNome();
         this.pessoaIdade = pessoaDTO.pessoaIdade();
         this.pessoaGenero = pessoaDTO.pessoaGenero();
