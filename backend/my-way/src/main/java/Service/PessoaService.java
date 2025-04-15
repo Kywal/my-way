@@ -27,6 +27,7 @@ public class PessoaService {
         this.salvarModificacoesPessoa(person);
         return person;
     }
+
     public List <Person> retornarPessoas(){
         return this.pessoaRepository.findAll();
     }
@@ -38,6 +39,7 @@ public class PessoaService {
 
         return pessoaRepository.save(person);
     }
+
     public void deletarPessoaPorEmail(String pessoaEmail) {
         Person pessoa = pessoaRepository.findByPessoaEmail(pessoaEmail)
                 .orElseThrow(() -> new RuntimeException("Pessoa não encontrada com o email: " + pessoaEmail));

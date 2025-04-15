@@ -22,10 +22,12 @@ public class PessoaController {
         Person person = pessoaService.criarNovaPessoa(novaPessoa);
         return new ResponseEntity<>(person, HttpStatus.CREATED);
     }
+
     @GetMapping
     public List<Person> retornarPessoas(){
         return pessoaService.retornarPessoas();
     }
+
     @DeleteMapping("/{email}")
     public ResponseEntity<String> apagarPessoa(@PathVariable String pessoaEmail){
         pessoaService.deletarPessoaPorEmail(pessoaEmail);
