@@ -1,9 +1,7 @@
 package br.ufrn.myway.Model.Entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -13,6 +11,9 @@ public abstract class AbstractModel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long id;
+    @Column(updatable = false)
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected LocalDate createdAt = LocalDate.now();
     protected boolean ativo = true;
 
