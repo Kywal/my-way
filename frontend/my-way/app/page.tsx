@@ -6,19 +6,22 @@ import { button as buttonStyles } from "@heroui/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
+import NextLink from "next/link";
+
+import clsx from "clsx";
 
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
+        <span className={clsx(title(), "dark:text-white")}>Make&nbsp;</span>
+        <span className={title({ color: "violet" })}>Roadmaps&nbsp;</span>
         <br />
-        <span className={title()}>
-          websites regardless of your design experience.
+        <span className={clsx(title(), "dark:text-white")}>
+          for your professional construction.
         </span>
         <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
+          Study, then do online interviews and curriculum analysis
         </div>
       </div>
 
@@ -47,7 +50,10 @@ export default function Home() {
       <div className="mt-8">
         <Snippet hideCopyButton hideSymbol variant="bordered">
           <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
+            Get started by{" "}
+            <Code color="primary">
+              <NextLink href={"/register"}>Sign up</NextLink>
+            </Code>
           </span>
         </Snippet>
       </div>
