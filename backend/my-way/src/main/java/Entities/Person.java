@@ -1,6 +1,6 @@
 package Entities;
 
-import DTO.PessoaDTO;
+import DTO.PersonDTO;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -21,7 +21,7 @@ public class Person {
     private int age;
 
     @Enumerated(EnumType.STRING)
-    private GeneroPessoa gender;
+    private GenderPerson gender;
 
     private String historyDescription;
 
@@ -31,7 +31,7 @@ public class Person {
 
     public Person() {}
 
-    public Person(UUID id, String name, int age, GeneroPessoa genero, String historyDescription, String country, String region) {
+    public Person(UUID id, String name, int age, GenderPerson genero, String historyDescription, String country, String region) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -41,13 +41,13 @@ public class Person {
         this.region = region;
     }
 
-    public Person(PessoaDTO pessoaDTO){
-        this.name = pessoaDTO.pessoaNome();
-        this.age = pessoaDTO.pessoaIdade();
-        this.gender = pessoaDTO.pessoaGenero();
-        this.historyDescription = pessoaDTO.historyDescription();
-        this.country = pessoaDTO.pessoaPais();
-        this.region = pessoaDTO.pessoaEstado();
+    public Person(PersonDTO personDTO){
+        this.name = personDTO.name();
+        this.age = personDTO.age();
+        this.gender = personDTO.gender();
+        this.historyDescription = personDTO.historyDescription();
+        this.country = personDTO.country();
+        this.region = personDTO.region();
     }
 
     public UUID getId() {
@@ -74,11 +74,11 @@ public class Person {
         this.age = age;
     }
 
-    public GeneroPessoa getGender() {
+    public GenderPerson getGender() {
         return gender;
     }
 
-    public void setGender(GeneroPessoa gender) {
+    public void setGender(GenderPerson gender) {
         this.gender = gender;
     }
 
