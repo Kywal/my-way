@@ -1,8 +1,8 @@
 package Service;
 
-import DTO.PessoaDTO;
+import DTO.PersonDTO;
 import Entities.Person;
-import Repository.PessoaRepository;
+import Repository.PersonRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,40 +10,41 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class PessoaService {
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private PersonRepository personRepository;
 
-    public PessoaService(PessoaRepository pessoaRepository) {
-        this.pessoaRepository = pessoaRepository;
+    public PessoaService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
     }
-    public void salvarModificacoesPessoa(Person novaPessoa){
-        this.pessoaRepository.save(novaPessoa);
+    public void saveChangesPerson(Person novaPessoa){
+        this.personRepository.save(novaPessoa);
     }
-    public Person criarNovaPessoa(PessoaDTO novaPessoa){
+    public Person createNewPerson(PersonDTO novaPessoa){
         Person person = new Person(novaPessoa);
-        this.salvarModificacoesPessoa(person);
+        this.saveChangesPerson(person);
         return person;
     }
 
-    public List <Person> retornarPessoas(){
-        return this.pessoaRepository.findAll();
+    public List <Person> ListPersons(){
+        return this.personRepository.findAll();
     }
-    public Person atualizarPessoa(String pessoaEmail, PessoaDTO atualizacao){
-        Person person = pessoaRepository.findByPessoaEmail(pessoaEmail).orElseThrow(()->
-                new RuntimeException("Pessoa não encontrada com o email: " + pessoaEmail));
+    public Person updatePerson(UUID idPerson, PersonDTO update){
+        Person person = personRepository.findById(idPerson).orElseThrow(()->
+                new RuntimeException("Person not found by the ID: " + idPerson));
 
-        BeanUtils.copyProperties(atualizacao, person, getNullPropertyNames(atualizacao));
+        BeanUtils.copyProperties(update, person, getNullPropertyNames(update));
 
-        return pessoaRepository.save(person);
+        return personRepository.save(person);
     }
 
-    public void deletarPessoaPorEmail(String pessoaEmail) {
-        Person pessoa = pessoaRepository.findByPessoaEmail(pessoaEmail)
-                .orElseThrow(() -> new RuntimeException("Pessoa não encontrada com o email: " + pessoaEmail));
-        pessoaRepository.delete(pessoa);
+    public void deletePersonById(UUID idPerson) {
+        Person pessoa = personRepository.findById(idPerson)
+                .orElseThrow(() -> new RuntimeException("Person not found by ID: " + idPerson));
+        personRepository.delete(pessoa);
     }
 
     private String[] getNullPropertyNames(Object source) {

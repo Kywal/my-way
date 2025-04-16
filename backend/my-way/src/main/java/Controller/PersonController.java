@@ -1,6 +1,6 @@
 package Controller;
 
-import DTO.PessoaDTO;
+import DTO.PersonDTO;
 import Entities.Person;
 import Service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,28 +9,29 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/Pessoa")
+@RequestMapping("/Person")
 
-public class PessoaController {
+public class PersonController {
     @Autowired
     PessoaService pessoaService;
 
     @PostMapping
-    public ResponseEntity<Person> criarPessoa(@RequestBody PessoaDTO novaPessoa){
-        Person person = pessoaService.criarNovaPessoa(novaPessoa);
+    public ResponseEntity<Person> criarPessoa(@RequestBody PersonDTO novaPessoa){
+        Person person = pessoaService.createNewPerson(novaPessoa);
         return new ResponseEntity<>(person, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Person> retornarPessoas(){
-        return pessoaService.retornarPessoas();
+    public List<Person> ListPerson(){
+        return pessoaService.ListPersons();
     }
 
-    @DeleteMapping("/{email}")
-    public ResponseEntity<String> apagarPessoa(@PathVariable String pessoaEmail){
-        pessoaService.deletarPessoaPorEmail(pessoaEmail);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> apagarPessoa(@PathVariable UUID idPerson){
+        pessoaService.deletePersonById(idPerson);
         return ResponseEntity.ok("Pessoa apagada com sucesso");
     }
 }
