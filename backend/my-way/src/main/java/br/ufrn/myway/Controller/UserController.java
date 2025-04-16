@@ -1,13 +1,11 @@
-package Controller;
+package br.ufrn.myway.Controller;
 
-import DTO.UserDTO;
-import Entities.Person;
-import Entities.User;
-import Service.UserService;
+import br.ufrn.myway.Model.DTO.UserDTO;
+import br.ufrn.myway.Model.Entities.User;
+import br.ufrn.myway.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
