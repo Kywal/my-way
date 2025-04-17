@@ -1,16 +1,11 @@
 package br.ufrn.myway.Service;
-
-import br.ufrn.myway.Model.DTO.PersonDTO;
+ 
 import br.ufrn.myway.Model.Entities.Person;
-import br.ufrn.myway.Repository.PersonRepository;
-import org.springframework.beans.BeanUtils;
+import br.ufrn.myway.Repository.PersonRepository; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+ 
+import java.util.List; 
 
 @Service
 public class PersonService {
