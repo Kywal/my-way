@@ -1,6 +1,5 @@
 package br.ufrn.myway.Model.Entities;
-
-import br.ufrn.myway.Model.DTO.PersonDTO;
+ 
 import br.ufrn.myway.Model.Enums.GenderPerson;
 import jakarta.persistence.*;
 
