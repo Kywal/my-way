@@ -10,10 +10,12 @@ import java.time.LocalDate;
 @Table(name = "tb_person")
 public class Person extends AbstractModel {
 
-    @Column
+    @OneToOne
+    @JoinColumn(name ="id_user")
+    private User user;
+
     private String name;
 
-    @Column
     private LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
@@ -24,8 +26,6 @@ public class Person extends AbstractModel {
     private String country;
 
     private String region;
-
-
 
     public String getName() {
         return name;
@@ -75,5 +75,15 @@ public class Person extends AbstractModel {
         this.region = region;
     }
 
+    public Person(User user, String name, LocalDate birthDate, GenderPerson gender, String historyDescription, String country, String region) {
+        this.user = user;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.historyDescription = historyDescription;
+        this.country = country;
+        this.region = region;
+    }
 
+    public Person(){}
 }
