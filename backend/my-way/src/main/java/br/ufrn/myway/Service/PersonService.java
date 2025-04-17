@@ -22,13 +22,17 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public Person save(Person person) {return personRepository.save(person);}
+    public Person save(Person person) {
+        return personRepository.save(person);
+    }
+
     public List<Person> list(){
-        return personRepository.findAll();
+
+        return personRepository.list();
     }
+
     public void delete(Long id) {
-
+        personRepository.delete(id);
     }
-
 
 }

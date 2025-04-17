@@ -1,15 +1,13 @@
 package br.ufrn.myway.Model.Entities;
 
-
 import jakarta.persistence.*;
-
-import java.util.UUID;
 
 @Table(name = "tb_user")
 @Entity
-public class User extends AbstractModel{
+public class User extends AbstractModel {
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="id_person")
     private Person person;
 
     private String email;
@@ -17,8 +15,6 @@ public class User extends AbstractModel{
     private String password;
 
     private int tokens;
-
-    private boolean ativo = true;
 
     public String getEmail() {
         return email;
@@ -41,6 +37,15 @@ public class User extends AbstractModel{
     }
 
     public void setTokens(int tokens) {
+        this.tokens = tokens;
+    }
+
+    public User(){}
+
+    public User(Person person, String email, String password, int tokens) {
+        this.person = person;
+        this.email = email;
+        this.password = password;
         this.tokens = tokens;
     }
 }
