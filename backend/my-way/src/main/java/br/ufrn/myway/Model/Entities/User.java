@@ -1,5 +1,6 @@
 package br.ufrn.myway.Model.Entities;
 
+import br.ufrn.myway.Model.Enums.Roles;
 import jakarta.persistence.*;
 
 @Table(name = "tb_user")
@@ -13,6 +14,24 @@ public class User extends AbstractModel {
     private String email;
 
     private String password;
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    private Roles role;
 
     private int tokens;
 
