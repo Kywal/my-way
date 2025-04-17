@@ -5,6 +5,6 @@ CREATE TABLE tb_user (
     password VARCHAR(255) NOT NULL,
     tokens INT NOT NULL,
     CONSTRAINT fk_user_person FOREIGN KEY (id_person)
-        REFERENCES person (id)
+        REFERENCES tb_person (id)
         ON DELETE CASCADE
 );
