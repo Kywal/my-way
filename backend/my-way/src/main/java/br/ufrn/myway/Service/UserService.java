@@ -3,6 +3,7 @@ package br.ufrn.myway.Service;
 import br.ufrn.myway.Model.User;
 import br.ufrn.myway.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +31,11 @@ public class UserService {
 
     public User findById(Long id) {
         return userRepository.getById(id);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
     }
 
 }
