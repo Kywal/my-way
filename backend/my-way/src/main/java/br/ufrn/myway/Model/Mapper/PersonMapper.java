@@ -1,8 +1,9 @@
 package br.ufrn.myway.Model.Mapper;
 
-import br.ufrn.myway.Model.Person;
-import br.ufrn.myway.Model.DTO.PersonDTO;
 import org.mapstruct.Mapper;
+
+import br.ufrn.myway.Model.DTO.PersonDTO;
+import br.ufrn.myway.Model.Person;
 
 @Mapper(componentModel = "spring")
 public interface PersonMapper {
