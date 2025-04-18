@@ -4,10 +4,10 @@ import br.ufrn.myway.Model.DTO.UserDTO;
 import br.ufrn.myway.Model.Entities.User;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = PersonMapper.class)
 public interface UserMapper {
 
     User toEntity(UserDTO dto);
-    UserDTO toDto(User user);
 
+    UserDTO toDto(User user);
 }
