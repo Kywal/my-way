@@ -1,7 +1,8 @@
 package br.ufrn.myway.Repository;
 
-import br.ufrn.myway.Model.Entities.User;
 import org.springframework.stereotype.Repository;
+
+import br.ufrn.myway.Model.User;
 
 import java.util.Optional;
 

@@ -1,8 +1,8 @@
 package br.ufrn.myway.Controller;
 
+import br.ufrn.myway.Model.User;
 import br.ufrn.myway.Model.DTO.LoginDTO;
 import br.ufrn.myway.Model.DTO.UserDTO;
-import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Mapper.UserMapper;
 import br.ufrn.myway.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

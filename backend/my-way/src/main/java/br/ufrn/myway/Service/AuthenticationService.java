@@ -1,6 +1,6 @@
 package br.ufrn.myway.Service;
 
-import br.ufrn.myway.Model.Entities.User;
+import br.ufrn.myway.Model.User;
 import br.ufrn.myway.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

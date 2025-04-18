@@ -1,11 +1,11 @@
 package br.ufrn.myway.Service;
- 
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Repository.UserRepository; 
+
+import br.ufrn.myway.Model.User;
+import br.ufrn.myway.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
- 
-import java.util.List; 
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -20,7 +20,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List <User> list(){
+    public List<User> list() {
         return userRepository.list();
     }
 
