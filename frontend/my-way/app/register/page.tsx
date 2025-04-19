@@ -47,13 +47,13 @@ export default function RegisterPage() {
 
   const getPasswordError = (value: any) => {
     if (value.length < 4) {
-      return "Password must be 4 characters or more";
+      return "A senha precisa de pelo menos 4 caracteres";
     }
     if ((value.match(/[A-Z]/g) || []).length < 1) {
-      return "Password needs at least 1 uppercase letter";
+      return "A senha precisa de pelo menos 1 letra maiúscula";
     }
     if ((value.match(/[^a-z]/gi) || []).length < 1) {
-      return "Password needs at least 1 symbol";
+      return "A senha precisa de pelo menos 1 símbolo";
     }
 
     return null;
@@ -73,7 +73,7 @@ export default function RegisterPage() {
     }
 
     if (data.name === "admin") {
-      newErrors.name = "Nice try! Choose a different username";
+      newErrors.name = "Boa tentativa! Escolha um nome diferente";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -84,7 +84,7 @@ export default function RegisterPage() {
     }
 
     if (data.terms !== "true") {
-      setErrors({ terms: "Please accept the terms" });
+      setErrors({ terms: "Por favor, leia e aceite os termos" });
       setIsSubmitting(false);
 
       return;
@@ -148,37 +148,37 @@ export default function RegisterPage() {
       validationErrors={errors}
       onSubmit={onSubmit}
     >
-      <h1 className={clsx(title(), "dark:text-white")}>Sign up</h1>
+      <h1 className={clsx(title(), "dark:text-white")}>Cadastrar</h1>
       <div className="flex flex-col gap-4 max-w-md">
         <Input
           isRequired
           errorMessage={({ validationDetails }) => {
             if (validationDetails.valueMissing) {
-              return "Please enter your name";
+              return "Por favor, insira seu nome";
             }
 
             return errors.name;
           }}
-          label="Name"
+          label="Nome"
           labelPlacement="outside"
           name="name"
-          placeholder="Enter your name"
+          placeholder="Insira seu nome"
         />
 
         <Input
           isRequired
           errorMessage={({ validationDetails }) => {
             if (validationDetails.valueMissing) {
-              return "Please enter your email";
+              return "Por favor, insira seu email";
             }
             if (validationDetails.typeMismatch) {
-              return "Please enter a valid email address";
+              return "Por favor, insira um endereço de email válido";
             }
           }}
           label="Email"
           labelPlacement="outside"
           name="email"
-          placeholder="Enter your email"
+          placeholder="Insira seu email"
           type="email"
         />
 
@@ -186,10 +186,10 @@ export default function RegisterPage() {
           isRequired
           errorMessage={getPasswordError(password)}
           isInvalid={getPasswordError(password) !== null}
-          label="Password"
+          label="Senha"
           labelPlacement="outside"
           name="password"
-          placeholder="Enter your password"
+          placeholder="Insira sua senha"
           type="password"
           value={password}
           onValueChange={setPassword}
@@ -208,7 +208,7 @@ export default function RegisterPage() {
             setErrors((prev) => ({ ...prev, terms: undefined }))
           }
         >
-          Eu estou de acordo com os termos e condições
+          Aceito os termos e condições
         </Checkbox>
 
         {errors.terms && (
@@ -222,10 +222,10 @@ export default function RegisterPage() {
             type="submit"
             isLoading={isSubmitting}
           >
-            Submit
+            Cadastrar
           </Button>
           <Button type="reset" variant="bordered">
-            Reset
+            Resetar
           </Button>
         </div>
       </div>
