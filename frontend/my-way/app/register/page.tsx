@@ -1,8 +1,20 @@
 "use client";
-import React from "react";
-import { Form, Input, Checkbox, Button } from "@heroui/react";
+import React, { useEffect } from "react";
+import {
+  Form,
+  Input,
+  Checkbox,
+  Button,
+  Progress,
+  Link,
+  useDisclosure,
+} from "@heroui/react";
 import { title } from "@/components/primitives";
 import clsx from "clsx";
+import axios from "axios";
+import { UserRegister } from "@/types";
+import ModalWithMessage from "@/components/modalWithMessage";
+import { CheckCircleIcon } from "@/components/icons";
 
 type ErrorsType = {
   name?: string;
@@ -13,10 +25,25 @@ type ErrorsType = {
 
 export default function RegisterPage() {
   const [password, setPassword] = React.useState("");
-  const [submitted, setSubmitted] = React.useState<{
-    [key: string]: FormDataEntryValue;
-  } | null>(null);
   const [errors, setErrors] = React.useState<ErrorsType>({});
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [onSuccessRegister, setOnSuccessRegister] = React.useState(false);
+  const [progressValueWithSuccess, setProgressValueWithSuccess] =
+    React.useState(0);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (onSuccessRegister)
+      interval = setInterval(() => {
+        if (progressValueWithSuccess >= 100) {
+          clearInterval(interval);
+        } else setProgressValueWithSuccess((v) => v + 2);
+      }, 60);
+
+    return () => clearInterval(interval);
+  }, [onSuccessRegister]);
 
   const getPasswordError = (value: any) => {
     if (value.length < 4) {
@@ -32,7 +59,8 @@ export default function RegisterPage() {
     return null;
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsSubmitting(true);
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget));
 
@@ -50,25 +78,74 @@ export default function RegisterPage() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      setIsSubmitting(false);
 
       return;
     }
 
     if (data.terms !== "true") {
       setErrors({ terms: "Please accept the terms" });
+      setIsSubmitting(false);
 
       return;
     }
 
+    const user: UserRegister = {
+      email: data.email as string,
+      password: data.password as string,
+      person: {
+        name: data.name as string,
+      },
+    };
+
+    await createUser(user);
     setErrors({});
-    setSubmitted(data);
+    setIsSubmitting(false);
+    setOnSuccessRegister(true);
   };
 
-  return (
+  const createUser = async (user: UserRegister) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8081/user/create",
+        user
+      );
+
+      return response;
+    } catch (error) {
+      setIsSubmitting(false);
+      onOpen();
+    }
+  };
+
+  return onSuccessRegister ? (
+    <div className="flex flex-col items-center justify-center">
+      {progressValueWithSuccess >= 100 ? (
+        <div className="flex flex-col items-center justify-center">
+          <h1 className={clsx(title(), "dark:text-white")}>
+            Cadastro realizado com sucesso!
+          </h1>
+          <p className="text-center text-small dark:text-white">
+            Agora você pode logar no sistema com seu email e senha.{" "}
+            <Link href="/login">Entrar Agora</Link>
+          </p>
+          <CheckCircleIcon className="text-success mt-6" size={150} />
+        </div>
+      ) : (
+        <Progress
+          aria-label="Progresso do usuário sendo criado"
+          className="max-w-md dark:text-white mb-8"
+          color="success"
+          showValueLabel={progressValueWithSuccess < 100}
+          size="md"
+          value={progressValueWithSuccess}
+        />
+      )}
+    </div>
+  ) : (
     <Form
       className="w-full justify-center items-center space-y-4"
       validationErrors={errors}
-      onReset={() => setSubmitted(null)}
       onSubmit={onSubmit}
     >
       <h1 className={clsx(title(), "dark:text-white")}>Sign up</h1>
@@ -131,7 +208,7 @@ export default function RegisterPage() {
             setErrors((prev) => ({ ...prev, terms: undefined }))
           }
         >
-          I agree to the terms and conditions
+          Eu estou de acordo com os termos e condições
         </Checkbox>
 
         {errors.terms && (
@@ -139,7 +216,12 @@ export default function RegisterPage() {
         )}
 
         <div className="flex gap-4">
-          <Button className="w-full" color="primary" type="submit">
+          <Button
+            className="w-full"
+            color="primary"
+            type="submit"
+            isLoading={isSubmitting}
+          >
             Submit
           </Button>
           <Button type="reset" variant="bordered">
@@ -147,12 +229,12 @@ export default function RegisterPage() {
           </Button>
         </div>
       </div>
-
-      {submitted && (
-        <div className="text-small text-default-500 mt-4">
-          Submitted data: <pre>{JSON.stringify(submitted, null, 2)}</pre>
-        </div>
-      )}
+      <ModalWithMessage
+        title="Erro ao cadastrar"
+        message="Erro ao tentar cadastrar, tente novamente."
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      />
     </Form>
   );
 }
