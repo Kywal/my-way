@@ -3,10 +3,8 @@ import React, { useEffect } from "react";
 import { Form, Input, Button, useDisclosure } from "@heroui/react";
 import { title } from "@/components/primitives";
 import clsx from "clsx";
-import axios from "axios";
 import { UserLogin } from "@/types";
 import ModalWithMessage from "@/components/modalWithMessage";
-import { CheckCircleIcon } from "@/components/icons";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -69,29 +67,15 @@ export default function LoginPage() {
       router.push("/dashboard");
     } else {
       console.log("Erro ao logar:", res?.error);
+      onOpen();
       setIsSubmitting(false);
 
       return;
     }
 
-    // await login(user);
     setErrors({});
     setIsSubmitting(false);
     setOnSuccessLogin(true);
-  };
-
-  const login = async (user: UserLogin) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8081/user/login",
-        user
-      );
-
-      return response;
-    } catch (error) {
-      setIsSubmitting(false);
-      onOpen();
-    }
   };
 
   return (
