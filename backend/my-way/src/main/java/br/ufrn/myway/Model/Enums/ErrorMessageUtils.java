@@ -1,5 +1,7 @@
 package br.ufrn.myway.Model.Enums;
 
+import br.ufrn.myway.Service.BusinessException;
+
 import java.text.MessageFormat;
 
 public enum ErrorMessageUtils {
@@ -16,5 +18,8 @@ public enum ErrorMessageUtils {
     public String getMessage(Object... args) {
         return MessageFormat.format(template, args);
     }
+
+
+
 
 }
