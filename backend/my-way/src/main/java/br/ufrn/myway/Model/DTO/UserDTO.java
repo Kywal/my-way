@@ -1,6 +1,7 @@
 package br.ufrn.myway.Model.DTO;
 
-import br.ufrn.myway.Model.Entities.Person;
+import br.ufrn.myway.Model.Enums.Roles;
 
-public record UserDTO(Person person, String email, String password, int tokens) {
+public record UserDTO(String email, String password, int tokens, Roles role, PersonDTO person) {
+
 }

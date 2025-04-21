@@ -1,26 +1,33 @@
 package br.ufrn.myway.Service;
- 
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Repository.UserRepository; 
+
+import br.ufrn.myway.Model.User;
+import br.ufrn.myway.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
- 
-import java.util.List; 
+
+import java.util.List;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
-    public List <User> list(){
+    public List<User> list() {
         return userRepository.list();
     }
 
@@ -30,6 +37,11 @@ public class UserService {
 
     public User findById(Long id) {
         return userRepository.getById(id);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
     }
 
 }

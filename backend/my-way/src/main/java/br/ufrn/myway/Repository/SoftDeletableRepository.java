@@ -1,12 +1,12 @@
 package br.ufrn.myway.Repository;
 
-import br.ufrn.myway.Model.Entities.AbstractModel;
-import br.ufrn.myway.Model.Entities.Person;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
+
+import br.ufrn.myway.Model.AbstractModel;
 
 import java.util.List;
 
