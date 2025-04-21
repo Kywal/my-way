@@ -13,3 +13,8 @@ export type UserRegister = {
 type Person = {
   name: string;
 };
+
+export type UserLogin = {
+  email: string;
+  password: string;
+};
