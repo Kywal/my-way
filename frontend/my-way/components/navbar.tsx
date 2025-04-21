@@ -24,8 +24,8 @@ import {
   TwitterIcon,
   GithubIcon,
   DiscordIcon,
-  HeartFilledIcon,
   SearchIcon,
+  LogInIcon,
 } from "@/components/icons";
 
 export const Navbar = () => {
@@ -69,7 +69,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium",
+                  "data-[active=true]:text-primary data-[active=true]:font-medium"
                 )}
                 color="foreground"
                 href={item.href}
@@ -100,14 +100,13 @@ export const Navbar = () => {
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
         <NavbarItem className="hidden md:flex">
           <Button
-            isExternal
             as={Link}
             className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.sponsor}
-            startContent={<HeartFilledIcon className="text-danger" />}
+            href={siteConfig.links.login}
+            startContent={<LogInIcon className="text-white fill-white" />}
             variant="flat"
           >
-            Sponsor
+            Login
           </Button>
         </NavbarItem>
       </NavbarContent>

@@ -14,14 +14,14 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block max-w-xl text-center justify-center">
-        <span className={clsx(title(), "dark:text-white")}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>Roadmaps&nbsp;</span>
+        <span className={clsx(title(), "dark:text-white")}>Crie&nbsp;</span>
+        <span className={title({ color: "green" })}>Roadmaps&nbsp;</span>
         <br />
         <span className={clsx(title(), "dark:text-white")}>
-          for your professional construction.
+          para sua construção profissional.
         </span>
         <div className={subtitle({ class: "mt-4" })}>
-          Study, then do online interviews and curriculum analysis
+          Estude, e então faça entrevistas e análises de currículos
         </div>
       </div>
 
@@ -35,7 +35,7 @@ export default function Home() {
           })}
           href={siteConfig.links.docs}
         >
-          Documentation
+          Documentação
         </Link>
         <Link
           isExternal
@@ -50,9 +50,9 @@ export default function Home() {
       <div className="mt-8">
         <Snippet hideCopyButton hideSymbol variant="bordered">
           <span>
-            Get started by{" "}
+            Inicie agora: {" "}
             <Code color="primary">
-              <NextLink href={"/register"}>Sign up</NextLink>
+              <NextLink href={"/register"}>Cadastre-se</NextLink>
             </Code>
           </span>
         </Snippet>
