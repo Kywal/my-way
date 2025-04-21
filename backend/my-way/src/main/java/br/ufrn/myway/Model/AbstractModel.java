@@ -1,4 +1,4 @@
-package br.ufrn.myway.Model.Entities;
+package br.ufrn.myway.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public abstract class AbstractModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
     @Column(updatable = false)
 

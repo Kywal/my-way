@@ -1,8 +1,9 @@
 package br.ufrn.myway.Repository;
 
-import br.ufrn.myway.Model.Entities.AbstractModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+
+import br.ufrn.myway.Model.AbstractModel;
 
 @NoRepositoryBean
 public interface AbstractRepository<M extends AbstractModel> extends JpaRepository<M, Long> {}

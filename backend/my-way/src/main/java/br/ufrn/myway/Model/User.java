@@ -1,5 +1,6 @@
-package br.ufrn.myway.Model.Entities;
+package br.ufrn.myway.Model;
 
+import br.ufrn.myway.Model.Enums.Roles;
 import jakarta.persistence.*;
 
 @Table(name = "tb_user")
@@ -7,12 +8,30 @@ import jakarta.persistence.*;
 public class User extends AbstractModel {
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="id_person")
+    @JoinColumn(name = "id_person")
     private Person person;
 
     private String email;
 
     private String password;
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    private Roles role;
 
     private int tokens;
 
@@ -40,7 +59,8 @@ public class User extends AbstractModel {
         this.tokens = tokens;
     }
 
-    public User(){}
+    public User() {
+    }
 
     public User(Person person, String email, String password, int tokens) {
         this.person = person;
@@ -49,4 +69,3 @@ public class User extends AbstractModel {
         this.tokens = tokens;
     }
 }
-
