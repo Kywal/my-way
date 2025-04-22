@@ -9,13 +9,9 @@ import java.time.LocalDate;
 @Table(name = "tb_person")
 public class Person extends AbstractModel {
 
-    @OneToOne(mappedBy = "person")
-    @JoinColumn(name = "id_user")
-    private User user;
-
     private String name;
 
-    private LocalDate birthDate;
+    private LocalDate birthday;
 
     @Enumerated(EnumType.STRING)
     private GenderPerson gender;
@@ -34,12 +30,12 @@ public class Person extends AbstractModel {
         this.name = name;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setBirthDate(LocalDate age) {
-        this.birthDate = age;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     public GenderPerson getGender() {
@@ -74,11 +70,10 @@ public class Person extends AbstractModel {
         this.region = region;
     }
 
-    public Person(User user, String name, LocalDate birthDate, GenderPerson gender, String historyDescription,
-            String country, String region) {
-        this.user = user;
+    public Person(String name, LocalDate birthday, GenderPerson gender, String historyDescription,
+                  String country, String region) {
         this.name = name;
-        this.birthDate = birthDate;
+        this.birthday = birthday;
         this.gender = gender;
         this.historyDescription = historyDescription;
         this.country = country;
