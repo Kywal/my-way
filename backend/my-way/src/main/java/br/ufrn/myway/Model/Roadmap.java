@@ -6,6 +6,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.OrderColumn;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Roadmap extends AbstractModel {
     private Goal finalGoal;
 
     @OneToMany(mappedBy = "roadmap")
+    @OrderColumn(name = "path_goals_order")
     private List<Goal> pathGoals;
 
     public Roadmap() {
