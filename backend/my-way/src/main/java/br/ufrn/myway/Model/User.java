@@ -2,6 +2,7 @@ package br.ufrn.myway.Model;
 
 import br.ufrn.myway.Model.Enums.Roles;
 import jakarta.persistence.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Table(name = "tb_user")
 @Entity
@@ -14,6 +15,20 @@ public class User extends AbstractModel {
     private String email;
 
     private String password;
+
+    private Roles role;
+
+    private int tokens;
+
+    public User() {
+    }
+
+    public User(Person person, String email, String password, int tokens) {
+        this.person = person;
+        this.email = email;
+        this.password = password;
+        this.tokens = tokens;
+    }
 
     public Roles getRole() {
         return role;
@@ -30,10 +45,6 @@ public class User extends AbstractModel {
     public void setPerson(Person person) {
         this.person = person;
     }
-
-    private Roles role;
-
-    private int tokens;
 
     public String getEmail() {
         return email;
@@ -56,16 +67,6 @@ public class User extends AbstractModel {
     }
 
     public void setTokens(int tokens) {
-        this.tokens = tokens;
-    }
-
-    public User() {
-    }
-
-    public User(Person person, String email, String password, int tokens) {
-        this.person = person;
-        this.email = email;
-        this.password = password;
         this.tokens = tokens;
     }
 }
