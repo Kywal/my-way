@@ -11,10 +11,11 @@ public abstract class AbstractModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-    @Column(updatable = false)
 
+    @Column(updatable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     protected LocalDate createdAt = LocalDate.now();
+
     protected boolean ativo = true;
 
 }
