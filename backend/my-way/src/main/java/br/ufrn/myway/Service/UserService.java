@@ -36,4 +36,8 @@ public class UserService {
                 .orElseThrow(() -> new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User")));
     }
 
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User")));
+    }
 }
