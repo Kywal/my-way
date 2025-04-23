@@ -1,0 +1,26 @@
+blank_issues_enabled: false
+contact_links: []
+issue_templates:
+  - name: Backlog Item
+    description: Registrar uma ideia ou sugestão para o backlog
+    title: "[Backlog]: "
+    labels: ["backlog"]
+    file: backlog-item.yml
+
+  - name: Feat
+    description: Propor uma nova funcionalidade
+    title: "[Feat]: "
+    labels: ["enhancement"]
+    file: feat.yml
+
+  - name: Fix
+    description: Reportar ou corrigir um bug
+    title: "[Fix]: "
+    labels: ["bug"]
+    file: fix.yml
+
+  - name: Refact
+    description: Solicitar uma refatoração de código
+    title: "[Refact]: "
+    labels: ["refactor"]
+    file: refact.yml

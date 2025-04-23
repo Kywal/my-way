@@ -1,0 +1,15 @@
+name: Backlog Item
+description: Registrar um item de backlog para discussão ou análise futura
+title: "[Backlog]: "
+labels: ["backlog-item"]
+body:
+  - type: textarea
+    attributes:
+      label: Descrição
+      description: Explique o item de forma clara.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Contexto / Observações
+      description: Qual o contexto desse item? Existe algum documento de apoio?
