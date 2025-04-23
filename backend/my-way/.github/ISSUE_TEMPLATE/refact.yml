@@ -1,0 +1,19 @@
+name: Refact
+description: Solicitação de refatoração de código
+title: "[Refact]: "
+labels: ["refact"]
+body:
+  - type: textarea
+    attributes:
+      label: Descrição
+      description: Explique por que esse trecho de código precisa ser refatorado.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Impacto Esperado
+      description: Haverá mudança de comportamento no sistema?
+  - type: textarea
+    attributes:
+      label: Partes Afetadas
+      description: Quais áreas ou arquivos serão alterados?

@@ -1,0 +1,23 @@
+name: Fix
+description: Reportar e resolver um bug
+title: "[Fix]: "
+labels: ["fix"]
+body:
+  - type: textarea
+    attributes:
+      label: Descrição do Bug
+      description: Explique o comportamento atual com detalhes.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Passos para Reproduzir
+      description: Como reproduzir o bug.
+  - type: textarea
+    attributes:
+      label: Comportamento Esperado
+      description: O que você esperava que acontecesse?
+  - type: textarea
+    attributes:
+      label: Ambiente
+      description: Versão, navegador, sistema operacional, etc.

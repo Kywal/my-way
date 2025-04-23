@@ -1,0 +1,19 @@
+name: Feat
+description: Sugestão ou especificação de nova funcionalidade
+title: "[Feat]: "
+labels: ["feat"]
+body:
+  - type: textarea
+    attributes:
+      label: Descrição
+      description: Explique a funcionalidade a ser implementada.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Critérios de aceitação
+      description: O que precisa estar funcionando para essa tarefa ser considerada completa?
+  - type: textarea
+    attributes:
+      label: Dependências
+      description: Essa tarefa depende de algo antes de começar?
