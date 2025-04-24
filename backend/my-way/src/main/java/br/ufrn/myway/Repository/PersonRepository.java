@@ -2,7 +2,7 @@ package br.ufrn.myway.Repository;
 
 import org.springframework.stereotype.Repository;
 
-import br.ufrn.myway.Model.Person; 
+import br.ufrn.myway.Model.Entities.Person; 
  
 @Repository
 public interface PersonRepository extends SoftDeletableRepository<Person> {

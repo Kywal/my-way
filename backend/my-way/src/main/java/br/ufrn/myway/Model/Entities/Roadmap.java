@@ -1,14 +1,14 @@
-package br.ufrn.myway.Model;
+package br.ufrn.myway.Model.Entities;
+
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.OrderColumn;
-
-import java.util.List;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_roadmap")

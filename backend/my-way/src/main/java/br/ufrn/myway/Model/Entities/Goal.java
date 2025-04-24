@@ -1,4 +1,4 @@
-package br.ufrn.myway.Model;
+package br.ufrn.myway.Model.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

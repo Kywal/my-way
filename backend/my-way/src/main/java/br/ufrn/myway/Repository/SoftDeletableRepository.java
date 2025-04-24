@@ -1,14 +1,14 @@
 package br.ufrn.myway.Repository;
 
-import jakarta.transaction.Transactional;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
 
-import br.ufrn.myway.Model.AbstractModel;
-
-import java.util.List;
+import br.ufrn.myway.Model.Entities.AbstractModel;
+import jakarta.transaction.Transactional;
 
 @NoRepositoryBean
 public interface SoftDeletableRepository<M extends AbstractModel> extends AbstractRepository<M> {

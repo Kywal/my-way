@@ -1,4 +1,4 @@
-package br.ufrn.myway.Model;
+package br.ufrn.myway.Model.Entities;
 
 import br.ufrn.myway.Model.Enums.Roles;
 import jakarta.persistence.*;

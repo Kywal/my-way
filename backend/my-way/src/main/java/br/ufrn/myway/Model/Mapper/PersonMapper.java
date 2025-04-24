@@ -3,7 +3,7 @@ package br.ufrn.myway.Model.Mapper;
 import org.mapstruct.Mapper;
 
 import br.ufrn.myway.Model.DTO.PersonDTO;
-import br.ufrn.myway.Model.Person;
+import br.ufrn.myway.Model.Entities.Person;
 
 @Mapper(componentModel = "spring")
 public interface PersonMapper {
