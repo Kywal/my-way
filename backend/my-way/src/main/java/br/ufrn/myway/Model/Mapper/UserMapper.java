@@ -1,7 +1,8 @@
 package br.ufrn.myway.Model.Mapper;
 
-import br.ufrn.myway.Model.User; 
 import br.ufrn.myway.Model.DTO.UserDTO;
+import br.ufrn.myway.Model.Entities.User;
+
 import org.mapstruct.Mapper; 
 
 @Mapper(componentModel = "spring")

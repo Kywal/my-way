@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.myway.Model.DTO.LoginDTO;
 import br.ufrn.myway.Model.DTO.UserDTO;
+import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.Roles;
 import br.ufrn.myway.Model.Mapper.UserMapper;
-import br.ufrn.myway.Model.User;
 import br.ufrn.myway.Service.UserService;
 
 @RestController

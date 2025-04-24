@@ -1,9 +1,12 @@
-package br.ufrn.myway.Model;
-
-import br.ufrn.myway.Model.Enums.GenderPerson;
-import jakarta.persistence.*;
+package br.ufrn.myway.Model.Entities;
 
 import java.time.LocalDate;
+
+import br.ufrn.myway.Model.Enums.GenderPerson;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_person")
