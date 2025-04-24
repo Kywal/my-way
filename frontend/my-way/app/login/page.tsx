@@ -63,16 +63,6 @@ export default function LoginPage() {
       callbackUrl: "/dashboard",
     });
 
-    if (res?.ok && !res.error) {
-      router.push("/dashboard");
-    } else {
-      console.log("Erro ao logar:", res?.error);
-      onOpen();
-      setIsSubmitting(false);
-
-      return;
-    }
-
     setErrors({});
     setIsSubmitting(false);
     setOnSuccessLogin(true);
