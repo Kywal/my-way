@@ -15,6 +15,8 @@ public abstract class Mission extends AbstractModel {
 
     private String description;
 
+    private int rewardPoints;
+
     public String getTitle() {
         return title;
     }
@@ -29,6 +31,14 @@ public abstract class Mission extends AbstractModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getRewardPoints() {
+        return rewardPoints;
+    }
+
+    public void setRewardPoints(int rewardPoints) {
+        this.rewardPoints = rewardPoints;
     }
 
 }
