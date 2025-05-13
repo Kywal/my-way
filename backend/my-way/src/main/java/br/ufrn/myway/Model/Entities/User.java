@@ -1,8 +1,14 @@
 package br.ufrn.myway.Model.Entities;
 
 import br.ufrn.myway.Model.Enums.Roles;
-import jakarta.persistence.*;
-import org.springframework.security.core.userdetails.UserDetails;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+import java.util.List;
 
 @Table(name = "tb_user")
 @Entity
@@ -19,6 +25,9 @@ public class User extends AbstractModel {
     private Roles role;
 
     private int tokens;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Mission> missions;
 
     public User() {
     }
@@ -68,5 +77,13 @@ public class User extends AbstractModel {
 
     public void setTokens(int tokens) {
         this.tokens = tokens;
+    }
+
+    public List<Mission> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(List<Mission> missions) {
+        this.missions = missions;
     }
 }
