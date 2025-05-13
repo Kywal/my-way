@@ -18,7 +18,7 @@ public abstract class AbstractModel {
     protected Long id;
 
     @Column(updatable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     protected LocalDate createdAt = LocalDate.now();
 
     protected boolean ativo = true;
