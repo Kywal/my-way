@@ -1,19 +1,14 @@
 package br.ufrn.myway.Model.Entities;
 
 import br.ufrn.myway.Model.Enums.Roles;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "tb_user")
 @Entity
 public class User extends AbstractModel {
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_person")
     private Person person;
@@ -26,8 +21,8 @@ public class User extends AbstractModel {
 
     private int tokens;
 
-    @ManyToMany(mappedBy = "users")
-    private List<Mission> missions;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserMission> userMissions = new ArrayList<>();
 
     public User() {
     }
@@ -79,11 +74,11 @@ public class User extends AbstractModel {
         this.tokens = tokens;
     }
 
-    public List<Mission> getMissions() {
-        return missions;
+    public List<UserMission> getUserMissions() {
+        return userMissions;
     }
 
-    public void setMissions(List<Mission> missions) {
-        this.missions = missions;
+    public void setUserMissions(List<UserMission> userMissions) {
+        this.userMissions = userMissions;
     }
 }
