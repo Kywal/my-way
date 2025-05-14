@@ -5,11 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,26 +31,12 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private final AuthenticationManager authenticationManager;
-
-    public UserController(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
+    public UserController() {
     }
 
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody LoginDTO loginRequest) {
-
-        UsernamePasswordAuthenticationToken authenticationRequest
-                = UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.email(), loginRequest.password());
-
-        Authentication authenticationResponse
-                = this.authenticationManager.authenticate(authenticationRequest);
-
-        UserDetails userDetails = (UserDetails) authenticationResponse.getPrincipal();
-        String email = userDetails.getUsername();
-        User user = userService.findByEmail(email);
-
+        User user = userService.loginByEmail(loginRequest.email(), loginRequest.password());
         return new ResponseEntity<>(userMapper.toDto(user), HttpStatus.OK);
     }
 
