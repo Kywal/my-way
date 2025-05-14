@@ -1,8 +1,6 @@
 package br.ufrn.myway.Controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.myway.Model.DTO.MissionDTO;
-import br.ufrn.myway.Model.Entities.Mission; 
+import br.ufrn.myway.Model.DTO.MissionProgressDTO;
+import br.ufrn.myway.Model.Entities.Mission;
+import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.MissionFrequency;
 import br.ufrn.myway.Model.Enums.MissionType;
 import br.ufrn.myway.Model.Mapper.MissionMapper;
 import br.ufrn.myway.Service.MissionService;
+import br.ufrn.myway.Service.UserMissionService;
+import br.ufrn.myway.Service.UserService;
 
 @RestController
 @RequestMapping("/missions")
@@ -31,6 +33,12 @@ public class MissionController {
 
     @Autowired
     private MissionMapper missionMapper;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserMissionService userMissionService;
 
     @GetMapping
     public List<Mission> listarTodas() {
@@ -52,8 +60,6 @@ public class MissionController {
     @PostMapping("/daily/quantity-time")
     public ResponseEntity<MissionDTO> criarDailyQuantityMission(@RequestBody MissionDTO mission) {
         Mission quantityTimeMission = missionMapper.toEntity(mission);
-        quantityTimeMission.setStartDate(LocalDateTime.now());
-        quantityTimeMission.setEndDate(LocalDateTime.now());
         quantityTimeMission.setFrequency(MissionFrequency.DAILY);
         quantityTimeMission.setType(MissionType.QUANTITY_TIME);
 
@@ -63,23 +69,23 @@ public class MissionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(missionMapper.toDto(quantityTimeMission));
     }
 
-     @PostMapping("/weekly/quantity-goal")
-     public ResponseEntity<MissionDTO> criarWeeklyQuantityGoal(@RequestBody MissionDTO mission) {
-         Mission quantityGoalMission = missionMapper.toEntity(mission);
-         quantityGoalMission.setStartDate(LocalDateTime.now());
-         quantityGoalMission.setEndDate(LocalDateTime.now());
-         quantityGoalMission.setFrequency(MissionFrequency.WEEKLY);
-         quantityGoalMission.setType(MissionType.QUANTITY_GOAL);
+    @PostMapping("/weekly/quantity-goal")
+    public ResponseEntity<MissionDTO> criarWeeklyQuantityGoal(@RequestBody MissionDTO mission) {
+        Mission quantityGoalMission = missionMapper.toEntity(mission);
+        quantityGoalMission.setFrequency(MissionFrequency.WEEKLY);
+        quantityGoalMission.setType(MissionType.QUANTITY_GOAL);
 
-         quantityGoalMission.setTimeInMinutes(null);
+        quantityGoalMission.setTimeInMinutes(null);
 
-         quantityGoalMission = missionService.save(quantityGoalMission);
-         return ResponseEntity.status(HttpStatus.CREATED).body(missionMapper.toDto(quantityGoalMission));
-     }
+        quantityGoalMission = missionService.save(quantityGoalMission);
+        return ResponseEntity.status(HttpStatus.CREATED).body(missionMapper.toDto(quantityGoalMission));
+    }
 
-    @GetMapping("/test")
-    public ResponseEntity<?> test() {
-        return ResponseEntity.ok(Map.of("msg", "funcionando"));
+    @PostMapping("/daily/check-quantity-time")
+    public ResponseEntity<?> checkQuantityTimeMission(@RequestBody MissionProgressDTO missionProgress) {
+        User user = userService.findById(missionProgress.userId());
+        boolean concluded = userMissionService.verifyConcludedQuantityTimeMission(user, missionProgress.timeInMinutes());
+        return ResponseEntity.ok(concluded ? "Missão concluída" : "Missão em andamento");
     }
 
     @DeleteMapping("/{id}")
