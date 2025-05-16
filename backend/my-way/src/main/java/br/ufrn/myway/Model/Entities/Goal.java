@@ -20,14 +20,11 @@ public class Goal extends AbstractModel {
 
     private int size;
 
-    public Goal(String nameGoal, List<StudyTopic> exercises, RoadMap roadMap, int size) {
+    public Goal(String nameGoal, RoadMap roadMap, int size) {
         this.nameGoal = nameGoal;
-        this.exercises = exercises;
         this.roadMap = roadMap;
         this.size = size;
     }
-
-    public Goal(String nameGoal) {}
 
     public Goal() {
 
@@ -43,18 +40,6 @@ public class Goal extends AbstractModel {
 
     public RoadMap getRoadMap() {
         return roadMap;
-    }
-
-    public void setRoadMap(RoadMap roadMap) {
-        this.roadMap = roadMap;
-    }
-
-    public List<StudyTopic> getExercises() {
-        return exercises;
-    }
-
-    public void setExercises(List<StudyTopic> exercises) {
-        this.exercises = exercises;
     }
 
     public String getNameGoal() {
