@@ -1,9 +1,6 @@
 package br.ufrn.myway.Model.DTO;
-
-import br.ufrn.myway.Model.Entities.Goal;
-
+import java.time.LocalDate;
 import java.util.List;
 
-public record RoadMapDTO (Long idRoadMap, String tittleRoadMap, String descriptionRoadMap,
-                         String userAssociatedWithRoadMap, List<Goal> listGoals){
+public record RoadMapDTO (Long id, LocalDate createdAt, String name, UserDTO user, List<GoalDTO> listGoals){
 }
