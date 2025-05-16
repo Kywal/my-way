@@ -1,7 +1,7 @@
 package br.ufrn.myway.Service;
 
 import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.StudyTopic;
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.GoalRepository;
 import br.ufrn.myway.Repository.StudyTopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,42 +12,26 @@ import java.util.List;
 @Service
 public class GoalService {
 
-
     @Autowired
     GoalRepository goalRepository;
 
-    @Autowired
-    StudyTopicRepository studyTopicRepository;
-
-    public GoalService(GoalRepository goalRepository, StudyTopicRepository studyTopicRepository) {
-        this.goalRepository = goalRepository;
-        this.studyTopicRepository = studyTopicRepository;
+    public Goal findById(Long id) {
+        Goal goal = goalRepository.getById(id);
+        if (goal == null) {
+            throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Goal"));
+        }
+        return goal;
     }
-
-    public Goal searchGoal(Long idGoal){
-        return goalRepository.findById(idGoal).orElseThrow(()-> new RuntimeException("not found"));
-    }
-
-    public Goal createGoal(Goal newGoal){
+    public Goal save(Goal newGoal){
         return goalRepository.save(newGoal);
     }
+
     public List<Goal> listGoals(){
-        return goalRepository.findAll();
+        return goalRepository.list();
     }
 
-    public List<StudyTopic> listStudyTopicsFromGoal(Long idGoal) {
-        Goal goal = searchGoal(idGoal);
-        return goal.getListTopics();
+    public void delete(Long id){
+        goalRepository.delete(id);
     }
-    public void addStudyTopics(Long idGoal, Long idStudyTopics){
-        Goal goal = searchGoal(idGoal);
 
-        StudyTopic topic = studyTopicRepository.findById(idStudyTopics)
-                .orElseThrow(() -> new RuntimeException("StudyTopic não encontrado"));
-
-        goal.getListTopics().add(topic);
-        topic.setGoal(goal);
-
-        goalRepository.save(goal);
-    }
 }
