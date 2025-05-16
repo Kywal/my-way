@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Goal extends AbstractModel {
 
-    private String nameGoal;
+    private String name;
 
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
     private List<StudyTopic> exercises = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Goal extends AbstractModel {
     private int size;
 
     public Goal(String nameGoal, RoadMap roadMap, int size) {
-        this.nameGoal = nameGoal;
+        this.name = name;
         this.roadMap = roadMap;
         this.size = size;
     }
@@ -42,11 +42,11 @@ public class Goal extends AbstractModel {
         return roadMap;
     }
 
-    public String getNameGoal() {
-        return nameGoal;
+    public String getName() {
+        return name;
     }
 
-    public void setNameGoal(String nameGoal) {
-        this.nameGoal = nameGoal;
+    public void setName(String name) {
+        this.name = name;
     }
 }

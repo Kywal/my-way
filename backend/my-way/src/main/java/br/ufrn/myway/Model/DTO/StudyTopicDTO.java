@@ -1,5 +1,6 @@
 package br.ufrn.myway.Model.DTO;
 
-public record StudyTopicDTO(Long idStudyTopic, String nameTopic,
-                            String descriptionTopic, boolean isDone) {
+import java.time.LocalDate;
+
+public record StudyTopicDTO(Long id, LocalDate createdAt, String name, String description, GoalDTO goal, boolean isDone) {
 }

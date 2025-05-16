@@ -7,7 +7,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class StudyTopic extends AbstractModel {
 
-    private String nome;
+    private String name;
 
     private String description;
 
@@ -17,8 +17,8 @@ public class StudyTopic extends AbstractModel {
 
     private boolean isDone = false ;
 
-    public StudyTopic(String nome, String description, Goal goal, boolean isDone) {
-        this.nome = nome;
+    public StudyTopic(String name, String description, Goal goal, boolean isDone) {
+        this.name = name;
         this.description = description;
         this.goal = goal;
         this.isDone = isDone;
@@ -26,12 +26,12 @@ public class StudyTopic extends AbstractModel {
 
     public StudyTopic() {}
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
