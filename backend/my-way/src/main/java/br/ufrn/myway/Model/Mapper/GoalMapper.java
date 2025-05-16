@@ -9,4 +9,5 @@ import org.mapstruct.Mapper;
 public interface GoalMapper {
     Goal toEntity(GoalDTO goalDTO);
     GoalDTO toDto(Goal goal);
+
 }
