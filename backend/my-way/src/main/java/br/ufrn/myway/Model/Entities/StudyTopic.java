@@ -1,67 +1,45 @@
 package br.ufrn.myway.Model.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-public class StudyTopic {
+@Entity
+public class StudyTopic extends AbstractModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idStudyTopic;
+    private String nome;
 
-    private String nameTopic;
+    private String description;
 
-    private String descriptionTopic;
-    //@ManyToOne
-    //@JoinColumn(name = "user_id")
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "id_goal")
     private Goal goal;
 
-    private boolean isDone;
+    private boolean isDone = false ;
 
-    public StudyTopic(Long idStudyTopic, String nameTopic, String descriptionTopic, boolean isDone) {
-        this.idStudyTopic = idStudyTopic;
-        this.nameTopic = nameTopic;
-        this.descriptionTopic = descriptionTopic;
+    public StudyTopic(String nome, String description, Goal goal, boolean isDone) {
+        this.nome = nome;
+        this.description = description;
+        this.goal = goal;
         this.isDone = isDone;
     }
-    public StudyTopic() {
+
+    public StudyTopic() {}
+
+    public String getNome() {
+        return nome;
     }
 
-    public Long getIdStudyTopic() {
-        return idStudyTopic;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setIdStudyTopic(Long idStudyTopic) {
-        this.idStudyTopic = idStudyTopic;
+    public String getDescription() {
+        return description;
     }
 
-    public String getNameTopic() {
-        return nameTopic;
-    }
-
-    public void setNameTopic(String nameTopic) {
-        this.nameTopic = nameTopic;
-    }
-
-    public String getDescriptionTopic() {
-        return descriptionTopic;
-    }
-
-    public void setDescriptionTopic(String descriptionTopic) {
-        this.descriptionTopic = descriptionTopic;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone(boolean done) {
-        isDone = done;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Goal getGoal() {
@@ -70,5 +48,13 @@ public class StudyTopic {
 
     public void setGoal(Goal goal) {
         this.goal = goal;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
     }
 }

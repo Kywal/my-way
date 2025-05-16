@@ -7,25 +7,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_goal")
-public class Goal {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idGoal;
+public class Goal extends AbstractModel {
 
     private String nameGoal;
 
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
-    private List<StudyTopic> listTopics = new ArrayList<>();
+    private List<StudyTopic> exercises = new ArrayList<>();
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "id_roadmap")
     private RoadMap roadMap;
 
-    public Goal(Long idGoal, String nameGoal, List<StudyTopic> listTopics) {
-        this.idGoal = idGoal;
+    private int size;
+
+    public Goal(String nameGoal, List<StudyTopic> exercises, RoadMap roadMap, int size) {
         this.nameGoal = nameGoal;
-        this.listTopics = listTopics;
+        this.exercises = exercises;
+        this.roadMap = roadMap;
+        this.size = size;
+    }
+
+    public Goal(String nameGoal) {}
+
+    public Goal() {
+
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public RoadMap getRoadMap() {
@@ -36,15 +49,12 @@ public class Goal {
         this.roadMap = roadMap;
     }
 
-    public Goal() {
+    public List<StudyTopic> getExercises() {
+        return exercises;
     }
 
-    public Long getIdGoal() {
-        return idGoal;
-    }
-
-    public void setIdGoal(Long idGoal) {
-        this.idGoal = idGoal;
+    public void setExercises(List<StudyTopic> exercises) {
+        this.exercises = exercises;
     }
 
     public String getNameGoal() {
@@ -53,17 +63,5 @@ public class Goal {
 
     public void setNameGoal(String nameGoal) {
         this.nameGoal = nameGoal;
-    }
-
-    public List<StudyTopic> getListTopics() {
-        return listTopics;
-    }
-
-    public void setListTopics(List<StudyTopic> listTopics) {
-        this.listTopics = listTopics;
-    }
-    public void addStudyTopic(StudyTopic studyTopic){
-        this.listTopics.add(studyTopic);
-        studyTopic.setGoal(this);
     }
 }
