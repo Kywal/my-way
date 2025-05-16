@@ -6,58 +6,39 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_roadmap")
-public class RoadMap {
+public class RoadMap extends AbstractModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRoadMap;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
-    private String tittleRoadMap;
-
-    private String descriptionRoadMap;
-
-    //@ManyToOne
-    //@JoinColumn(name = "user_id")
-    //@JsonIgnore
-    private String userAssociatedWithRoadMap;
+    private String name;
 
     @OneToMany(mappedBy = "roadMap", cascade = CascadeType.ALL) // Must match Goal's property name
     private List<Goal> listGoals = new ArrayList<>();
 
-    public RoadMap(Long idRoadMap, String tittleRoadMap, String descriptionRoadMap, String userAssociatedWithRoadMap, List<Goal> listGoals) {
-        this.idRoadMap = idRoadMap;
-        this.tittleRoadMap = tittleRoadMap;
-        this.descriptionRoadMap = descriptionRoadMap;
-        this.userAssociatedWithRoadMap = userAssociatedWithRoadMap;
+    public RoadMap(User user, String name, List<Goal> listGoals) {
+        this.user = user;
+        this.name = name;
         this.listGoals = listGoals;
     }
 
-    public RoadMap() {
+    public RoadMap() {}
+
+    public User getUser() {
+        return user;
     }
 
-    public String getTittleRoadMap() {
-        return tittleRoadMap;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setTittleRoadMap(String tittleRoadMap) {
-        this.tittleRoadMap = tittleRoadMap;
+    public String getName() {
+        return name;
     }
 
-    public String getDescriptionRoadMap() {
-        return descriptionRoadMap;
-    }
-
-    public void setDescriptionRoadMap(String descriptionRoadMap) {
-        this.descriptionRoadMap = descriptionRoadMap;
-    }
-
-    public String getUserAssociatedWithRoadMap() {
-        return userAssociatedWithRoadMap;
-    }
-
-    public void setUserAssociatedWithRoadMap(String userAssociatedWithRoadMap) {
-        this.userAssociatedWithRoadMap = userAssociatedWithRoadMap;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Goal> getListGoals() {
@@ -66,9 +47,5 @@ public class RoadMap {
 
     public void setListGoals(List<Goal> listGoals) {
         this.listGoals = listGoals;
-    }
-    public void addGoal(Goal goal){
-        this.listGoals.add(goal);
-        goal.setRoadMap(this);
     }
 }
