@@ -1,6 +1,7 @@
 package br.ufrn.myway.Service;
 
 import br.ufrn.myway.Model.Entities.StudyTopic;
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.StudyTopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,19 +12,23 @@ public class StudyTopicService {
     @Autowired
     StudyTopicRepository studyTopicRepository;
 
-    public StudyTopicService(StudyTopicRepository studyTopicRepository) {
-        this.studyTopicRepository = studyTopicRepository;
+    public StudyTopic findById(Long id){
+        StudyTopic studyTopic = studyTopicRepository.getById(id);
+        if(studyTopic == null){
+            throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Study Topic"));
+        }
+        return studyTopic;
+    }
+    public StudyTopic save(StudyTopic studyTopic){
+        return studyTopicRepository.save(studyTopic);
     }
 
-    public StudyTopic searchStudyTopic(Long idStudyTopic){
-        return studyTopicRepository.findById(idStudyTopic).orElseThrow(()-> new RuntimeException("not found"));
+    public List<StudyTopic> list(){
+        return studyTopicRepository.list();
     }
 
-    public StudyTopic createStudyTopic(StudyTopic newStudyTopic){
-        return studyTopicRepository.save(newStudyTopic);
-    }
-    public List<StudyTopic> listStudyTopic(){
-        return studyTopicRepository.findAll();
+    public void delete(Long id){
+        studyTopicRepository.delete(id);
     }
 
 }

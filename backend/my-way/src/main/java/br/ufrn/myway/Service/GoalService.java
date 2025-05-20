@@ -3,7 +3,6 @@ package br.ufrn.myway.Service;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.GoalRepository;
-import br.ufrn.myway.Repository.StudyTopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +21,8 @@ public class GoalService {
         }
         return goal;
     }
-    public Goal save(Goal newGoal){
-        return goalRepository.save(newGoal);
+    public Goal save(Goal goal){
+        return goalRepository.save(goal);
     }
 
     public List<Goal> listGoals(){

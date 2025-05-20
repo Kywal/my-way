@@ -2,6 +2,7 @@ package br.ufrn.myway.Service;
 
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.RoadMap;
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.GoalRepository;
 import br.ufrn.myway.Repository.RoadMapRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,42 +11,30 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class RoadMapService {
+
     @Autowired
     private RoadMapRepository roadMapRepository;
 
     @Autowired
     private GoalRepository goalRepository;
 
-    public RoadMapService(RoadMapRepository roadMapRepository, GoalRepository goalRepository) {
-        this.roadMapRepository = roadMapRepository;
-        this.goalRepository = goalRepository;
+    public RoadMap findById(Long id){
+        RoadMap roadMap = roadMapRepository.getById(id);
+        if(roadMap == null){
+            throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("RoadMap"));
+        }
+        return roadMap;
     }
 
-    public RoadMap searchRoadMap(Long idRoadMap){
-        return roadMapRepository.findById(idRoadMap).orElseThrow(()-> new RuntimeException("not found"));
+    public RoadMap save(RoadMap roadMap){
+        return roadMapRepository.save(roadMap);
     }
 
-    public RoadMap createRoadMap(RoadMap newRoadMap){
-        return roadMapRepository.save(newRoadMap);
-    }
-    public List<RoadMap> listRoadMap(){
-        return roadMapRepository.findAll();
+    public List<RoadMap> listar(){
+        return roadMapRepository.list();
     }
 
-    public void addGoalsToRoadMap(Long idRoadMap, Long idGoal){
-        RoadMap roadMap = searchRoadMap(idRoadMap);
-
-        Goal goal = goalRepository.findById(idGoal)
-                .orElseThrow(() -> new RuntimeException("Goal não encontrado"));
-
-        roadMap.getListGoals().add(goal);
-        goal.setRoadMap(roadMap);
-
-        roadMapRepository.save(roadMap);
-    }
-
-    public List<Goal> listGoalsFromRoadMap(Long idRoadMap) {
-        RoadMap roadMap = searchRoadMap(idRoadMap);
-        return roadMap.getListGoals();
+    public void deletar(Long id){
+        roadMapRepository.delete(id);
     }
 }
