@@ -1,10 +1,10 @@
 package br.ufrn.myway.Controller;
 
-import br.ufrn.myway.Model.Entities.Goal;
+import br.ufrn.myway.Model.DTO.RoadMapDTO;
 import br.ufrn.myway.Model.Entities.RoadMap;
+import br.ufrn.myway.Model.Mapper.RoadMapMapper;
 import br.ufrn.myway.Service.RoadMapService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,26 +13,31 @@ import java.util.List;
 @RestController
 @RequestMapping("/roadmap")
 public class RoadMapController {
+
     @Autowired
     RoadMapService roadMapService;
 
-    @PostMapping("/create")
-    public ResponseEntity<RoadMap> createRoadMap(@RequestBody RoadMap newRoadMap){
-        RoadMap roadMap = roadMapService.createRoadMap(newRoadMap);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @Autowired
+    private RoadMapMapper roadMapMapper;
+
+    @PostMapping("/save")
+    public ResponseEntity<RoadMapDTO> save(@RequestBody RoadMapDTO roadMapDto){
+        RoadMap roadMap = roadMapMapper.toEntity(roadMapDto);
+        return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.save(roadMap)));
     }
-    @GetMapping
-    public List<RoadMap> listAllRoadMaps(){
-        return roadMapService.listRoadMap();
+    @GetMapping("/list")
+    public List<RoadMapDTO> list(){
+        return roadMapMapper.toListDTO(roadMapService.list());
     }
-    @PostMapping("/add/{idRoadMap}/{idGoal}")
-    public ResponseEntity<String> addGoalToRoadMap(@PathVariable Long idRoadMap, @PathVariable Long idGoal){
-        roadMapService.addGoalsToRoadMap(idRoadMap, idGoal);
-        return ResponseEntity.ok("adicionado");
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<RoadMapDTO> get(@PathVariable long id){
+        return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.findById(id)));
     }
-    @GetMapping("/list/{idRoadMap}")
-    public ResponseEntity<List<Goal>> listGoalsRoadMap(@PathVariable Long idRoadMap){
-        List<Goal> listOfGoals = roadMapService.listGoalsFromRoadMap(idRoadMap);
-        return ResponseEntity.ok(listOfGoals);
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable long id){
+        roadMapService.deletar(id);
+        return ResponseEntity.ok("RoadMap successfully deleted.");
     }
 }

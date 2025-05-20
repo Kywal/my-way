@@ -15,8 +15,6 @@ public class RoadMapService {
     @Autowired
     private RoadMapRepository roadMapRepository;
 
-    @Autowired
-    private GoalRepository goalRepository;
 
     public RoadMap findById(Long id){
         RoadMap roadMap = roadMapRepository.getById(id);
@@ -30,7 +28,7 @@ public class RoadMapService {
         return roadMapRepository.save(roadMap);
     }
 
-    public List<RoadMap> listar(){
+    public List<RoadMap> list(){
         return roadMapRepository.list();
     }
 

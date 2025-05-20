@@ -1,10 +1,10 @@
 package br.ufrn.myway.Controller;
 
+import br.ufrn.myway.Model.DTO.GoalDTO;
 import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.StudyTopic;
+import br.ufrn.myway.Model.Mapper.GoalMapper;
 import br.ufrn.myway.Service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,29 +12,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/goal")
 public class GoalController {
+
     @Autowired
     private GoalService goalService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Goal> create (@RequestBody Goal newGoal){
-        Goal goal = goalService.createGoal(newGoal);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @Autowired
+    private GoalMapper goalMapper;
+
+    @PostMapping("/save")
+    public ResponseEntity<GoalDTO> save(@RequestBody GoalDTO goalDto){
+        Goal goal = goalMapper.toEntity(goalDto);
+        return ResponseEntity.ok(goalMapper.toDto(goalService.save(goal)));
     }
 
-    @GetMapping
-    public List<Goal> listGoals(){
-        return goalService.listGoals();
+    @GetMapping("/get/{id}")
+    public ResponseEntity<GoalDTO> get(@PathVariable Long id){
+        return ResponseEntity.ok(goalMapper.toDto(goalService.findById(id)));
+    }
 
+    @GetMapping("/list")
+    public List<GoalDTO> listGoals(){
+        return goalMapper.toListDTO(goalService.listGoals());
     }
-    @PostMapping("/add/{idGoal}/{idStudyTopic}")
-    public ResponseEntity<String> addStudyTopicToGoal(@PathVariable Long idGoal, @PathVariable Long idStudyTopic){
-        goalService.addStudyTopics(idGoal,idStudyTopic);
-        return ResponseEntity.ok("Tópico adicionado com sucesso");
-    }
-    @GetMapping("/list/{idGoal}")
-    public ResponseEntity<List<StudyTopic>> listStudyTopicsFromGoal(@PathVariable Long idGoal){
-        List<StudyTopic> listOfStudyTopics = goalService.listStudyTopicsFromGoal(idGoal);
-        return ResponseEntity.ok(listOfStudyTopics);
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        goalService.delete(id);
+        return ResponseEntity.ok("Goal successfully deleted.");
     }
 
 }
