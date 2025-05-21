@@ -14,7 +14,7 @@ import java.util.List;
 public class RoadMapController {
 
     @Autowired
-    RoadMapService roadMapService;
+    private RoadMapService roadMapService;
 
     @Autowired
     private RoadMapMapper roadMapMapper;
@@ -30,12 +30,12 @@ public class RoadMapController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<RoadMapDTO> get(@PathVariable long id){
+    public ResponseEntity<RoadMapDTO> get(@PathVariable Long id){
         return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.findById(id)));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable long id){
+    public ResponseEntity<String> delete(@PathVariable Long id){
         roadMapService.deletar(id);
         return ResponseEntity.ok("RoadMap successfully deleted.");
     }
