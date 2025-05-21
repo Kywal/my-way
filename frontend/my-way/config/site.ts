@@ -57,7 +57,17 @@ export const siteConfig = {
     {
       label: "Logout",
       href: "/logout",
-    }, 
+    },
+  ],
+  navItemsAuthenticated: [
+    {
+      label: "Dashboard",
+      href: "/dashboard",
+    },
+    {
+      label: "Missões",
+      href: "/missions",
+    },
   ],
   links: {
     github: "https://github.com/Kywal/my-way",
@@ -65,6 +75,6 @@ export const siteConfig = {
     docs: "https://heroui.com",
     discord: "https://discord.gg/9b6yyZKmH4",
     sponsor: "https://patreon.com/jrgarciadev",
-    login: '/login'
+    login: "/login",
   },
 };
