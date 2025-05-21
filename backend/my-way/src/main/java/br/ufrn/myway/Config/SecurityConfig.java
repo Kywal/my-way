@@ -41,6 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/user/login").permitAll()
                 .requestMatchers("/user/create").permitAll()
+                .requestMatchers("/ai/ping").permitAll()
                 // .anyRequest().authenticated()
                 .anyRequest().permitAll()
                 );
