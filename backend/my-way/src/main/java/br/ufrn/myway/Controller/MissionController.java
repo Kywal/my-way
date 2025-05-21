@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ufrn.myway.Model.DTO.FullUserMissionDTO;
 import br.ufrn.myway.Model.DTO.MissionDTO;
 import br.ufrn.myway.Model.DTO.MissionProgressDTO;
 import br.ufrn.myway.Model.Entities.Mission;
 import br.ufrn.myway.Model.Entities.User;
+import br.ufrn.myway.Model.Entities.UserMission;
 import br.ufrn.myway.Model.Enums.MissionFrequency;
 import br.ufrn.myway.Model.Enums.MissionType;
+import br.ufrn.myway.Model.Mapper.FullUserMissionMapper;
 import br.ufrn.myway.Model.Mapper.MissionMapper;
 import br.ufrn.myway.Service.MissionService;
 import br.ufrn.myway.Service.UserMissionService;
@@ -40,6 +44,9 @@ public class MissionController {
     @Autowired
     private UserMissionService userMissionService;
 
+    @Autowired
+    private FullUserMissionMapper fullUserMissionMapper;
+
     @GetMapping
     public List<Mission> listarTodas() {
         return missionService.listAll();
@@ -49,6 +56,12 @@ public class MissionController {
     public ResponseEntity<Mission> buscarPorId(@PathVariable Long id) {
         Mission mission = missionService.findById(id);
         return ResponseEntity.ok(mission);
+    }
+
+    @GetMapping("/daily-mission")
+    public ResponseEntity<FullUserMissionDTO> getCurrentDailyMission(@RequestParam String emailUser) {
+        UserMission userMission = userMissionService.findByUserAndDateRange(emailUser);
+        return ResponseEntity.ok(fullUserMissionMapper.toDto(userMission));
     }
 
     @PostMapping
