@@ -21,7 +21,7 @@ spring:
       enabled: false
   config:
     activate:
-      on-profile: dev
+      on-profile: local
   datasource:
     url: jdbc:postgresql://localhost:5432/myway
     username: postgres
@@ -36,7 +36,25 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/myway
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 ---
 spring:
   config:
