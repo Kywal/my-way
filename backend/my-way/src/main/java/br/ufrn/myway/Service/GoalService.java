@@ -1,6 +1,7 @@
 package br.ufrn.myway.Service;
 
 import br.ufrn.myway.Model.Entities.Goal;
+import br.ufrn.myway.Model.Entities.RoadMap;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.GoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class GoalService {
 
     @Autowired
     GoalRepository goalRepository;
+    @Autowired
+    private RoadMapService roadMapService;
 
     public Goal findById(Long id) {
         Goal goal = goalRepository.getById(id);
@@ -21,7 +24,9 @@ public class GoalService {
         }
         return goal;
     }
-    public Goal save(Goal goal){
+    public Goal save(Goal goal, Long id){
+        RoadMap roadMap = roadMapService.findById(id);
+        goal.setRoadMap(roadMap);
         return goalRepository.save(goal);
     }
 

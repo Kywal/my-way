@@ -7,8 +7,8 @@ import br.ufrn.myway.Service.StudyTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 @RestController
 @RequestMapping("/studytopic")
 public class StudyTopicController {
@@ -19,10 +19,10 @@ public class StudyTopicController {
     @Autowired
     private StudyTopicMapper studyTopicMapper;
 
-    @PostMapping("/save")
-    public ResponseEntity<StudyTopicDTO> save(@RequestBody StudyTopicDTO studyTopicDto){
+    @PostMapping("/save/{id}")
+    public ResponseEntity<StudyTopicDTO> save(@RequestBody StudyTopicDTO studyTopicDto, @PathVariable Long id) {
         StudyTopic studyTopic = studyTopicMapper.toEntity(studyTopicDto);
-        return ResponseEntity.ok(studyTopicMapper.toDto(studyTopicService.save(studyTopic)));
+        return ResponseEntity.ok(studyTopicMapper.toDto(studyTopicService.save(studyTopic, id)));
     }
     @GetMapping("/list")
     public List<StudyTopicDTO> list(){

@@ -42,6 +42,10 @@ public class Goal extends AbstractModel {
         return roadMap;
     }
 
+    public void setRoadMap(RoadMap roadMap) {
+        this.roadMap = roadMap;
+    }
+
     public String getName() {
         return name;
     }

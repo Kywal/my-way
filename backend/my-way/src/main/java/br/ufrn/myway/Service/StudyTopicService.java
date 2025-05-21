@@ -1,5 +1,6 @@
 package br.ufrn.myway.Service;
 
+import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.StudyTopicRepository;
@@ -11,6 +12,8 @@ import java.util.List;
 public class StudyTopicService {
     @Autowired
     StudyTopicRepository studyTopicRepository;
+    @Autowired
+    private GoalService goalService;
 
     public StudyTopic findById(Long id){
         StudyTopic studyTopic = studyTopicRepository.getById(id);
@@ -19,7 +22,9 @@ public class StudyTopicService {
         }
         return studyTopic;
     }
-    public StudyTopic save(StudyTopic studyTopic){
+    public StudyTopic save(StudyTopic studyTopic, Long id){
+        Goal goal = goalService.findById(id);
+        studyTopic.setGoal(goal);
         return studyTopicRepository.save(studyTopic);
     }
 

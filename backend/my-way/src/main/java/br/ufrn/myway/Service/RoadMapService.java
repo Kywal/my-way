@@ -2,6 +2,7 @@ package br.ufrn.myway.Service;
 
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.RoadMap;
+import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.GoalRepository;
 import br.ufrn.myway.Repository.RoadMapRepository;
@@ -15,6 +16,9 @@ public class RoadMapService {
     @Autowired
     private RoadMapRepository roadMapRepository;
 
+    @Autowired
+    private UserService userService;
+
 
     public RoadMap findById(Long id){
         RoadMap roadMap = roadMapRepository.getById(id);
@@ -24,7 +28,9 @@ public class RoadMapService {
         return roadMap;
     }
 
-    public RoadMap save(RoadMap roadMap){
+    public RoadMap save(RoadMap roadMap, Long id){
+        User user = userService.findById(id);
+        roadMap.setUser(user);
         return roadMapRepository.save(roadMap);
     }
 

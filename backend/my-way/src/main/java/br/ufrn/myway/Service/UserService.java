@@ -44,8 +44,12 @@ public class UserService {
     }
 
     public User findById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User")));
+        User user = userRepository.getById(id);
+        if(user == null) {
+            throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User"));
+        }
+
+        return user;
     }
 
     public User findByEmail(String email) {

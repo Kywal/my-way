@@ -7,7 +7,6 @@ import br.ufrn.myway.Service.RoadMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -20,10 +19,10 @@ public class RoadMapController {
     @Autowired
     private RoadMapMapper roadMapMapper;
 
-    @PostMapping("/save")
-    public ResponseEntity<RoadMapDTO> save(@RequestBody RoadMapDTO roadMapDto){
+    @PostMapping("/save/{id}")
+    public ResponseEntity<RoadMapDTO> save(@RequestBody RoadMapDTO roadMapDto, @PathVariable Long id){
         RoadMap roadMap = roadMapMapper.toEntity(roadMapDto);
-        return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.save(roadMap)));
+        return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.save(roadMap, id)));
     }
     @GetMapping("/list")
     public List<RoadMapDTO> list(){

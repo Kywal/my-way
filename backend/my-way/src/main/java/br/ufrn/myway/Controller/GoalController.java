@@ -19,10 +19,10 @@ public class GoalController {
     @Autowired
     private GoalMapper goalMapper;
 
-    @PostMapping("/save")
-    public ResponseEntity<GoalDTO> save(@RequestBody GoalDTO goalDto){
+    @PostMapping("/save/{id}")
+    public ResponseEntity<GoalDTO> save(@RequestBody GoalDTO goalDto, @PathVariable Long id){
         Goal goal = goalMapper.toEntity(goalDto);
-        return ResponseEntity.ok(goalMapper.toDto(goalService.save(goal)));
+        return ResponseEntity.ok(goalMapper.toDto(goalService.save(goal, id)));
     }
 
     @GetMapping("/get/{id}")
