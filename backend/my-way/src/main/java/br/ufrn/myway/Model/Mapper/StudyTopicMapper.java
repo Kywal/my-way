@@ -15,8 +15,11 @@ import java.util.List;
 public interface StudyTopicMapper {
     StudyTopic toEntity(RequestStudyTopicDTO requestStudyTopicDTO);
 
+    @Mapping(target = "goalId", source = "studyTopic.goal.id")
     RequestStudyTopicDTO toRequest(StudyTopic studyTopic);
 
+    @Mapping(target = "goalId", source = "studyTopic.goal.id")
     ResponseStudyTopicDTO toResponse(StudyTopic studyTopic);
+
     List<ResponseStudyTopicDTO> toResponse(List<StudyTopic> studyTopics);
 }
