@@ -3,7 +3,7 @@ package br.ufrn.myway.Model.Mapper;
 import br.ufrn.myway.Model.DTO.GoalDTO;
 import br.ufrn.myway.Model.DTO.RoadMapSimpleDTO;
 import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.RoadMap;
+import br.ufrn.myway.Model.Entities.Roadmap;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -18,7 +18,7 @@ public interface GoalMapper {
     GoalDTO toDto(Goal goal);
     List<GoalDTO> toListDTO(List<Goal> goals);
 
-    default RoadMapSimpleDTO roadMapToSimple(RoadMap roadMap) {
+    default RoadMapSimpleDTO roadMapToSimple(Roadmap roadMap) {
         if (roadMap == null) {
             return null;
         }

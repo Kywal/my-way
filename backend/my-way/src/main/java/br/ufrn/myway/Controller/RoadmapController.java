@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
-import br.ufrn.myway.Model.Mapper.RoadMapMapper;
-import br.ufrn.myway.Service.RoadMapService;
+import br.ufrn.myway.Model.Mapper.RoadmapMapper;
+import br.ufrn.myway.Service.RoadmapService;
 
 @RestController
 @RequestMapping("/roadmap")
-public class RoadMapController {
+public class RoadmapController {
 
     @Autowired
-    private RoadMapService roadmapService;
+    private RoadmapService roadmapService;
 
     @Autowired
-    private RoadMapMapper roadmapMapper;
+    private RoadmapMapper roadmapMapper;
 
     @PostMapping("/save/{userId}")
     public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestRoadmapDTO roadmapDTO, @PathVariable Long userId){
@@ -55,6 +55,6 @@ public class RoadMapController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         roadmapService.deletar(id);
-        return ResponseEntity.ok("RoadMap successfully deleted.");
+        return ResponseEntity.ok("Roadmap successfully deleted.");
     }
 }

@@ -19,11 +19,11 @@ public class Goal extends AbstractModel {
 
     @ManyToOne
     @JoinColumn(name = "id_roadmap")
-    private RoadMap roadMap;
+    private Roadmap roadMap;
 
     private int size;
 
-    public Goal(String nameGoal, RoadMap roadMap, int size, List<StudyTopic> exercices) {
+    public Goal(String nameGoal, Roadmap roadMap, int size, List<StudyTopic> exercices) {
         this.name = nameGoal;
         this.roadMap = roadMap;
         this.size = size;
@@ -42,11 +42,11 @@ public class Goal extends AbstractModel {
         this.size = size;
     }
 
-    public RoadMap getRoadMap() {
+    public Roadmap getRoadMap() {
         return roadMap;
     }
 
-    public void setRoadMap(RoadMap roadMap) {
+    public void setRoadMap(Roadmap roadMap) {
         this.roadMap = roadMap;
     }
 

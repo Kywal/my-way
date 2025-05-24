@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class RoadMap extends AbstractModel {
+public class Roadmap extends AbstractModel {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -24,13 +24,13 @@ public class RoadMap extends AbstractModel {
 
     private RoadMapStatus status;
 
-    public RoadMap(User user, String name, List<Goal> listGoals) {
+    public Roadmap(User user, String name, List<Goal> listGoals) {
         this.user = user;
         this.name = name;
         this.listGoals = listGoals;
     }
 
-    public RoadMap() {}
+    public Roadmap() {}
 
     public User getUser() {
         return user;
