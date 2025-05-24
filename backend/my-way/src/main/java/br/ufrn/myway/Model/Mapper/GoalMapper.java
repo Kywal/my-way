@@ -22,6 +22,6 @@ public interface GoalMapper {
         if (roadMap == null) {
             return null;
         }
-        return new RoadMapSimpleDTO(roadMap.getId(), roadMap.getName());
+        return new RoadMapSimpleDTO(roadMap.getId(), roadMap.getName(), roadMap.getStatus());
     }
 }
