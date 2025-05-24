@@ -1,7 +1,7 @@
 package br.ufrn.myway.Controller;
 
-import br.ufrn.myway.Model.DTO.StudyTopicDTO;
-import br.ufrn.myway.Model.Entities.StudyTopic;
+import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO;
+import br.ufrn.myway.Model.DTO.Response.ResponseStudyTopicDTO;
 import br.ufrn.myway.Model.Mapper.StudyTopicMapper;
 import br.ufrn.myway.Service.StudyTopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +19,28 @@ public class StudyTopicController {
     @Autowired
     private StudyTopicMapper studyTopicMapper;
 
-    @PostMapping("/save/{id}")
-    public ResponseEntity<StudyTopicDTO> save(@RequestBody StudyTopicDTO studyTopicDto, @PathVariable Long id) {
-        StudyTopic studyTopic = studyTopicMapper.toEntity(studyTopicDto);
-        return ResponseEntity.ok(studyTopicMapper.toDto(studyTopicService.save(studyTopic, id)));
+    @PostMapping("/save/{goalId}")
+    public ResponseEntity<ResponseStudyTopicDTO> save(@RequestBody RequestStudyTopicDTO requestStudyTopicDto, @PathVariable Long goalId) {
+        return ResponseEntity.ok(
+                studyTopicMapper.toResponse(
+                        studyTopicService.save(
+                                studyTopicMapper.toEntity(requestStudyTopicDto), goalId)
+                )
+        );
     }
+
     @GetMapping("/list")
-    public List<StudyTopicDTO> list(){
-        return studyTopicMapper.toListDTO(studyTopicService.list());
+    public List<ResponseStudyTopicDTO> list(){
+        return studyTopicMapper.toResponse(studyTopicService.list());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<StudyTopicDTO> get(@PathVariable Long id){
-        return ResponseEntity.ok(studyTopicMapper.toDto(studyTopicService.findById(id)));
+    public ResponseEntity<ResponseStudyTopicDTO> get(@PathVariable Long id){
+        return ResponseEntity.ok(
+                studyTopicMapper.toResponse(
+                        studyTopicService.findById(id)
+                )
+        );
     }
 
     @DeleteMapping("/delete/{id}")
