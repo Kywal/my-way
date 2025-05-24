@@ -1,8 +1,5 @@
 package br.ufrn.myway.Model.Entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.ufrn.myway.Model.Enums.RoadMapStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Roadmap extends AbstractModel {
@@ -23,6 +24,7 @@ public class Roadmap extends AbstractModel {
 
     private String description;
 
+    @OrderBy("roadmapIndex")
     @OneToMany(mappedBy = "roadMap", cascade = CascadeType.ALL) // Must match Goal's property name
     private List<Goal> goals = new ArrayList<>();
 

@@ -21,26 +21,15 @@ public class Goal extends AbstractModel {
     @JoinColumn(name = "id_roadmap")
     private Roadmap roadMap;
 
-    private int size;
+    private int roadmapIndex;
 
-    public Goal(String nameGoal, Roadmap roadMap, int size, List<StudyTopic> exercices) {
+    public Goal(String nameGoal, Roadmap roadMap, List<StudyTopic> exercices) {
         this.name = nameGoal;
         this.roadMap = roadMap;
-        this.size = size;
         this.exercises = exercices;
     }
 
-    public Goal() {
-
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
+    public Goal() {}
 
     public Roadmap getRoadMap() {
         return roadMap;
@@ -66,5 +55,11 @@ public class Goal extends AbstractModel {
         this.exercises = exercises;
     }
 
-    
+    public int getRoadmapIndex() {
+        return roadmapIndex;
+    }
+
+    public void setRoadmapIndex(int roadmapIndex) {
+        this.roadmapIndex = roadmapIndex;
+    }
 }
