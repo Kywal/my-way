@@ -14,6 +14,8 @@ public class Goal extends AbstractModel {
 
     private String name;
 
+    private String description;
+
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
     private List<StudyTopic> exercises = new ArrayList<>();
 
