@@ -1,15 +1,15 @@
 package br.ufrn.myway.Service;
 
-import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.RoadMap;
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
-import br.ufrn.myway.Repository.GoalRepository;
-import br.ufrn.myway.Repository.RoadMapRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import br.ufrn.myway.Model.Entities.RoadMap;
+import br.ufrn.myway.Model.Entities.User;
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Repository.RoadMapRepository;
+
 @Service
 public class RoadMapService {
 
@@ -19,26 +19,26 @@ public class RoadMapService {
     @Autowired
     private UserService userService;
 
-
-    public RoadMap findById(Long id){
+    public RoadMap findById(Long id) {
         RoadMap roadMap = roadMapRepository.getById(id);
-        if(roadMap == null){
+        if (roadMap == null) {
             throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("RoadMap"));
         }
         return roadMap;
     }
 
-    public RoadMap save(RoadMap roadMap, Long id){
+    public RoadMap save(RoadMap roadMap, Long id) {
         User user = userService.findById(id);
         roadMap.setUser(user);
+
         return roadMapRepository.save(roadMap);
     }
 
-    public List<RoadMap> list(){
+    public List<RoadMap> list() {
         return roadMapRepository.list();
     }
 
-    public void deletar(Long id){
+    public void deletar(Long id) {
         roadMapRepository.delete(id);
     }
 }

@@ -1,10 +1,13 @@
 package br.ufrn.myway.Model.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Goal extends AbstractModel {
@@ -20,10 +23,11 @@ public class Goal extends AbstractModel {
 
     private int size;
 
-    public Goal(String nameGoal, RoadMap roadMap, int size) {
-        this.name = name;
+    public Goal(String nameGoal, RoadMap roadMap, int size, List<StudyTopic> exercices) {
+        this.name = nameGoal;
         this.roadMap = roadMap;
         this.size = size;
+        this.exercises = exercices;
     }
 
     public Goal() {
@@ -53,4 +57,14 @@ public class Goal extends AbstractModel {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<StudyTopic> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<StudyTopic> exercises) {
+        this.exercises = exercises;
+    }
+
+    
 }

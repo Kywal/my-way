@@ -1,10 +1,11 @@
 package br.ufrn.myway.Model.Mapper;
 
-import br.ufrn.myway.Model.DTO.RoadMapDTO;
-import br.ufrn.myway.Model.Entities.RoadMap;
+import java.util.List;
+
 import org.mapstruct.Mapper;
 
-import java.util.List;
+import br.ufrn.myway.Model.DTO.RoadMapDTO;
+import br.ufrn.myway.Model.Entities.RoadMap;
 
 @Mapper(componentModel = "spring")
 
@@ -14,3 +15,4 @@ public interface RoadMapMapper {
 
     List<RoadMapDTO> toListDTO(List<RoadMap> list);
 }
+
