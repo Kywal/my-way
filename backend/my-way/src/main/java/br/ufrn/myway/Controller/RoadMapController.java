@@ -2,6 +2,7 @@ package br.ufrn.myway.Controller;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.DTO.Response.ResponseRoadmapDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufrn.myway.Model.DTO.RoadMapDTO;
-import br.ufrn.myway.Model.Entities.RoadMap;
+import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
 import br.ufrn.myway.Model.Mapper.RoadMapMapper;
 import br.ufrn.myway.Service.RoadMapService;
 
@@ -22,29 +22,39 @@ import br.ufrn.myway.Service.RoadMapService;
 public class RoadMapController {
 
     @Autowired
-    private RoadMapService roadMapService;
+    private RoadMapService roadmapService;
 
     @Autowired
-    private RoadMapMapper roadMapMapper;
+    private RoadMapMapper roadmapMapper;
 
     @PostMapping("/save/{userId}")
-    public ResponseEntity<RoadMapDTO> save(@RequestBody RoadMapDTO roadMapDto, @PathVariable Long userId){
-        RoadMap roadMap = roadMapMapper.toEntity(roadMapDto);
-        return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.save(roadMap, userId)));
+    public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestRoadmapDTO roadmapDTO, @PathVariable Long userId){
+        return ResponseEntity.ok(
+                roadmapMapper.toResponse(
+                        roadmapService.save(
+                                roadmapMapper.toEntity(roadmapDTO), userId
+                        )
+                )
+        );
     }
+
     @GetMapping("/list")
-    public List<RoadMapDTO> list(){
-        return roadMapMapper.toListDTO(roadMapService.list());
+    public List<ResponseRoadmapDTO> list(){
+        return roadmapMapper.toListDTO(roadmapService.list());
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<RoadMapDTO> get(@PathVariable Long id){
-        return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.findById(id)));
+    public ResponseEntity<ResponseRoadmapDTO> get(@PathVariable Long id){
+        return ResponseEntity.ok(
+                roadmapMapper.toResponse(
+                        roadmapService.findById(id)
+                )
+        );
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
-        roadMapService.deletar(id);
+        roadmapService.deletar(id);
         return ResponseEntity.ok("RoadMap successfully deleted.");
     }
 }
