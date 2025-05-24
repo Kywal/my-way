@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.ufrn.myway.Model.Enums.RoadMapStatus;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -17,16 +18,19 @@ public class Roadmap extends AbstractModel {
     @JoinColumn(name = "id_user")
     private User user;
 
-    private String name;
+    @Column(nullable = false)
+    private String mainGoal;
+
+    private String description;
 
     @OneToMany(mappedBy = "roadMap", cascade = CascadeType.ALL) // Must match Goal's property name
     private List<Goal> goals = new ArrayList<>();
 
     private RoadMapStatus status;
 
-    public Roadmap(User user, String name, List<Goal> goals) {
+    public Roadmap(User user, String mainGoal, List<Goal> goals) {
         this.user = user;
-        this.name = name;
+        this.mainGoal = mainGoal;
         this.goals = goals;
     }
 
@@ -40,12 +44,12 @@ public class Roadmap extends AbstractModel {
         this.user = user;
     }
 
-    public String getName() {
-        return name;
+    public String getMainGoal() {
+        return mainGoal;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMainGoal(String name) {
+        this.mainGoal = name;
     }
 
     public List<Goal> getGoals() {

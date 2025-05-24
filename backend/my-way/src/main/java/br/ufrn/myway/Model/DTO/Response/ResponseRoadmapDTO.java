@@ -5,5 +5,5 @@ import br.ufrn.myway.Model.Enums.RoadMapStatus;
 
 import java.util.List;
 
-public record ResponseRoadmapDTO(String name, List<GoalDTO> goals, RoadMapStatus status) {
+public record ResponseRoadmapDTO(String mainGoal, String description, List<GoalDTO> goals, RoadMapStatus status) {
 }
