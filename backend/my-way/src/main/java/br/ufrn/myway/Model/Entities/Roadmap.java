@@ -54,6 +54,14 @@ public class Roadmap extends AbstractModel {
         this.mainGoal = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public List<Goal> getGoals() {
         return goals;
     }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,6 +13,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Goal extends AbstractModel {
 
+    @Column(nullable = false)
     private String name;
 
     private String description;
@@ -47,6 +49,14 @@ public class Goal extends AbstractModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<StudyTopic> getExercises() {
