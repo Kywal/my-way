@@ -15,6 +15,7 @@ import java.util.List;
 public interface GoalMapper {
     Goal toEntity(RequestGoalDTO requestGoalDTO);
 
+    @Mapping(target = "roadmapId", source = "goal.roadmap.id")
     ResponseGoalDTO toResponse(Goal goal);
 
     List<ResponseGoalDTO> toResponse(List<Goal> goals);
