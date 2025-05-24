@@ -27,10 +27,10 @@ public class RoadMapController {
     @Autowired
     private RoadMapMapper roadMapMapper;
 
-    @PostMapping("/save/{idUser}")
-    public ResponseEntity<RoadMapDTO> save(@RequestBody RoadMapDTO roadMapDto, @PathVariable Long idUser){
+    @PostMapping("/save/{userId}")
+    public ResponseEntity<RoadMapDTO> save(@RequestBody RoadMapDTO roadMapDto, @PathVariable Long userId){
         RoadMap roadMap = roadMapMapper.toEntity(roadMapDto);
-        return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.save(roadMap, idUser)));
+        return ResponseEntity.ok(roadMapMapper.toDto(roadMapService.save(roadMap, userId)));
     }
     @GetMapping("/list")
     public List<RoadMapDTO> list(){
