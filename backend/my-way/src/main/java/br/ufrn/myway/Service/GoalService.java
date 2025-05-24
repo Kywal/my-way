@@ -26,7 +26,7 @@ public class GoalService {
     }
     public Goal save(Goal goal, Long id){
         Roadmap roadMap = roadMapService.findById(id);
-        goal.setRoadMap(roadMap);
+        goal.setRoadmap(roadMap);
         return goalRepository.save(goal);
     }
 

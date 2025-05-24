@@ -23,24 +23,24 @@ public class Goal extends AbstractModel {
 
     @ManyToOne
     @JoinColumn(name = "id_roadmap")
-    private Roadmap roadMap;
+    private Roadmap roadmap;
 
     private int roadmapIndex;
 
-    public Goal(String nameGoal, Roadmap roadMap, List<StudyTopic> exercices) {
+    public Goal(String nameGoal, Roadmap roadmap, List<StudyTopic> exercices) {
         this.name = nameGoal;
-        this.roadMap = roadMap;
+        this.roadmap = roadmap;
         this.exercises = exercices;
     }
 
     public Goal() {}
 
-    public Roadmap getRoadMap() {
-        return roadMap;
+    public Roadmap getRoadmap() {
+        return roadmap;
     }
 
-    public void setRoadMap(Roadmap roadMap) {
-        this.roadMap = roadMap;
+    public void setRoadmap(Roadmap roadMap) {
+        this.roadmap = roadMap;
     }
 
     public String getName() {

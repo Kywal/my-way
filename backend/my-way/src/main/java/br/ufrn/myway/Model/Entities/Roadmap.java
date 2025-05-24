@@ -25,7 +25,7 @@ public class Roadmap extends AbstractModel {
     private String description;
 
     @OrderBy("roadmapIndex")
-    @OneToMany(mappedBy = "roadMap", cascade = CascadeType.ALL) // Must match Goal's property name
+    @OneToMany(mappedBy = "roadmap", cascade = CascadeType.ALL) // Must match Goal's property name
     private List<Goal> goals = new ArrayList<>();
 
     private RoadMapStatus status;
