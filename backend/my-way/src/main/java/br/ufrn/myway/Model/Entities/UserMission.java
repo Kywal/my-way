@@ -1,16 +1,18 @@
 package br.ufrn.myway.Model.Entities;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "tb_user_mission")
 public class UserMission extends AbstractModel {
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

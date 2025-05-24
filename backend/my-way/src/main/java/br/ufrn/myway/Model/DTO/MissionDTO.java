@@ -5,7 +5,9 @@ public record MissionDTO(
         String description,
         int rewardPoints,
         Integer quantityGoal,
-        Integer timeInMinutes
+        Integer timeInMinutes,
+        String frequency,
+        String type
         ) {
 
 }
