@@ -1,6 +1,7 @@
 package br.ufrn.myway.Model.Mapper;
 
-import br.ufrn.myway.Model.DTO.GoalDTO;
+import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
+import br.ufrn.myway.Model.DTO.Response.ResponseGoalDTO;
 import br.ufrn.myway.Model.DTO.RoadMapSimpleDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
@@ -12,11 +13,14 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 
 public interface GoalMapper {
-    Goal toEntity(GoalDTO goalDTO);
+    Goal toEntity(RequestGoalDTO requestGoalDTO);
 
     @Mapping(target = "roadMap", expression = "java(roadMapToSimple(goal.getRoadMap()))")
-    GoalDTO toDto(Goal goal);
-    List<GoalDTO> toListDTO(List<Goal> goals);
+    RequestGoalDTO toRequest(Goal goal);
+
+    ResponseGoalDTO toResponse(Goal goal);
+
+    List<ResponseGoalDTO> toResponse(List<Goal> goals);
 
     default RoadMapSimpleDTO roadMapToSimple(Roadmap roadMap) {
         if (roadMap == null) {

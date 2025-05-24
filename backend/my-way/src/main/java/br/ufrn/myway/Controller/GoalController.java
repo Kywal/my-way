@@ -1,7 +1,7 @@
 package br.ufrn.myway.Controller;
 
-import br.ufrn.myway.Model.DTO.GoalDTO;
-import br.ufrn.myway.Model.Entities.Goal;
+import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
+import br.ufrn.myway.Model.DTO.Response.ResponseGoalDTO;
 import br.ufrn.myway.Model.Mapper.GoalMapper;
 import br.ufrn.myway.Service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +20,25 @@ public class GoalController {
     @Autowired
     private GoalMapper goalMapper;
 
-    @PostMapping("/save/{id}")
-    public ResponseEntity<GoalDTO> save(@RequestBody GoalDTO goalDto, @PathVariable Long id){
-        Goal goal = goalMapper.toEntity(goalDto);
-        return ResponseEntity.ok(goalMapper.toDto(goalService.save(goal, id)));
+    @PostMapping("/save/{roadmapId}")
+    public ResponseEntity<ResponseGoalDTO> save(@RequestBody RequestGoalDTO goalDTO, @PathVariable Long roadmapId){
+        return ResponseEntity.ok(
+                goalMapper.toResponse(
+                        goalService.save(
+                                goalMapper.toEntity(goalDTO), roadmapId
+                        )
+                )
+        );
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<GoalDTO> get(@PathVariable Long id){
-        return ResponseEntity.ok(goalMapper.toDto(goalService.findById(id)));
+    public ResponseEntity<ResponseGoalDTO> get(@PathVariable Long id){
+        return ResponseEntity.ok(goalMapper.toResponse(goalService.findById(id)));
     }
 
     @GetMapping("/list")
-    public List<GoalDTO> listGoals(){
-        return goalMapper.toListDTO(goalService.listGoals());
+    public List<ResponseGoalDTO> listGoals(){
+        return goalMapper.toResponse(goalService.listGoals());
     }
 
     @DeleteMapping("/delete/{id}")
