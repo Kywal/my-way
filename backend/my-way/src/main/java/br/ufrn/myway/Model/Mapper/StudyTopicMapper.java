@@ -15,16 +15,8 @@ import java.util.List;
 public interface StudyTopicMapper {
     StudyTopic toEntity(RequestStudyTopicDTO requestStudyTopicDTO);
 
-    @Mapping(target = "goal", source = "goal")
-    RequestStudyTopicDTO toDto(StudyTopic studyTopic);
+    RequestStudyTopicDTO toRequest(StudyTopic studyTopic);
 
     ResponseStudyTopicDTO toResponse(StudyTopic studyTopic);
     List<ResponseStudyTopicDTO> toResponse(List<StudyTopic> studyTopics);
-
-    default GoalSimpleDTO goalToGoalSimpleDTO(Goal goal) {
-        if (goal == null) {
-            return null;
-        }
-        return new GoalSimpleDTO(goal.getId(), goal.getName());
-    }
 }
