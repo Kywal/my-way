@@ -20,14 +20,14 @@ public class Roadmap extends AbstractModel {
     private String name;
 
     @OneToMany(mappedBy = "roadMap", cascade = CascadeType.ALL) // Must match Goal's property name
-    private List<Goal> listGoals = new ArrayList<>();
+    private List<Goal> goals = new ArrayList<>();
 
     private RoadMapStatus status;
 
-    public Roadmap(User user, String name, List<Goal> listGoals) {
+    public Roadmap(User user, String name, List<Goal> goals) {
         this.user = user;
         this.name = name;
-        this.listGoals = listGoals;
+        this.goals = goals;
     }
 
     public Roadmap() {}
@@ -48,12 +48,12 @@ public class Roadmap extends AbstractModel {
         this.name = name;
     }
 
-    public List<Goal> getListGoals() {
-        return listGoals;
+    public List<Goal> getGoals() {
+        return goals;
     }
 
-    public void setListGoals(List<Goal> listGoals) {
-        this.listGoals = listGoals;
+    public void setGoals(List<Goal> listGoals) {
+        this.goals = listGoals;
     }
 
     public RoadMapStatus getStatus() {
