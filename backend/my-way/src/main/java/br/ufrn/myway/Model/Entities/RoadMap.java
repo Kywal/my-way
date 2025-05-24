@@ -3,7 +3,12 @@ package br.ufrn.myway.Model.Entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.*;
+import br.ufrn.myway.Model.Enums.RoadMapStatus;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class RoadMap extends AbstractModel {
@@ -16,6 +21,8 @@ public class RoadMap extends AbstractModel {
 
     @OneToMany(mappedBy = "roadMap", cascade = CascadeType.ALL) // Must match Goal's property name
     private List<Goal> listGoals = new ArrayList<>();
+
+    private RoadMapStatus status;
 
     public RoadMap(User user, String name, List<Goal> listGoals) {
         this.user = user;
@@ -48,4 +55,14 @@ public class RoadMap extends AbstractModel {
     public void setListGoals(List<Goal> listGoals) {
         this.listGoals = listGoals;
     }
+
+    public RoadMapStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(RoadMapStatus status) {
+        this.status = status;
+    }
+
+    
 }

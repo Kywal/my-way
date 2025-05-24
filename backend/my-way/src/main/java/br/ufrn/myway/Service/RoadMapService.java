@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.ufrn.myway.Model.Entities.RoadMap;
 import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Model.Enums.RoadMapStatus;
 import br.ufrn.myway.Repository.RoadMapRepository;
 
 @Service
@@ -30,6 +31,7 @@ public class RoadMapService {
     public RoadMap save(RoadMap roadMap, Long id) {
         User user = userService.findById(id);
         roadMap.setUser(user);
+        roadMap.setStatus(RoadMapStatus.ACTIVE);
 
         return roadMapRepository.save(roadMap);
     }
