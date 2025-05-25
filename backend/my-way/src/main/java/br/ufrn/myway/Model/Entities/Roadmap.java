@@ -1,52 +1,57 @@
 package br.ufrn.myway.Model.Entities;
 
-import java.util.List;
-
+import br.ufrn.myway.Model.Enums.RoadMapStatus;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.OrderColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.OrderBy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "tb_roadmap")
 public class Roadmap extends AbstractModel {
-
-    private String name;
-
-    private String description;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name ="id_final_goal")
-    private Goal finalGoal;
+    @Column(nullable = false)
+    private String mainGoal;
 
-    @OneToMany(mappedBy = "roadmap")
-    @OrderColumn(name = "path_goals_order")
-    private List<Goal> pathGoals;
+    private String description;
 
-    public Roadmap() {
-    }
+    @OrderBy("roadmapIndex")
+    @OneToMany(mappedBy = "roadmap", cascade = CascadeType.ALL) // Must match Goal's property name
+    private List<Goal> goals = new ArrayList<>();
 
-    public Roadmap(String name, String description, User user, Goal finalGoal, List<Goal> pathGoals) {
-        this.name = name;
-        this.description = description;
+    private RoadMapStatus status;
+
+    public Roadmap(User user, String mainGoal, List<Goal> goals) {
         this.user = user;
-        this.finalGoal = finalGoal;
-        this.pathGoals = pathGoals;
+        this.mainGoal = mainGoal;
+        this.goals = goals;
     }
 
-    public String getName() {
-        return name;
+    public Roadmap() {}
+
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getMainGoal() {
+        return mainGoal;
+    }
+
+    public void setMainGoal(String name) {
+        this.mainGoal = name;
     }
 
     public String getDescription() {
@@ -57,27 +62,21 @@ public class Roadmap extends AbstractModel {
         this.description = description;
     }
 
-    public User getUser() {
-        return user;
+    public List<Goal> getGoals() {
+        return goals;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setGoals(List<Goal> listGoals) {
+        this.goals = listGoals;
     }
 
-    public Goal getFinalGoal() {
-        return finalGoal;
+    public RoadMapStatus getStatus() {
+        return status;
     }
 
-    public void setFinalGoal(Goal finalGoal) {
-        this.finalGoal = finalGoal;
+    public void setStatus(RoadMapStatus status) {
+        this.status = status;
     }
 
-    public List<Goal> getPathGoals() {
-        return pathGoals;
-    }
-
-    public void setPathGoals(List<Goal> pathGoals) {
-        this.pathGoals = pathGoals;
-    }
+    
 }

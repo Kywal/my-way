@@ -1,29 +1,46 @@
 package br.ufrn.myway.Model.Entities;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "tb_goal")
 public class Goal extends AbstractModel {
 
+    @Column(nullable = false)
     private String name;
 
     private String description;
+
+    @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
+    private List<StudyTopic> studyTopics = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "id_roadmap")
     private Roadmap roadmap;
 
-    public Goal() {
+    private Long roadmapIndex;
+
+    public Goal(String nameGoal, Roadmap roadmap, List<StudyTopic> exercices) {
+        this.name = nameGoal;
+        this.roadmap = roadmap;
+        this.studyTopics = exercices;
     }
 
-    public Goal(String name, String description, Roadmap roadmap) {
-        this.name = name;
-        this.description = description;
-        this.roadmap = roadmap;
+    public Goal() {}
+
+    public Roadmap getRoadmap() {
+        return roadmap;
+    }
+
+    public void setRoadmap(Roadmap roadMap) {
+        this.roadmap = roadMap;
     }
 
     public String getName() {
@@ -42,11 +59,19 @@ public class Goal extends AbstractModel {
         this.description = description;
     }
 
-    public Roadmap getRoadmap() {
-        return roadmap;
+    public List<StudyTopic> getStudyTopics() {
+        return studyTopics;
     }
 
-    public void setRoadmap(Roadmap roadmap) {
-        this.roadmap = roadmap;
+    public void setStudyTopics(List<StudyTopic> exercises) {
+        this.studyTopics = exercises;
+    }
+
+    public Long getRoadmapIndex() {
+        return roadmapIndex;
+    }
+
+    public void setRoadmapIndex(Long roadmapIndex) {
+        this.roadmapIndex = roadmapIndex;
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name = "tb_user")
 @Entity
 public class User extends AbstractModel {
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_person")
     private Person person;

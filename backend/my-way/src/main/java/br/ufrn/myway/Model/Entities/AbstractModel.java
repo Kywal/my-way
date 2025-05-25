@@ -1,3 +1,4 @@
+
 package br.ufrn.myway.Model.Entities;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+
 
 @MappedSuperclass
 public abstract class AbstractModel {
@@ -23,4 +25,23 @@ public abstract class AbstractModel {
 
     protected boolean ativo = true;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 }
