@@ -16,4 +16,11 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionDTO> handleException(BusinessException e) {
+        return ResponseEntity.status(e.getStatus()).body(
+                new ExceptionDTO(e.getStatus(), e.getMessage())
+        );
+    }
+
 }
