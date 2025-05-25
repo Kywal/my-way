@@ -15,7 +15,7 @@ public class StudyTopic extends AbstractModel {
     @JoinColumn(name = "id_goal")
     private Goal goal;
 
-    private boolean isDone = false ;
+    private boolean isDone;
 
     public StudyTopic(String name, String description, Goal goal, boolean isDone) {
         this.name = name;
@@ -54,7 +54,11 @@ public class StudyTopic extends AbstractModel {
         return isDone;
     }
 
-    public void setDone(boolean done) {
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(boolean done) {
         isDone = done;
     }
 }
