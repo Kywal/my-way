@@ -27,7 +27,7 @@ public class RoadmapController {
     @Autowired
     private RoadmapMapper roadmapMapper;
 
-    @PostMapping("/save/{userId}")
+    @PostMapping("/{userId}")
     public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestRoadmapDTO roadmapDTO, @PathVariable Long userId){
         return ResponseEntity.ok(
                 roadmapMapper.toResponse(
@@ -43,7 +43,7 @@ public class RoadmapController {
         return roadmapMapper.toListDTO(roadmapService.list());
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ResponseRoadmapDTO> get(@PathVariable Long id){
         return ResponseEntity.ok(
                 roadmapMapper.toResponse(
@@ -52,7 +52,7 @@ public class RoadmapController {
         );
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         roadmapService.deletar(id);
         return ResponseEntity.ok("Roadmap successfully deleted.");

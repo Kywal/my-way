@@ -20,7 +20,7 @@ public class GoalController {
     @Autowired
     private GoalMapper goalMapper;
 
-    @PostMapping("/save/{roadmapId}")
+    @PostMapping("/{roadmapId}")
     public ResponseEntity<ResponseGoalDTO> save(@RequestBody RequestGoalDTO goalDTO, @PathVariable Long roadmapId){
         return ResponseEntity.ok(
                 goalMapper.toResponse(
@@ -31,7 +31,7 @@ public class GoalController {
         );
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ResponseGoalDTO> get(@PathVariable Long id){
         return ResponseEntity.ok(goalMapper.toResponse(goalService.findById(id)));
     }
@@ -41,7 +41,7 @@ public class GoalController {
         return goalMapper.toResponse(goalService.listGoals());
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         goalService.delete(id);
         return ResponseEntity.ok("Goal successfully deleted.");

@@ -19,7 +19,7 @@ public class StudyTopicController {
     @Autowired
     private StudyTopicMapper studyTopicMapper;
 
-    @PostMapping("/save/{goalId}")
+    @PostMapping("/{goalId}")
     public ResponseEntity<ResponseStudyTopicDTO> save(@RequestBody RequestStudyTopicDTO requestStudyTopicDto, @PathVariable Long goalId) {
         return ResponseEntity.ok(
                 studyTopicMapper.toResponse(
@@ -34,7 +34,7 @@ public class StudyTopicController {
         return studyTopicMapper.toResponse(studyTopicService.list());
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ResponseStudyTopicDTO> get(@PathVariable Long id){
         return ResponseEntity.ok(
                 studyTopicMapper.toResponse(
@@ -43,7 +43,7 @@ public class StudyTopicController {
         );
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         studyTopicService.delete(id);
         return ResponseEntity.ok("Study Topic successfully deleted.");
