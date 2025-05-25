@@ -1,13 +1,14 @@
 package br.ufrn.myway.Service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.GoalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class GoalService {
@@ -24,26 +25,29 @@ public class GoalService {
         }
         return goal;
     }
-    public Goal save(Goal goal, Long id){
+
+    public Goal save(Goal goal, Long id) {
         Roadmap roadMap = roadMapService.findById(id);
         Long lastIndex = -1L;
+        goal.setRoadmap(roadMap);
 
         if (roadMap == null) {
             lastIndex = null;
         } else if (!roadMap.getGoals().isEmpty()) {
             lastIndex = roadMap.getGoals().getLast().getRoadmapIndex();
             goal.setRoadmapIndex(lastIndex + 1);
+        } else {
+            goal.setRoadmapIndex(0L);
         }
 
-        goal.setRoadmap(roadMap);
         return goalRepository.save(goal);
     }
 
-    public List<Goal> listGoals(){
+    public List<Goal> listGoals() {
         return goalRepository.list();
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         goalRepository.delete(id);
     }
 
