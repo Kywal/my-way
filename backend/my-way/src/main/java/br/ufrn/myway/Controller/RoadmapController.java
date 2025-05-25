@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
 import br.ufrn.myway.Model.Mapper.RoadmapMapper;
-import br.ufrn.myway.Service.RoadmapService;
+import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 
 @RestController
 @RequestMapping("/roadmap")
