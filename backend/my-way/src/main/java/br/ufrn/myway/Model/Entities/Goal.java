@@ -19,7 +19,7 @@ public class Goal extends AbstractModel {
     private String description;
 
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL)
-    private List<StudyTopic> exercises = new ArrayList<>();
+    private List<StudyTopic> studyTopics = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "id_roadmap")
@@ -31,7 +31,7 @@ public class Goal extends AbstractModel {
     public Goal(String nameGoal, Roadmap roadmap, List<StudyTopic> exercices) {
         this.name = nameGoal;
         this.roadmap = roadmap;
-        this.exercises = exercices;
+        this.studyTopics = exercices;
     }
 
     public Goal() {}
@@ -60,12 +60,12 @@ public class Goal extends AbstractModel {
         this.description = description;
     }
 
-    public List<StudyTopic> getExercises() {
-        return exercises;
+    public List<StudyTopic> getStudyTopics() {
+        return studyTopics;
     }
 
-    public void setExercises(List<StudyTopic> exercises) {
-        this.exercises = exercises;
+    public void setStudyTopics(List<StudyTopic> exercises) {
+        this.studyTopics = exercises;
     }
 
     public Long getRoadmapIndex() {
