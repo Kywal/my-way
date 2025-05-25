@@ -25,7 +25,6 @@ public class Goal extends AbstractModel {
     @JoinColumn(name = "id_roadmap")
     private Roadmap roadmap;
 
-    @Column(unique = true)
     private Long roadmapIndex;
 
     public Goal(String nameGoal, Roadmap roadmap, List<StudyTopic> exercices) {
