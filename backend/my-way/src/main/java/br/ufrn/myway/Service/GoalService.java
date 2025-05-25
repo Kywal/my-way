@@ -2,6 +2,7 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
+import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
