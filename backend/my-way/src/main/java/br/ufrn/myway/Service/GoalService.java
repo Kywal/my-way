@@ -26,6 +26,15 @@ public class GoalService {
     }
     public Goal save(Goal goal, Long id){
         Roadmap roadMap = roadMapService.findById(id);
+        Long lastIndex = -1L;
+
+        if (roadMap == null) {
+            lastIndex = null;
+        } else if (!roadMap.getGoals().isEmpty()) {
+            lastIndex = roadMap.getGoals().getLast().getRoadmapIndex();
+            goal.setRoadmapIndex(lastIndex + 1);
+        }
+
         goal.setRoadmap(roadMap);
         return goalRepository.save(goal);
     }
