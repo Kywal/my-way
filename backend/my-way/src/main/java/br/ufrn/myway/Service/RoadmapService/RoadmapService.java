@@ -6,6 +6,7 @@ import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Service.BusinessException;
 import br.ufrn.myway.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.myway.Model.Entities.User;
@@ -25,7 +26,7 @@ public class RoadmapService {
     public Roadmap findById(Long id) {
         Roadmap roadMap = roadmapRepository.getById(id);
         if (roadMap == null) {
-            throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap"));
+            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap"));
         }
         return roadMap;
     }

@@ -5,6 +5,7 @@ import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.StudyTopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class StudyTopicService {
     public StudyTopic findById(Long id){
         StudyTopic studyTopic = studyTopicRepository.getById(id);
         if(studyTopic == null){
-            throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Study Topic"));
+            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Study Topic"));
         }
         return studyTopic;
     }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.myway.Model.Entities.Goal;
@@ -22,7 +23,7 @@ public class GoalService {
     public Goal findById(Long id) {
         Goal goal = goalRepository.getById(id);
         if (goal == null) {
-            throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Goal"));
+            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Goal"));
         }
         return goal;
     }
