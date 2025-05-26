@@ -1,7 +1,7 @@
 package br.ufrn.myway.Controller.RoadmapController;
 
-import br.ufrn.myway.Model.DTO.GenerateRoadmapDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
+import br.ufrn.myway.Model.DTO.Response.ResponseGenerateRoadmapDTO;
 import br.ufrn.myway.Model.Mapper.RoadmapMapper;
 import br.ufrn.myway.Service.RoadmapService.AiRoadmapService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class AiRoadmapController {
     private RoadmapMapper roadmapMapper;
 
     @PostMapping
-    public ResponseEntity<GenerateRoadmapDTO> generateRoadmap(@RequestBody RequestRoadmapDTO roadmapDTO){
+    public ResponseEntity<ResponseGenerateRoadmapDTO> generateRoadmap(@RequestBody RequestRoadmapDTO roadmapDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 aiRoadmapService.generateRoadmap(
                     roadmapDTO.mainGoal(), roadmapDTO.description()
