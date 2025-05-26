@@ -2,9 +2,7 @@ package br.ufrn.myway.Model.Mapper;
 
 import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseGoalDTO;
-import br.ufrn.myway.Model.DTO.RoadMapSimpleDTO;
 import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.Roadmap;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
