@@ -1,4 +1,4 @@
-package br.ufrn.myway.Controller;
+package br.ufrn.myway.Controller.RoadmapController;
 
 import java.util.List;
 
