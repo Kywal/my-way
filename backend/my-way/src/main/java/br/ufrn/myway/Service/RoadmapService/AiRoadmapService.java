@@ -24,7 +24,8 @@ public class AiRoadmapService {
 
         return ChatClient.create(chatModel).prompt()
                 .user(u -> u.text(prompt)
-                        .param(mainGoal, description))
+                        .param("mainGoal", mainGoal)
+                        .param("description", description))
                 .call()
                 .entity(Roadmap.class);
     }
