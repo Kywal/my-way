@@ -2,7 +2,7 @@ package br.ufrn.myway.Model.Mapper;
 
 import java.util.List;
 
-import br.ufrn.myway.Model.DTO.GenerateRoadmapDTO;
+import br.ufrn.myway.Model.DTO.Request.RequestFullRoadmapDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseRoadmapDTO;
 import br.ufrn.myway.Model.Entities.Roadmap;
@@ -12,7 +12,7 @@ import org.mapstruct.Mapper;
 public interface RoadmapMapper {
     Roadmap toEntity(RequestRoadmapDTO roadMapDTO);
     Roadmap toEntity(ResponseRoadmapDTO roadMapDTO);
-    Roadmap toEntity(GenerateRoadmapDTO roadmapDTO);
+    Roadmap toEntity(RequestFullRoadmapDTO roadmapDTO);
 
     ResponseRoadmapDTO toResponse(Roadmap roadMap);
 
