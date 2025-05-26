@@ -19,7 +19,7 @@ public class AiRoadmapService {
     @Autowired
     private ChatModel chatModel;
 
-    public Roadmap createRoadmapWithAi(String mainGoal, String description) {
+    public Roadmap generateRoadmap(String mainGoal, String description) {
         String prompt = "Gere um roadmap para o objetivo: {mainGoal}, a descrição desse objetivo é: {description}.";
 
         return ChatClient.create(chatModel).prompt()
