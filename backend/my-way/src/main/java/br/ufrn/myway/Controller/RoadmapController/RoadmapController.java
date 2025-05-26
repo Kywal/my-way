@@ -2,8 +2,10 @@ package br.ufrn.myway.Controller.RoadmapController;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.DTO.GenerateRoadmapDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseRoadmapDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +32,17 @@ public class RoadmapController {
     @PostMapping("/{userId}")
     public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestRoadmapDTO roadmapDTO, @PathVariable Long userId){
         return ResponseEntity.ok(
+                roadmapMapper.toResponse(
+                        roadmapService.save(
+                                roadmapMapper.toEntity(roadmapDTO), userId
+                        )
+                )
+        );
+    }
+
+    @PostMapping("/save/{userId}")
+    public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody GenerateRoadmapDTO roadmapDTO, @PathVariable Long userId){
+        return ResponseEntity.status(HttpStatus.CREATED).body(
                 roadmapMapper.toResponse(
                         roadmapService.save(
                                 roadmapMapper.toEntity(roadmapDTO), userId
