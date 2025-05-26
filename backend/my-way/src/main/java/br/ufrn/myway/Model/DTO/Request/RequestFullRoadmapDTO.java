@@ -1,13 +1,13 @@
-package br.ufrn.myway.Model.DTO;
+package br.ufrn.myway.Model.DTO.Request;
 
 import br.ufrn.myway.Model.Enums.RoadMapStatus;
 
 import java.util.List;
 
-public record GenerateRoadmapDTO(
+public record RequestFullRoadmapDTO(
         String mainGoal, 
         String description, 
-        List<GenerateGoalDTO> goals,
+        List<RequestFullGoalDTO> goals,
         RoadMapStatus status
 )  {
 }
