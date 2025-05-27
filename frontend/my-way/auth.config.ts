@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
+import axios from "axios"; 
 
 export const authConfig: NextAuthOptions = {
   pages: {
@@ -15,11 +15,32 @@ export const authConfig: NextAuthOptions = {
         password: { label: "Senha", type: "password" },
       },
       async authorize(credentials) {
+        if (!credentials) {
+          console.error("Credenciais não fornecidas");
+          return null;
+        }
+        const { email, password } = credentials;
+
+        if (!email || !password) {
+          console.error("Email ou senha não fornecidos");
+          return null;
+        }
+
+        const basicAuth = Buffer.from(`${email}:${password}`).toString(
+          "base64"
+        );
+
         try {
-          const res = await axios.post("http://localhost:8081/user/login", {
-            email: credentials?.email,
-            password: credentials?.password,
-          });
+          const res = await axios.post(
+            "http://localhost:8081/user/login",
+            {},
+            {
+              headers: {
+                'Authorization': `Basic ${basicAuth}`,
+                'Content-Type': 'application/json',
+              },
+            }
+          );
 
           console.log("LOGIN RESPONSE", res.status, res.data);
 
@@ -30,7 +51,7 @@ export const authConfig: NextAuthOptions = {
           }
 
           return {
-            id: user.email, // Fake ID pro NextAuth não quebrar
+            id: user.id,
             email: user.email,
             role: user.role,
             name: user.person?.name,
