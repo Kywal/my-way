@@ -71,6 +71,10 @@ public class UserService {
         UserDetails userDetails = (UserDetails) authenticationResponse.getPrincipal();
         User user = findByEmail(userDetails.getUsername());
 
+        if(user == null) {
+            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_LOGIN.getMessage());
+        }
+
         missionService.assignDailyMissionIfNeeded(user);
 
         return user;
