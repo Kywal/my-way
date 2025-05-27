@@ -7,6 +7,7 @@ import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Model.Enums.RoadMapStatus;
+import br.ufrn.myway.Model.Mapper.RoadmapMapper;
 import br.ufrn.myway.Service.BusinessException;
 import br.ufrn.myway.Service.GoalService;
 import br.ufrn.myway.Service.UserService;
@@ -27,6 +28,9 @@ public class AiRoadmapService {
 
     @Autowired
     private GoalService goalService;
+
+    @Autowired
+    private RoadmapMapper roadmapMapper;
 
     @Autowired
     private ChatModel chatModel;
@@ -74,6 +78,14 @@ public class AiRoadmapService {
         }
 
         return roadmapService.save(roadmap, userId);
+    }
+
+    public Roadmap generateAndSaveRoadmap(String mainGoal, String description, Long userId) {
+        ResponseGenerateRoadmapDTO generatedRoadmap = generateRoadmap(mainGoal, description);
+
+        return saveGeneratedRoadmap(
+                roadmapMapper.toEntity(generatedRoadmap), userId
+        );
     }
 
 }
