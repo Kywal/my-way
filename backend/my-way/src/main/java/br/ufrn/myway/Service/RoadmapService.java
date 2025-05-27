@@ -2,12 +2,10 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
-import br.ufrn.myway.Model.DTO.GoalPositionDTO;
-import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.Roadmap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Model.Enums.RoadMapStatus;
@@ -30,12 +28,16 @@ public class RoadmapService {
         return roadMap;
     }
 
-    public Roadmap save(Roadmap roadMap, Long id) {
+    public Roadmap save(Roadmap roadmap, Long id) {
         User user = userService.findById(id);
-        roadMap.setUser(user);
-        roadMap.setStatus(RoadMapStatus.ACTIVE);
+        if (user == null) {
+            roadmap.setUser(user);
+        }
+        if (roadmap.getStatus() == null) {
+            roadmap.setStatus(RoadMapStatus.ACTIVE);
+        }
 
-        return roadmapRepository.save(roadMap);
+        return roadmapRepository.save(roadmap);
     }
 
     public List<Roadmap> list() {
@@ -46,19 +48,19 @@ public class RoadmapService {
         roadmapRepository.delete(id);
     }
 
-    public List<Roadmap> findRoadMapByUser(Long id){
+    public List<Roadmap> findRoadMapByUser(Long id) {
         return roadmapRepository.findRoadMapByUser(id);
     }
 
-    public Roadmap cancelRoadmap(Long id){
-        Roadmap roadMap = findById(id);
-        findById(id).setStatus(RoadMapStatus.CANCELLED);
-        return save(roadMap, roadMap.getUser().getId());
+    public Roadmap cancelRoadmap(Long id) {
+        Roadmap roadmap = findById(id);
+        roadmap.setStatus(RoadMapStatus.CANCELLED);
+        return save(roadmap, roadmap.getUser().getId());
     }
 
-    public Roadmap finishRoadmap(Long id){
-        Roadmap roadMap = findById(id);
-        findById(id).setStatus(RoadMapStatus.CONCLUDED);
-        return save(roadMap, roadMap.getUser().getId());
+    public Roadmap finishRoadmap(Long id) {
+        Roadmap roadmap = findById(id);
+        roadmap.setStatus(RoadMapStatus.CONCLUDED);
+        return save(roadmap, roadmap.getUser().getId());
     }
 }
