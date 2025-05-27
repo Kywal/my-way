@@ -2,8 +2,6 @@ package br.ufrn.myway.Controller.RoadmapController;
 
 import java.util.List;
 
-import br.ufrn.myway.Model.DTO.Request.RequestFullRoadmapDTO;
-import br.ufrn.myway.Model.DTO.Response.ResponseRoadmapDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ufrn.myway.Model.DTO.Request.RequestFullRoadmapDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
+import br.ufrn.myway.Model.DTO.Response.ResponseRoadmapDTO;
 import br.ufrn.myway.Model.Mapper.RoadmapMapper;
 import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 
@@ -30,7 +30,7 @@ public class RoadmapController {
     private RoadmapMapper roadmapMapper;
 
     @PostMapping("/{userId}")
-    public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestRoadmapDTO roadmapDTO, @PathVariable Long userId){
+    public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestRoadmapDTO roadmapDTO, @PathVariable Long userId) {
         return ResponseEntity.ok(
                 roadmapMapper.toResponse(
                         roadmapService.save(
@@ -41,7 +41,7 @@ public class RoadmapController {
     }
 
     @PostMapping("/save/{userId}")
-    public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestFullRoadmapDTO roadmapDTO, @PathVariable Long userId){
+    public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestFullRoadmapDTO roadmapDTO, @PathVariable Long userId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 roadmapMapper.toResponse(
                         roadmapService.save(
@@ -52,12 +52,12 @@ public class RoadmapController {
     }
 
     @GetMapping("/list")
-    public List<ResponseRoadmapDTO> list(){
+    public List<ResponseRoadmapDTO> list() {
         return roadmapMapper.toListDTO(roadmapService.list());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseRoadmapDTO> get(@PathVariable Long id){
+    public ResponseEntity<ResponseRoadmapDTO> get(@PathVariable Long id) {
         return ResponseEntity.ok(
                 roadmapMapper.toResponse(
                         roadmapService.findById(id)
@@ -66,8 +66,24 @@ public class RoadmapController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         roadmapService.deletar(id);
         return ResponseEntity.ok("Roadmap successfully deleted.");
     }
+
+    @GetMapping("/find-by-user/{id}")
+    public ResponseEntity<List<ResponseRoadmapDTO>> findByUser(@PathVariable Long id) {
+        return ResponseEntity.ok(roadmapMapper.toListDTO(roadmapService.findRoadMapByUser(id)));
+    }
+
+    @PostMapping("/finish-roadmap/{id}")
+    public ResponseEntity<ResponseRoadmapDTO> finish(@PathVariable Long id) {
+        return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.finishRoadmap(id)));
+    }
+
+    @PostMapping("/cancel-roadmap/{id}")
+    public ResponseEntity<ResponseRoadmapDTO> cancel(@PathVariable Long id) {
+        return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.cancelRoadmap(id)));
+    }
+
 }

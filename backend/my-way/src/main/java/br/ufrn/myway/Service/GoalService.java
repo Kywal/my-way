@@ -2,21 +2,22 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
-import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.GoalRepository;
+import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 
 @Service
 public class GoalService {
 
     @Autowired
-    GoalRepository goalRepository;
+    private GoalRepository goalRepository;
     @Autowired
     private RoadmapService roadMapService;
 
@@ -51,6 +52,14 @@ public class GoalService {
 
     public void delete(Long id) {
         goalRepository.delete(id);
+    }
+
+    public void changeIndexRoadMapFromGoals(Long id, List<GoalPositionDTO> list) {
+        for (GoalPositionDTO g : list) {
+            Goal goal = findById(g.id());
+            goal.setRoadmapIndex(g.updatedPosition());
+            save(goal, id);
+        }
     }
 
 }
