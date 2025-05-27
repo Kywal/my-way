@@ -1,5 +1,6 @@
 package br.ufrn.myway.Controller;
 
+import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseGoalDTO;
 import br.ufrn.myway.Model.Mapper.GoalMapper;
@@ -45,6 +46,12 @@ public class GoalController {
     public ResponseEntity<String> delete(@PathVariable Long id){
         goalService.delete(id);
         return ResponseEntity.ok("Goal successfully deleted.");
+    }
+
+    @PostMapping("/change-goal-index/{id}")
+    public ResponseEntity<String> changeIndexRoadMapFromGoals(@PathVariable Long id, @RequestBody List<GoalPositionDTO> list) {
+        goalService.changeIndexRoadMapFromGoals(id, list);
+        return ResponseEntity.ok("Roadmap successfully updated.");
     }
 
 }

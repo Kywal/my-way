@@ -2,6 +2,8 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.DTO.GoalPositionDTO;
+import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +44,21 @@ public class RoadmapService {
 
     public void deletar(Long id) {
         roadmapRepository.delete(id);
+    }
+
+    public List<Roadmap> findRoadMapByUser(Long id){
+        return roadmapRepository.findRoadMapByUser(id);
+    }
+
+    public Roadmap cancelRoadmap(Long id){
+        Roadmap roadMap = findById(id);
+        findById(id).setStatus(RoadMapStatus.CANCELLED);
+        return save(roadMap, roadMap.getUser().getId());
+    }
+
+    public Roadmap finishRoadmap(Long id){
+        Roadmap roadMap = findById(id);
+        findById(id).setStatus(RoadMapStatus.CONCLUDED);
+        return save(roadMap, roadMap.getUser().getId());
     }
 }

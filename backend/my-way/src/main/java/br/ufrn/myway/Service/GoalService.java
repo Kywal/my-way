@@ -2,6 +2,7 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import br.ufrn.myway.Repository.GoalRepository;
 public class GoalService {
 
     @Autowired
-    GoalRepository goalRepository;
+    private GoalRepository goalRepository;
     @Autowired
     private RoadmapService roadMapService;
 
@@ -49,6 +50,14 @@ public class GoalService {
 
     public void delete(Long id) {
         goalRepository.delete(id);
+    }
+
+    public void changeIndexRoadMapFromGoals(Long id, List<GoalPositionDTO> list) {
+        for (GoalPositionDTO g : list) {
+            Goal goal = findById(g.id());
+            goal.setRoadmapIndex(g.updatedPosition());
+            save(goal, id);
+        }
     }
 
 }

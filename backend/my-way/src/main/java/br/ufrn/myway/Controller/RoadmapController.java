@@ -2,7 +2,10 @@ package br.ufrn.myway.Controller;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseRoadmapDTO;
+import br.ufrn.myway.Model.Entities.Goal;
+import br.ufrn.myway.Model.Entities.Roadmap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,4 +60,20 @@ public class RoadmapController {
         roadmapService.deletar(id);
         return ResponseEntity.ok("Roadmap successfully deleted.");
     }
+
+    @GetMapping("/find-by-user/{id}")
+    public ResponseEntity<List<ResponseRoadmapDTO>> findByUser(@PathVariable Long id){
+        return ResponseEntity.ok(roadmapMapper.toListDTO(roadmapService.findRoadMapByUser(id)));
+    }
+
+    @PostMapping("/finish-roadmap/{id}")
+    public ResponseEntity<ResponseRoadmapDTO> finish(@PathVariable Long id){
+        return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.finishRoadmap(id)));
+    }
+
+    @PostMapping("/cancel-roadmap/{id}")
+    public ResponseEntity<ResponseRoadmapDTO> cancel(@PathVariable Long id){
+        return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.cancelRoadmap(id)));
+    }
+
 }
