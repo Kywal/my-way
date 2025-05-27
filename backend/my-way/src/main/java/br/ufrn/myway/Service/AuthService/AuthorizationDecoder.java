@@ -1,6 +1,9 @@
 package br.ufrn.myway.Service.AuthService;
 
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Service.BusinessException;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -15,6 +18,6 @@ public class AuthorizationDecoder {
             String credentials = new String(decodedBytes, StandardCharsets.UTF_8);
             return credentials.split(":", 2); // Splits into [email, password]
         }
-        throw new IllegalArgumentException("Invalid Authorization header");
+        throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_LOGIN.getMessage());
     }
 }
