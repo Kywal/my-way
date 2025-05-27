@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "@heroui/button";
-import { useSession } from "next-auth/react";
-// import { signOut } from "@/auth";
+import React from "react";
 
-import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
+
+import { Roadmap } from "@/components/Roadmap";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -16,14 +16,9 @@ export default function DashboardPage() {
     return <p>Usuário não autenticado</p>;
   }
 
-  console.log({ session });
-
   return (
     <div>
-      <h1 className="dark:text-white">Bem-vindo</h1>
-      <Button color="danger" onClick={() => signOut()}>
-        Logout
-      </Button>
+      <Roadmap />
     </div>
   );
 }

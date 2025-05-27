@@ -3,6 +3,7 @@ package br.ufrn.myway.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,15 +47,17 @@ public class UserService {
     public User findById(Long id) {
         User user = userRepository.getById(id);
         if(user == null) {
-            throw new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User"));
+            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User"));
         }
-
         return user;
     }
 
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User")));
+        User user = userRepository.findByEmail(email);
+        if(user == null) {
+            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User"));
+        }
+        return userRepository.findByEmail(email);
     }
 
     public User loginByEmail(String email, String password) {
@@ -66,7 +69,11 @@ public class UserService {
                 = this.authenticationManager.authenticate(authenticationRequest);
 
         UserDetails userDetails = (UserDetails) authenticationResponse.getPrincipal();
-        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(() -> new UsernameNotFoundException("Email não encontrado"));
+        User user = findByEmail(userDetails.getUsername());
+
+        if(user == null) {
+            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_LOGIN.getMessage());
+        }
 
         missionService.assignDailyMissionIfNeeded(user);
 

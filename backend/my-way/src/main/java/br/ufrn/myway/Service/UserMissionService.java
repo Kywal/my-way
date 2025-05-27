@@ -3,6 +3,7 @@ package br.ufrn.myway.Service;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.myway.Model.Entities.Mission;
@@ -19,7 +20,7 @@ public class UserMissionService {
     private UserMissionRepository userMissionRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     public boolean verifyConcludedQuantityTimeMission(User user, int timeInMinutes) {
         LocalDateTime now = LocalDateTime.now();
@@ -29,7 +30,7 @@ public class UserMissionService {
         UserMission userMissionToday = userMissionRepository.findByUserAndDateRange(user, startOfDay, endOfDay);
 
         if (userMissionToday == null) {
-            throw new BusinessException(ErrorMessageUtils.ERROR_USER_DONT_HAVE_DAILY_MISSION.getMessage(user.getEmail()));
+            throw new BusinessException(HttpStatus.BAD_REQUEST, ErrorMessageUtils.ERROR_USER_DONT_HAVE_DAILY_MISSION.getMessage(user.getEmail()));
         }
 
         Mission mission = userMissionToday.getMission();
@@ -43,8 +44,7 @@ public class UserMissionService {
     }
 
     public UserMission findByUserAndDateRange(String userEmail) {
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new BusinessException(ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User")));
+        User user = userService.findByEmail(userEmail);
 
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfDay = now.toLocalDate().atStartOfDay();
@@ -52,7 +52,7 @@ public class UserMissionService {
         UserMission userMissionToday = userMissionRepository.findByUserAndDateRange(user, startOfDay, endOfDay);
 
         if (userMissionToday == null) {
-            throw new BusinessException(ErrorMessageUtils.ERROR_USER_DONT_HAVE_DAILY_MISSION.getMessage(user.getEmail()));
+            throw new BusinessException(HttpStatus.BAD_REQUEST, ErrorMessageUtils.ERROR_USER_DONT_HAVE_DAILY_MISSION.getMessage(user.getEmail()));
         }
         return userMissionToday;
     }
