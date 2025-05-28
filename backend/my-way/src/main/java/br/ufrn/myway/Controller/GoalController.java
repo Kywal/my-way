@@ -3,6 +3,7 @@ package br.ufrn.myway.Controller;
 import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseGoalDTO;
+import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Mapper.GoalMapper;
 import br.ufrn.myway.Service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,11 @@ public class GoalController {
         goalService.changeIndexRoadMapFromGoals(id, list);
         return ResponseEntity.ok("Roadmap successfully updated.");
     }
-
+    @PutMapping("/{id}")
+    public ResponseEntity<Goal> update(
+            @PathVariable Long id,
+            @RequestBody RequestGoalDTO requestGoalDTO){
+        Goal updated = goalService.update(requestGoalDTO, id);
+        return ResponseEntity.ok(updated);
+    }
 }

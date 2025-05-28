@@ -2,6 +2,7 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,15 @@ public class GoalService {
         }
 
         return goalRepository.save(goal);
+    }
+
+    public Goal update(RequestGoalDTO requestGoalDTO, Long id){
+        Goal oldGoal = findById(id);
+
+        oldGoal.setName(requestGoalDTO.name());
+        oldGoal.setDescription(requestGoalDTO.description());
+
+        return goalRepository.save(oldGoal);
     }
 
     public List<Goal> listGoals() {
