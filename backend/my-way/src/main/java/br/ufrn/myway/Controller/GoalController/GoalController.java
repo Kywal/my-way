@@ -1,4 +1,4 @@
-package br.ufrn.myway.Controller;
+package br.ufrn.myway.Controller.GoalController;
 
 import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
