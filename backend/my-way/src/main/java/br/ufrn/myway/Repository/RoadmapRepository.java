@@ -11,7 +11,7 @@ public interface RoadmapRepository extends SoftDeletableRepository<Roadmap> {
     @Query("SELECT r FROM Roadmap r WHERE r.user.id = :id")
     List<Roadmap> findRoadMapByUser(Long id);
 
-    @Query("SELECT r FROM Roadmap r WHERE r.user.id = :id AND r.status = :status")
-    Roadmap findByStatus(@Param("id") Long id, @Param("status") RoadMapStatus status);
+    @Query("SELECT r FROM Roadmap r WHERE r.user.id = :userId AND r.status = :status")
+    Roadmap findByStatus(@Param("id") Long userId, @Param("status") RoadMapStatus status);
 
 }

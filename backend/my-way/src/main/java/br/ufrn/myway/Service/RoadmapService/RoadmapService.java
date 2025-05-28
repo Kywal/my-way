@@ -67,8 +67,8 @@ public class RoadmapService {
         return save(roadmap, roadmap.getUser().getId());
     }
 
-    public Roadmap getByStatus(Long id, RoadMapStatus status) {
-        Roadmap roadmap = roadmapRepository.findByStatus(id, status);
+    public Roadmap getByStatus(Long userId, RoadMapStatus status) {
+        Roadmap roadmap = roadmapRepository.findByStatus(userId, status);
         if (roadmap == null) {
             throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap"));
         }
