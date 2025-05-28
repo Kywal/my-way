@@ -1,5 +1,6 @@
 package br.ufrn.myway.Service;
 
+import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
@@ -29,6 +30,16 @@ public class StudyTopicService {
         return studyTopicRepository.save(studyTopic);
     }
 
+
+    public StudyTopic update(RequestStudyTopicDTO studyTopicUpdated, long id){
+        StudyTopic studyTopicOld = findById(id);
+
+        studyTopicOld.setName(studyTopicUpdated.name());
+        studyTopicOld.setDescription(studyTopicUpdated.description());
+        studyTopicOld.setIsDone(studyTopicUpdated.isDone());
+
+        return studyTopicRepository.save(studyTopicOld);
+    }
     public List<StudyTopic> list(){
         return studyTopicRepository.list();
     }
