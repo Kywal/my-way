@@ -17,6 +17,10 @@ public class StudyTopic extends AbstractModel {
 
     private boolean isDone;
 
+    // Contrusctors
+
+    public StudyTopic() {}
+
     public StudyTopic(String name, String description, Goal goal, boolean isDone) {
         this.name = name;
         this.description = description;
@@ -24,7 +28,16 @@ public class StudyTopic extends AbstractModel {
         this.isDone = isDone;
     }
 
-    public StudyTopic() {}
+    // Utils
+
+    @Override
+    public String toString() {
+        return "\t - " + name + "\n" +
+                "\t\t" + description + "\n" +
+                "\t\tJá foi estudado?" + isDone + "\n";
+    }
+
+    // Getters and setters
 
     public String getName() {
         return name;

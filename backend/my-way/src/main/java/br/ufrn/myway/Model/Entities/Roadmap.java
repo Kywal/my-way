@@ -29,14 +29,38 @@ public class Roadmap extends AbstractModel {
     private List<Goal> goals = new ArrayList<>();
 
     private RoadMapStatus status;
-
+    
+    // Constructors 
+    
+    public Roadmap() {}
+    
     public Roadmap(User user, String mainGoal, List<Goal> goals) {
         this.user = user;
         this.mainGoal = mainGoal;
         this.goals = goals;
     }
 
-    public Roadmap() {}
+    // Utils
+
+    @Override
+    public String toString() {
+        StringBuilder roadmap =
+                new StringBuilder(
+                        "- Roadmap para " + mainGoal + " -\n" +
+                        "\nDescrição: " + description + "\n" +
+                        "\n" +
+                        "Objetivos:\n"
+                );
+
+        for (Goal g : goals) {
+            roadmap.append(g);
+        }
+        
+        return roadmap.toString();
+    }
+
+
+    // Getters and setters
 
     public User getUser() {
         return user;
