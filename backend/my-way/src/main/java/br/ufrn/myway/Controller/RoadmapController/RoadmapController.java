@@ -87,9 +87,9 @@ public class RoadmapController {
         return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.cancelRoadmap(id)));
     }
 
-    @PostMapping("/find-active/{id}")
-    public ResponseEntity<ResponseRoadmapDTO> findActiveRoadMap(@PathVariable Long id) {
-        return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.getByStatus(id, RoadMapStatus.valueOf(RoadMapStatus.ACTIVE.toString()))));
+    @GetMapping("/find-active/{userId}")
+    public ResponseEntity<ResponseRoadmapDTO> findActiveRoadMap(@PathVariable Long userId) {
+        return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.getByStatus(userId, RoadMapStatus.valueOf(RoadMapStatus.ACTIVE.toString()))));
     }
 
 }
