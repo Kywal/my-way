@@ -33,7 +33,7 @@ public class RoadmapService {
 
     public Roadmap save(Roadmap roadmap, Long id) {
         User user = userService.findById(id);
-        if (user != null) {
+        if (roadmap.getUser() == null) {
             roadmap.setUser(user);
         }
         if (roadmap.getStatus() == null) {
