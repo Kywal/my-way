@@ -1,8 +1,9 @@
-package br.ufrn.myway.Service;
+package br.ufrn.myway.Service.GoalService;
 
 import java.util.List;
 
 import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
+import br.ufrn.myway.Service.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
