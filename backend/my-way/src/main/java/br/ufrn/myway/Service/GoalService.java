@@ -52,7 +52,7 @@ public class GoalService {
 
         oldGoal.setName(requestGoalDTO.name());
         oldGoal.setDescription(requestGoalDTO.description());
-
+        oldGoal.setRoadmapIndex(requestGoalDTO.roadmapIndex());
         return goalRepository.save(oldGoal);
     }
 
