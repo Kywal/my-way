@@ -10,6 +10,7 @@ import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Model.Enums.GoalStatus;
 import br.ufrn.myway.Repository.GoalRepository;
 import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 
@@ -43,6 +44,10 @@ public class GoalService {
             goal.setRoadmapIndex(0L);
         }
 
+        if (goal.getStatus() == null) {
+            goal.setStatus(GoalStatus.ACTIVE);
+        }
+
         return goalRepository.save(goal);
     }
 
@@ -60,6 +65,18 @@ public class GoalService {
             goal.setRoadmapIndex(g.updatedPosition());
             save(goal, id);
         }
+    }
+
+    public Goal cancelGoal(Long id) {
+        Goal goal = findById(id);
+        goal.setStatus(GoalStatus.CANCELLED);
+        return save(goal, goal.getRoadmap().getId());
+    }
+
+    public Goal finishGoal(Long id) {
+        Goal goal = findById(id);
+        goal.setStatus(GoalStatus.CONCLUDED);
+        return save(goal, goal.getRoadmap().getId());
     }
 
 }
