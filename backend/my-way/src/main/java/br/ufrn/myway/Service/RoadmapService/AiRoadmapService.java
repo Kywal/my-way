@@ -40,13 +40,13 @@ public class AiRoadmapService {
     @Autowired
     private ChatModel chatModel;
 
-    public ResponseGenerateRoadmapDTO generateRoadmap(String mainGoal, String description) {
+    public ResponseGenerateRoadmapDTO generateRoadmap(String mainGoal, String description, String aditionalInfo) {
         String prompt = "Gere um roadmap para o objetivo: {mainGoal}, a descrição desse objetivo é: {description}.";
-
+        final String fullPrompt = prompt.concat(aditionalInfo);
         return ChatClient.create(chatModel).prompt()
-                .user(u -> u.text(prompt)
-                        .param("mainGoal", mainGoal)
-                        .param("description", description))
+                .user(u -> u.text(fullPrompt)
+                .param("mainGoal", mainGoal)
+                .param("description", description))
                 .call()
                 .entity(ResponseGenerateRoadmapDTO.class);
     }
@@ -54,8 +54,9 @@ public class AiRoadmapService {
     public Roadmap saveGeneratedRoadmap(Roadmap roadmap, Long userId) {
         User user = userService.findById(userId);
 
-        if (user == null)
+        if (user == null) {
             throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User"));
+        }
 
         Roadmap roadmapToBeSaved = new Roadmap();
         roadmapToBeSaved.setUser(user);
@@ -89,7 +90,9 @@ public class AiRoadmapService {
     }
 
     public Roadmap generateAndSaveRoadmap(String mainGoal, String description, Long userId) {
-        ResponseGenerateRoadmapDTO generatedRoadmap = generateRoadmap(mainGoal, description);
+        String aditionalPrompt = roadmapService.getRoadmapPreferencesPromptByUser(userId);
+
+        ResponseGenerateRoadmapDTO generatedRoadmap = generateRoadmap(mainGoal, description, aditionalPrompt);
 
         return saveGeneratedRoadmap(
                 roadmapMapper.toEntity(generatedRoadmap), userId
