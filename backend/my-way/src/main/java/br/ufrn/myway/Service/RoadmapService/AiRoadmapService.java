@@ -1,21 +1,23 @@
 package br.ufrn.myway.Service.RoadmapService;
 
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
 import br.ufrn.myway.Model.DTO.Response.ResponseGenerateRoadmapDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Model.Enums.GoalStatus;
 import br.ufrn.myway.Model.Mapper.RoadmapMapper;
 import br.ufrn.myway.Service.BusinessException;
 import br.ufrn.myway.Service.GoalService;
 import br.ufrn.myway.Service.StudyTopicService;
 import br.ufrn.myway.Service.UserService;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AiRoadmapService {
@@ -65,12 +67,13 @@ public class AiRoadmapService {
         roadmap.setId(roadmapToBeSaved.getId());
 
         for (Goal goal : roadmap.getGoals()) {
-
+            goal.setStatus(GoalStatus.ACTIVE);
             Goal goalToBeSaved = new Goal();
             goalToBeSaved.setRoadmap(roadmapToBeSaved);
             goalToBeSaved.setRoadmapIndex(goal.getRoadmapIndex());
             goalToBeSaved.setDescription(goal.getDescription());
             goalToBeSaved.setName(goal.getName());
+            goalToBeSaved.setStatus(goal.getStatus());
             goalToBeSaved = goalService.save(goalToBeSaved, roadmapToBeSaved.getId());
 
             goal.setRoadmap(roadmapToBeSaved);
