@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.myway.Model.DTO.GoalPositionDTO;
+import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
@@ -49,6 +50,16 @@ public class GoalService {
         }
 
         return goalRepository.save(goal);
+    }
+
+    public Goal update(RequestGoalDTO requestGoalDTO, Long id) {
+        Goal oldGoal = findById(id);
+
+        oldGoal.setName(requestGoalDTO.name());
+        oldGoal.setDescription(requestGoalDTO.description());
+        oldGoal.setRoadmapIndex(requestGoalDTO.roadmapIndex());
+        oldGoal.setStatus(requestGoalDTO.status());
+        return goalRepository.save(oldGoal);
     }
 
     public List<Goal> listGoals() {

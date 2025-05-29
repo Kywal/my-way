@@ -2,6 +2,7 @@ package br.ufrn.myway.Controller.RoadmapController;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.Enums.RoadMapStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -84,6 +85,11 @@ public class RoadmapController {
     @PostMapping("/cancel-roadmap/{id}")
     public ResponseEntity<ResponseRoadmapDTO> cancel(@PathVariable Long id) {
         return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.cancelRoadmap(id)));
+    }
+
+    @GetMapping("/find-active/{userId}")
+    public ResponseEntity<ResponseRoadmapDTO> findActiveRoadMap(@PathVariable Long userId) {
+        return ResponseEntity.ok(roadmapMapper.toResponse(roadmapService.getByStatus(userId, RoadMapStatus.valueOf(RoadMapStatus.ACTIVE.toString()))));
     }
 
 }

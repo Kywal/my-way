@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseGoalDTO;
+import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Mapper.GoalMapper;
 import br.ufrn.myway.Service.GoalService;
 
@@ -71,4 +73,11 @@ public class GoalController {
         return ResponseEntity.ok(goalMapper.toResponse(goalService.cancelGoal(goalId)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Goal> update(
+            @PathVariable Long id,
+            @RequestBody RequestGoalDTO requestGoalDTO){
+        Goal updated = goalService.update(requestGoalDTO, id);
+        return ResponseEntity.ok(updated);
+    }
 }

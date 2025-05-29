@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseStudyTopicDTO;
+import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Mapper.StudyTopicMapper;
 import br.ufrn.myway.Service.StudyTopicService;
 
@@ -65,5 +67,13 @@ public class StudyTopicController {
     @PostMapping("/cancel/{studyTopicId}")
     public ResponseEntity<ResponseStudyTopicDTO> cancel(@PathVariable Long studyTopicId) {
         return ResponseEntity.ok(studyTopicMapper.toResponse(studyTopicService.cancelStudyTopic(studyTopicId)));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StudyTopic> update(
+            @PathVariable Long id,
+            @RequestBody RequestStudyTopicDTO requestStudyTopicDTO){
+        StudyTopic updated = studyTopicService.update(requestStudyTopicDTO,id);
+        return ResponseEntity.ok(updated);
     }
 }

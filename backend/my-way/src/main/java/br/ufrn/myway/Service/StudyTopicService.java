@@ -2,15 +2,16 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO;
+import br.ufrn.myway.Model.Entities.Goal;
+import br.ufrn.myway.Model.Entities.StudyTopic;
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Repository.StudyTopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.StudyTopic;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Model.Enums.StudyTopicStatus;
-import br.ufrn.myway.Repository.StudyTopicRepository;
 
 @Service
 public class StudyTopicService {
@@ -36,6 +37,16 @@ public class StudyTopicService {
             studyTopic.setStatus(StudyTopicStatus.ACTIVE);
         }
         return studyTopicRepository.save(studyTopic);
+    }
+
+    public StudyTopic update(RequestStudyTopicDTO studyTopicUpdated, long id) {
+        StudyTopic studyTopicOld = findById(id);
+
+        studyTopicOld.setName(studyTopicUpdated.name());
+        studyTopicOld.setDescription(studyTopicUpdated.description());
+        studyTopicOld.setStatus(studyTopicUpdated.status());
+
+        return studyTopicRepository.save(studyTopicOld);
     }
 
     public List<StudyTopic> list() {
