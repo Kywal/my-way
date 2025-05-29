@@ -1,40 +1,61 @@
 package br.ufrn.myway.Service;
 
-import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.StudyTopic;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
-import br.ufrn.myway.Repository.StudyTopicRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import br.ufrn.myway.Model.Entities.Goal;
+import br.ufrn.myway.Model.Entities.StudyTopic;
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Model.Enums.StudyTopicStatus;
+import br.ufrn.myway.Repository.StudyTopicRepository;
+
 @Service
 public class StudyTopicService {
+
     @Autowired
     StudyTopicRepository studyTopicRepository;
     @Autowired
     private GoalService goalService;
 
-    public StudyTopic findById(Long id){
+    public StudyTopic findById(Long id) {
         StudyTopic studyTopic = studyTopicRepository.getById(id);
-        if(studyTopic == null){
+        if (studyTopic == null) {
             throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Study Topic"));
         }
         return studyTopic;
     }
-    public StudyTopic save(StudyTopic studyTopic, Long id){
+
+    public StudyTopic save(StudyTopic studyTopic, Long id) {
         Goal goal = goalService.findById(id);
         studyTopic.setGoal(goal);
+
+        if (studyTopic.getStatus() == null) {
+            studyTopic.setStatus(StudyTopicStatus.ACTIVE);
+        }
         return studyTopicRepository.save(studyTopic);
     }
 
-    public List<StudyTopic> list(){
+    public List<StudyTopic> list() {
         return studyTopicRepository.list();
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         studyTopicRepository.delete(id);
+    }
+
+    public StudyTopic cancelStudyTopic(Long id) {
+        StudyTopic studyTopic = findById(id);
+        studyTopic.setStatus(StudyTopicStatus.CANCELLED);
+        return save(studyTopic, studyTopic.getGoal().getId());
+    }
+
+    public StudyTopic finishStudyTopic(Long id) {
+        StudyTopic studyTopic = findById(id);
+        studyTopic.setStatus(StudyTopicStatus.CONCLUDED);
+        return save(studyTopic, studyTopic.getGoal().getId());
     }
 
 }
