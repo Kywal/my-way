@@ -1,14 +1,15 @@
 package br.ufrn.myway.Model.Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.ufrn.myway.Model.Enums.GoalStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Goal extends AbstractModel {
@@ -27,13 +28,16 @@ public class Goal extends AbstractModel {
 
     private Long roadmapIndex;
 
+    private GoalStatus status;
+
     public Goal(String nameGoal, Roadmap roadmap, List<StudyTopic> exercices) {
         this.name = nameGoal;
         this.roadmap = roadmap;
         this.studyTopics = exercices;
     }
 
-    public Goal() {}
+    public Goal() {
+    }
 
     public Roadmap getRoadmap() {
         return roadmap;
@@ -74,4 +78,13 @@ public class Goal extends AbstractModel {
     public void setRoadmapIndex(Long roadmapIndex) {
         this.roadmapIndex = roadmapIndex;
     }
+
+    public GoalStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(GoalStatus status) {
+        this.status = status;
+    }
+
 }
