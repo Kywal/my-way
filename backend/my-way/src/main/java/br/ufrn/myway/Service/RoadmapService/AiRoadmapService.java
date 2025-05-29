@@ -8,7 +8,7 @@ import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Model.Mapper.RoadmapMapper;
 import br.ufrn.myway.Service.BusinessException;
-import br.ufrn.myway.Service.GoalService;
+import br.ufrn.myway.Service.GoalService.GoalService;
 import br.ufrn.myway.Service.StudyTopicService;
 import br.ufrn.myway.Service.UserService;
 import org.springframework.ai.chat.client.ChatClient;
