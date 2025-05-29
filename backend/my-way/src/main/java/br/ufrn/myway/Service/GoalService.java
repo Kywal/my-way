@@ -2,15 +2,16 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
-import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.myway.Model.DTO.GoalPositionDTO;
+import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Model.Enums.GoalStatus;
 import br.ufrn.myway.Repository.GoalRepository;
 import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 
@@ -44,15 +45,20 @@ public class GoalService {
             goal.setRoadmapIndex(0L);
         }
 
+        if (goal.getStatus() == null) {
+            goal.setStatus(GoalStatus.ACTIVE);
+        }
+
         return goalRepository.save(goal);
     }
 
-    public Goal update(RequestGoalDTO requestGoalDTO, Long id){
+    public Goal update(RequestGoalDTO requestGoalDTO, Long id) {
         Goal oldGoal = findById(id);
 
         oldGoal.setName(requestGoalDTO.name());
         oldGoal.setDescription(requestGoalDTO.description());
         oldGoal.setRoadmapIndex(requestGoalDTO.roadmapIndex());
+        oldGoal.setStatus(requestGoalDTO.status());
         return goalRepository.save(oldGoal);
     }
 
@@ -70,6 +76,18 @@ public class GoalService {
             goal.setRoadmapIndex(g.updatedPosition());
             save(goal, id);
         }
+    }
+
+    public Goal cancelGoal(Long id) {
+        Goal goal = findById(id);
+        goal.setStatus(GoalStatus.CANCELLED);
+        return save(goal, goal.getRoadmap().getId());
+    }
+
+    public Goal finishGoal(Long id) {
+        Goal goal = findById(id);
+        goal.setStatus(GoalStatus.CONCLUDED);
+        return save(goal, goal.getRoadmap().getId());
     }
 
 }

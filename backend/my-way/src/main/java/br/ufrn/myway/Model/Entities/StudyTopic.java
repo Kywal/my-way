@@ -1,5 +1,6 @@
 package br.ufrn.myway.Model.Entities;
 
+import br.ufrn.myway.Model.Enums.StudyTopicStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,16 +16,16 @@ public class StudyTopic extends AbstractModel {
     @JoinColumn(name = "id_goal")
     private Goal goal;
 
-    private boolean isDone;
+    private StudyTopicStatus status;
 
-    public StudyTopic(String name, String description, Goal goal, boolean isDone) {
+    public StudyTopic(String name, String description, Goal goal) {
         this.name = name;
         this.description = description;
         this.goal = goal;
-        this.isDone = isDone;
     }
 
-    public StudyTopic() {}
+    public StudyTopic() {
+    }
 
     public String getName() {
         return name;
@@ -50,15 +51,12 @@ public class StudyTopic extends AbstractModel {
         this.goal = goal;
     }
 
-    public boolean isDone() {
-        return isDone;
+    public StudyTopicStatus getStatus() {
+        return status;
     }
 
-    public boolean getIsDone() {
-        return isDone;
+    public void setStatus(StudyTopicStatus status) {
+        this.status = status;
     }
 
-    public void setIsDone(boolean done) {
-        isDone = done;
-    }
 }
