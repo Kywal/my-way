@@ -1,4 +1,4 @@
-package br.ufrn.myway.Controller;
+package br.ufrn.myway.Controller.GoalController;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseGoalDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Mapper.GoalMapper;
-import br.ufrn.myway.Service.GoalService;
+import br.ufrn.myway.Service.GoalService.GoalService;
 
 @RestController
 @RequestMapping("/goal")

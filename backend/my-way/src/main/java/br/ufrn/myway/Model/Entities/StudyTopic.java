@@ -18,14 +18,25 @@ public class StudyTopic extends AbstractModel {
 
     private StudyTopicStatus status;
 
+    // Contrusctors
+
+    public StudyTopic() {}
+
     public StudyTopic(String name, String description, Goal goal) {
         this.name = name;
         this.description = description;
         this.goal = goal;
     }
+    // Utils
 
-    public StudyTopic() {
+    @Override
+    public String toString() {
+        return "\t - " + name + "\n" +
+                "\t\t" + description + "\n" +
+                "\t\tStatus: " + status + "\n";
     }
+
+    // Getters and setters
 
     public String getName() {
         return name;

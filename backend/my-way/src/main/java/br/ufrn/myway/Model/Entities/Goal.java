@@ -30,14 +30,37 @@ public class Goal extends AbstractModel {
 
     private GoalStatus status;
 
+    // Constructors
+
+    public Goal() {}
+
     public Goal(String nameGoal, Roadmap roadmap, List<StudyTopic> exercices) {
         this.name = nameGoal;
         this.roadmap = roadmap;
         this.studyTopics = exercices;
     }
 
-    public Goal() {
+    // Utils
+
+    @Override
+    public String toString() {
+        StringBuilder goal =
+                new StringBuilder(
+                        roadmapIndex + " - " + name + "\n" +
+                            "\tDescrição: " + description + "\n" +
+                            "\tStatus: " + status + "\n" +
+                            "\tTópicos de estudo:\n"
+                );
+
+        for (StudyTopic st : studyTopics) {
+            goal.append(st);
+        }
+
+        return goal.append("\n").toString();
     }
+
+
+    // Getters and setters
 
     public Roadmap getRoadmap() {
         return roadmap;

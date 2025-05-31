@@ -7,6 +7,7 @@ import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.StudyTopicRepository;
+import br.ufrn.myway.Service.GoalService.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

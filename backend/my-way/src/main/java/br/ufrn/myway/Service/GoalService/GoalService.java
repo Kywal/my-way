@@ -1,10 +1,4 @@
-package br.ufrn.myway.Service;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
+package br.ufrn.myway.Service.GoalService;
 
 import br.ufrn.myway.Model.DTO.GoalPositionDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
@@ -13,7 +7,13 @@ import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Model.Enums.GoalStatus;
 import br.ufrn.myway.Repository.GoalRepository;
+import br.ufrn.myway.Service.BusinessException;
 import br.ufrn.myway.Service.RoadmapService.RoadmapService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GoalService {
