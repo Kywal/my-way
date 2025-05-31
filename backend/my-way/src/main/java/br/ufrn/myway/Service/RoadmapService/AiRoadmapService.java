@@ -1,21 +1,23 @@
 package br.ufrn.myway.Service.RoadmapService;
 
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
 import br.ufrn.myway.Model.DTO.Response.ResponseGenerateRoadmapDTO;
 import br.ufrn.myway.Model.Entities.Goal;
 import br.ufrn.myway.Model.Entities.Roadmap;
 import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Model.Enums.GoalStatus;
 import br.ufrn.myway.Model.Mapper.RoadmapMapper;
 import br.ufrn.myway.Service.BusinessException;
 import br.ufrn.myway.Service.GoalService.GoalService;
 import br.ufrn.myway.Service.StudyTopicService;
 import br.ufrn.myway.Service.UserService;
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AiRoadmapService {
@@ -38,13 +40,13 @@ public class AiRoadmapService {
     @Autowired
     private ChatModel chatModel;
 
-    public ResponseGenerateRoadmapDTO generateRoadmap(String mainGoal, String description) {
+    public ResponseGenerateRoadmapDTO generateRoadmap(String mainGoal, String description, String aditionalInfo) {
         String prompt = "Gere um roadmap para o objetivo: {mainGoal}, a descrição desse objetivo é: {description}.";
-
+        final String fullPrompt = prompt.concat(aditionalInfo);
         return ChatClient.create(chatModel).prompt()
-                .user(u -> u.text(prompt)
-                        .param("mainGoal", mainGoal)
-                        .param("description", description))
+                .user(u -> u.text(fullPrompt)
+                .param("mainGoal", mainGoal)
+                .param("description", description))
                 .call()
                 .entity(ResponseGenerateRoadmapDTO.class);
     }
@@ -52,8 +54,9 @@ public class AiRoadmapService {
     public Roadmap saveGeneratedRoadmap(Roadmap roadmap, Long userId) {
         User user = userService.findById(userId);
 
-        if (user == null)
+        if (user == null) {
             throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("User"));
+        }
 
         Roadmap roadmapToBeSaved = new Roadmap();
         roadmapToBeSaved.setUser(user);
@@ -65,12 +68,13 @@ public class AiRoadmapService {
         roadmap.setId(roadmapToBeSaved.getId());
 
         for (Goal goal : roadmap.getGoals()) {
-
+            goal.setStatus(GoalStatus.ACTIVE);
             Goal goalToBeSaved = new Goal();
             goalToBeSaved.setRoadmap(roadmapToBeSaved);
             goalToBeSaved.setRoadmapIndex(goal.getRoadmapIndex());
             goalToBeSaved.setDescription(goal.getDescription());
             goalToBeSaved.setName(goal.getName());
+            goalToBeSaved.setStatus(goal.getStatus());
             goalToBeSaved = goalService.save(goalToBeSaved, roadmapToBeSaved.getId());
 
             goal.setRoadmap(roadmapToBeSaved);
@@ -86,7 +90,9 @@ public class AiRoadmapService {
     }
 
     public Roadmap generateAndSaveRoadmap(String mainGoal, String description, Long userId) {
-        ResponseGenerateRoadmapDTO generatedRoadmap = generateRoadmap(mainGoal, description);
+        String aditionalPrompt = roadmapService.getRoadmapPreferencesPromptByUser(userId);
+
+        ResponseGenerateRoadmapDTO generatedRoadmap = generateRoadmap(mainGoal, description, aditionalPrompt);
 
         return saveGeneratedRoadmap(
                 roadmapMapper.toEntity(generatedRoadmap), userId
