@@ -33,7 +33,7 @@ public class StudyTopic extends AbstractModel {
     public String toString() {
         return "\t - " + name + "\n" +
                 "\t\t" + description + "\n" +
-                "\t\tJá foi estudado? " + status + "\n";
+                "\t\tStatus: " + status + "\n";
     }
 
     // Getters and setters

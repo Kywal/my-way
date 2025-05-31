@@ -48,6 +48,7 @@ public class Goal extends AbstractModel {
                 new StringBuilder(
                         roadmapIndex + " - " + name + "\n" +
                             "\tDescrição: " + description + "\n" +
+                            "\tStatus: " + status + "\n" +
                             "\tTópicos de estudo:\n"
                 );
 

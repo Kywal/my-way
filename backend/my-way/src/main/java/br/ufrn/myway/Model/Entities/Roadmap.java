@@ -46,8 +46,9 @@ public class Roadmap extends AbstractModel {
     public String toString() {
         StringBuilder roadmap =
                 new StringBuilder(
-                        "- Roadmap para " + mainGoal + " -\n" +
+                        "\n- Roadmap para " + mainGoal + " -\n" +
                         "\nDescrição: " + description + "\n" +
+                        "Status: " + status +
                         "\n" +
                         "Objetivos:\n"
                 );
