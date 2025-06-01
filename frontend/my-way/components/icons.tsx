@@ -240,14 +240,23 @@ export const BoxIcon = ({
     viewBox="0 0 24 24"
     {...props}
   >
-    <path d="m21.95 8.68-2-6A1 1 0 0 0 19 2H6c-.38 0-.73.21-.89.55l-3 6s0 .03-.01.04c0 .02-.01.04-.02.07q-.06.15-.06.3V20c0 .55.45 1 1 1h18c.55 0 1-.45 1-1V8.97c0-.1-.01-.19-.05-.29ZM6.62 4h11.66l1.33 4H4.62zM20 19H4v-9h16z"/>
+    <path d="m21.95 8.68-2-6A1 1 0 0 0 19 2H6c-.38 0-.73.21-.89.55l-3 6s0 .03-.01.04c0 .02-.01.04-.02.07q-.06.15-.06.3V20c0 .55.45 1 1 1h18c.55 0 1-.45 1-1V8.97c0-.1-.01-.19-.05-.29ZM6.62 4h11.66l1.33 4H4.62zM20 19H4v-9h16z" />
   </svg>
 );
 
-{/* <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  fill="currentColor"
-  viewBox="0 0 24 24"
-></svg>; */}
+export const ArrowDownRightIcon = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}: IconSvgProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size || width}
+    height={size || height}
+    viewBox="0 0 24 24"
+    {...props}
+  >
+    <path d="M8.71 7.29 7.29 8.71l4.5 4.5L8 17h9V8l-3.79 3.79z" />
+  </svg>
+);
