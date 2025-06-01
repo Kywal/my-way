@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardHeader,
@@ -11,11 +11,12 @@ import Image from "next/image";
 
 import mywaylogo from "@/public/my-way-logo.png";
 import GoalDescription from "./GoalDescription";
+import { StudyTopicType } from "@/types";
 
 interface GoalProps {
   title: string;
   description: string;
-  exercices: string[];
+  exercices: StudyTopicType[];
 }
 
 export const Goal = ({ title, description, exercices }: GoalProps) => {
