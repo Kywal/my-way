@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.myway.Model.Entities.Mission;
@@ -28,8 +30,11 @@ public class MissionService {
     }
 
     public Mission findById(Long id) {
-        return missionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Missão não encontrada"));
+        Mission mission = missionRepository.getById(id);
+        if(mission == null){
+            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Mission"));
+        }
+        return mission;
     }
 
     public Mission save(Mission mission) {
