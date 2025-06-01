@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import {
   Modal,
@@ -10,12 +10,17 @@ import {
   Input,
   Form,
 } from "@heroui/react";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { LoadingSpinner } from "./loadingSpinner";
 
 type ModalRegisterRoadmapProps = {
   actionText?: string;
   onActionPress?: () => void;
   isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  onClose: () => void;
+  setRoadmapAtual: (roadmap: any) => void;
 };
 
 type ErrorsType = {
@@ -28,8 +33,13 @@ export default function ModalRegisterRoadmap({
   isOpen,
   onOpenChange,
   onActionPress,
+  setRoadmapAtual,
+  onClose,
 }: ModalRegisterRoadmapProps) {
   const [errors, setErrors] = useState<ErrorsType>({});
+  const buttonSubmitRef = useRef<HTMLButtonElement>(null);
+  const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,15 +53,35 @@ export default function ModalRegisterRoadmap({
       return;
     }
 
-    console.log({ data });
+    try {
+      if (session && session.user && "id" in session.user) {
+        setLoading(true);
+        const response = await axios.post(
+          `http://localhost:8081/ai/roadmap/gen-and-save/${session?.user?.id}`,
+          {
+            mainGoal: data.objetivo,
+            description: data.description,
+          }
+        );
+
+        setRoadmapAtual(response.data);
+        setLoading(false);
+        onClose();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
+      {loading && <LoadingSpinner />}
+
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         className="dark:text-white"
+        isDismissable={!loading}
       >
         <ModalContent>
           {(onClose) => (
@@ -88,6 +118,12 @@ export default function ModalRegisterRoadmap({
                     placeholder="Desejo aprender a programar em Java e me tornar um desenvolvedor backend"
                     type="text"
                   />
+
+                  <button
+                    type="submit"
+                    className="hidden"
+                    ref={buttonSubmitRef}
+                  />
                 </Form>
               </ModalBody>
               <ModalFooter>
@@ -99,7 +135,9 @@ export default function ModalRegisterRoadmap({
                   type="submit"
                   onPress={() => {
                     if (onActionPress) onActionPress();
-                    onClose();
+                    if (buttonSubmitRef.current) {
+                      buttonSubmitRef.current.click();
+                    }
                   }}
                 >
                   {actionText ? actionText : "OK"}
