@@ -9,13 +9,14 @@ import {
   Button,
   Divider,
 } from "@heroui/react";
+import { StudyTopicType } from "@/types";
 
 type ModalWithMessageProps = {
   title?: string;
   description?: string;
   isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
-  exercices?: string[];
+  exercices?: StudyTopicType[];
 };
 
 export default function GoalDescription({
@@ -45,7 +46,7 @@ export default function GoalDescription({
                     key={index}
                     className="flex justify-between items-center"
                   >
-                    <span className="mr-4">{exercice}</span>
+                    <span className="mr-4">{exercice.name}</span>
                     <div className="flex gap-2">
                       <Button color="danger">Excluir</Button>
                       <Button color="success">Concluir</Button>
