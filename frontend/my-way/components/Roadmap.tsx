@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   arrayMove,
@@ -17,8 +17,17 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+import { ArrowDownRightIcon } from "./icons";
+import { RoadmapType } from "@/types";
 
-export const Roadmap = () => {
+interface RoadmapProps {
+  roadmapAtual: RoadmapType | null;
+  setRoadmapAtual: (roadmap: any) => void;
+}
+
+export const Roadmap = ({ roadmapAtual, setRoadmapAtual }: RoadmapProps) => {
   const [listGoals, setListGoals] = useState<
     { id: string; title: string; description: string; exercices: string[] }[]
   >([
@@ -50,6 +59,30 @@ export const Roadmap = () => {
     })
   );
 
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    console.log("Session:", session);
+    const fetchRoadmap = async () => {
+      if (session && session.user && "id" in session.user) {
+        console.log("User ID:", session.user.id);
+
+        try {
+          const data = await axios.get(
+            `http://localhost:8081/roadmap/find-active/${session.user.id}`
+          );
+
+          console.log("Roadmap data:", data);
+          setRoadmapAtual(data.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+
+    fetchRoadmap();
+  }, []);
+
   function handleDragEnd(event: any) {
     const { active, over } = event;
 
@@ -63,7 +96,8 @@ export const Roadmap = () => {
     }
   }
 
-  return (
+
+  return roadmapAtual ? (
     <div className="grid grid-cols-1 gap-4">
       <h1 className="dark:text-white text-3xl py-4 text-center">
         Roadmap atual: Aprender Java Backend
@@ -76,25 +110,39 @@ export const Roadmap = () => {
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={listGoals.map((goal) => goal.id)}
-            strategy={verticalListSortingStrategy} 
+            items={roadmapAtual.goals.map((goal) => String(goal.id))}
+            strategy={verticalListSortingStrategy}
           >
-            {listGoals.map((goal, index) => (
+            {roadmapAtual.goals.map((goal, index) => (
               <div
                 key={goal.id}
                 className={`flex justify-center ${index % 2 === 0 ? "self-start" : "self-end"}`}
               >
-                <SortableItem key={goal.id} id={goal.id}>
+                <SortableItem key={String(goal.id)} id={String(goal.id)}>
                   <Goal
-                    title={goal.title}
+                    title={goal.name}
                     description={goal.description}
-                    exercices={goal.exercices}
+                    exercices={goal.studyTopics}
                   />
                 </SortableItem>
               </div>
             ))}
           </SortableContext>
         </DndContext>
+      </div>
+    </div>
+  ) : (
+    <div>
+      <div>
+        <h1 className="dark:text-white text-3xl py-4 text-center">
+          Nenhum roadmap ativo encontrado
+        </h1>
+        <p className="text-center dark:text-gray-400">
+          Você pode criar um novo roadmap clicando no botão abaixo.
+        </p>
+      </div>
+      <div className="">
+        <ArrowDownRightIcon className="text-white fill-white w-[180px] h-[180px] absolute bottom-10 right-10" />
       </div>
     </div>
   );
