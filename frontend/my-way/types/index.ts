@@ -18,3 +18,30 @@ export type UserLogin = {
   email: string;
   password: string;
 };
+
+export type RoadmapType = {
+  id: number;
+  mainGoal: string;
+  description: string;
+  status: string;
+  createdAt: string;
+  goals: GoalType[];
+}
+
+export type GoalType = {
+  id: number;
+  name: string;
+  description: string;
+  status: string;
+  createdAt: string;
+  roadmapIndex: number;
+  studyTopics: StudyTopicType[];
+}
+
+export type StudyTopicType = {
+  id: number;
+  name: string;
+  description: string;
+  status: string;
+  createdAt: string;
+}
