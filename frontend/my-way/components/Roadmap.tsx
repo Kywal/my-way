@@ -20,7 +20,8 @@ import {
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { ArrowDownRightIcon } from "./icons";
-import { RoadmapType } from "@/types";
+import { GoalType, RoadmapType } from "@/types";
+import { LoadingSpinner } from "./loadingSpinner";
 
 interface RoadmapProps {
   roadmapAtual: RoadmapType | null;
@@ -28,30 +29,8 @@ interface RoadmapProps {
 }
 
 export const Roadmap = ({ roadmapAtual, setRoadmapAtual }: RoadmapProps) => {
-  const [listGoals, setListGoals] = useState<
-    { id: string; title: string; description: string; exercices: string[] }[]
-  >([
-    {
-      id: "0",
-      title: "Aprender Spring Boot",
-      description:
-        "Aprender o básico do spring boot, como estrutura e arquitetura.",
-      exercices: ["teste", "teste2", "teste3"],
-    },
-    {
-      id: "1",
-      title: "Aprender autenticação básica",
-      description:
-        "Aprender autenticação básica, como login e cadastro de usuários.",
-      exercices: ["teste", "teste2"],
-    },
-    {
-      id: "2",
-      title: "Aprender consultas SQL",
-      description: "Aprender sobre consultas SQL, queries e mais.",
-      exercices: ["teste", "teste2"],
-    },
-  ]);
+  const [listGoals, setListGoals] = useState<GoalType[]>();
+  const [loading, setLoading] = useState(false);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -62,7 +41,6 @@ export const Roadmap = ({ roadmapAtual, setRoadmapAtual }: RoadmapProps) => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    console.log("Session:", session);
     const fetchRoadmap = async () => {
       if (session && session.user && "id" in session.user) {
         console.log("User ID:", session.user.id);
@@ -74,6 +52,7 @@ export const Roadmap = ({ roadmapAtual, setRoadmapAtual }: RoadmapProps) => {
 
           console.log("Roadmap data:", data);
           setRoadmapAtual(data.data);
+          setListGoals(data.data.goals);
         } catch (error) {
           console.log(error);
         }
@@ -83,22 +62,56 @@ export const Roadmap = ({ roadmapAtual, setRoadmapAtual }: RoadmapProps) => {
     fetchRoadmap();
   }, []);
 
+  useEffect(() => {
+    if (roadmapAtual) {
+      setListGoals(roadmapAtual.goals);
+    }
+  }, [roadmapAtual]);
+
   function handleDragEnd(event: any) {
     const { active, over } = event;
+    const activeId = Number(active.id);
+    const overId = Number(over.id);
+
+    if (!listGoals) return;
+
+    try {
+      setLoading(true);
+      const oldIndex = listGoals.findIndex((item) => item.id === activeId);
+      const newIndex = listGoals.findIndex((item) => item.id === overId);
+
+      axios.post(
+        `http://localhost:8081/goal/change-goal-index/${roadmapAtual?.id}`,
+        [
+          { id: listGoals[oldIndex].id, updatedPosition: newIndex + 1 },
+          { id: listGoals[newIndex].id, updatedPosition: oldIndex + 1 },
+        ]
+      );
+    } catch (error) {
+      console.error("Error during drag end:", error);
+
+      return;
+    } finally {
+      setLoading(false);
+    }
 
     if (active.id !== over.id) {
       setListGoals((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
+        if (!items) return items;
+
+        console.log({ active, over });
+
+        const oldIndex = items.findIndex((item) => item.id === activeId);
+        const newIndex = items.findIndex((item) => item.id === overId);
 
         return arrayMove(items, oldIndex, newIndex);
       });
     }
   }
 
-
-  return roadmapAtual ? (
+  return roadmapAtual && listGoals ? (
     <div className="grid grid-cols-1 gap-4">
+      {loading && <LoadingSpinner />}
       <h1 className="dark:text-white text-3xl py-4 text-center">
         Roadmap atual: Aprender Java Backend
       </h1>
@@ -110,19 +123,22 @@ export const Roadmap = ({ roadmapAtual, setRoadmapAtual }: RoadmapProps) => {
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={roadmapAtual.goals.map((goal) => String(goal.id))}
+            items={listGoals.map((goal) => String(goal.id))}
             strategy={verticalListSortingStrategy}
           >
-            {roadmapAtual.goals.map((goal, index) => (
+            {listGoals.map((goal, index) => (
               <div
                 key={goal.id}
                 className={`flex justify-center ${index % 2 === 0 ? "self-start" : "self-end"}`}
               >
-                <SortableItem key={String(goal.id)} id={String(goal.id)}>
+                <SortableItem key={goal.id} id={String(goal.id)}>
                   <Goal
+                    id={goal.id}
                     title={goal.name}
                     description={goal.description}
                     exercices={goal.studyTopics}
+                    status={goal.status}
+                    setGoals={setListGoals}
                   />
                 </SortableItem>
               </div>
