@@ -48,9 +48,9 @@ public class GoalController {
         return ResponseEntity.ok("Goal successfully deleted.");
     }
 
-    @PostMapping("/change-goal-index/{id}")
-    public ResponseEntity<String> changeIndexRoadMapFromGoals(@PathVariable Long id, @RequestBody List<GoalPositionDTO> list) {
-        goalService.changeIndexRoadMapFromGoals(id, list);
+    @PostMapping("/change-goal-index")
+    public ResponseEntity<String> changeIndexRoadMapFromGoals(@RequestBody List<GoalPositionDTO> list) {
+        goalService.changeIndexRoadMapFromGoals(list);
         return ResponseEntity.ok("Roadmap successfully updated.");
     }
 

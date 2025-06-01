@@ -52,11 +52,11 @@ public class GoalService {
         goalRepository.delete(id);
     }
 
-    public void changeIndexRoadMapFromGoals(Long id, List<GoalPositionDTO> list) {
+    public void changeIndexRoadMapFromGoals(List<GoalPositionDTO> list) {
         for (GoalPositionDTO g : list) {
             Goal goal = findById(g.id());
             goal.setRoadmapIndex(g.updatedPosition());
-            save(goal, id);
+            goalRepository.save(goal);
         }
     }
 
