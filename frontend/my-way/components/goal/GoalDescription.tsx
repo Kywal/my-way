@@ -11,7 +11,7 @@ import {
 } from "@heroui/react";
 import { GoalType, StudyTopicType } from "@/types";
 import axios from "axios";
-import { LoadingSpinner } from "./loadingSpinner";
+import { LoadingSpinner } from "../loadingSpinner";
 
 type ModalWithMessageProps = {
   goalId: number;
