@@ -22,6 +22,7 @@ import axios from "axios";
 import { ArrowDownRightIcon } from "./icons";
 import { GoalType, RoadmapType } from "@/types";
 import { LoadingSpinner } from "./loadingSpinner";
+import GenerateGoalButton from "./goal/GenerateGoalButton";
 
 interface RoadmapProps {
   roadmapAtual: RoadmapType | null;
@@ -113,7 +114,7 @@ export const Roadmap = ({ roadmapAtual, setRoadmapAtual }: RoadmapProps) => {
     <div className="grid grid-cols-1 gap-4">
       {loading && <LoadingSpinner />}
       <h1 className="dark:text-white text-3xl py-4 text-center">
-        Roadmap atual: Aprender Java Backend
+        Roadmap atual: {roadmapAtual.mainGoal}
       </h1>
 
       <div className="flex flex-col gap-4 px-[20%]">
@@ -145,6 +146,29 @@ export const Roadmap = ({ roadmapAtual, setRoadmapAtual }: RoadmapProps) => {
             ))}
           </SortableContext>
         </DndContext>
+        {roadmapAtual?.id ? (
+          <GenerateGoalButton 
+            roadmapId={roadmapAtual.id} 
+            fetchRoadmap={() => {
+              // Re-fetch the roadmap and update state
+              if (session && session.user && "id" in session.user) {
+                axios
+                  .get(`http://localhost:8081/roadmap/find-active/${session.user.id}`)
+                  .then((data) => {
+                    setRoadmapAtual(data.data);
+                    setListGoals(data.data.goals);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }
+            }}
+          />
+        ) : (
+          <p className="text-center dark:text-gray-400">
+            Não é possível gerar metas sem um roadmap ativo.
+          </p>
+        )}
       </div>
     </div>
   ) : (
