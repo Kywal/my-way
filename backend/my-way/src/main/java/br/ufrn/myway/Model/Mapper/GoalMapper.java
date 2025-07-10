@@ -1,22 +1,62 @@
 package br.ufrn.myway.Model.Mapper;
 
-import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
-import br.ufrn.myway.Model.DTO.Response.ResponseGenerateGoalDTO;
-import br.ufrn.myway.Model.DTO.Response.ResponseGoalDTO;
-import br.ufrn.myway.Model.Entities.Goal;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public interface GoalMapper {
-    Goal toEntity(RequestGoalDTO requestGoalDTO);
-    Goal toEntity(ResponseGenerateGoalDTO responseGenerateGoalDTO);
+import br.ufrn.myway.Model.DTO.GoalDTO;
+import br.ufrn.myway.Model.Entities.Goal.AbstractGoal; 
+import br.ufrn.myway.Model.Entities.Goal.DailyGoal;
+import br.ufrn.myway.Model.Entities.Goal.GoalBase;
+import br.ufrn.myway.Model.Entities.Goal.StaticGoal;
+import br.ufrn.myway.Model.Enums.GoalStatus; 
 
-    @Mapping(target = "roadmapId", source = "goal.roadmap.id")
-    ResponseGoalDTO toResponse(Goal goal);
+@Mapper(componentModel = "spring", uses = {StudyTopicMapper.class})
+public abstract class GoalMapper {
 
-    List<ResponseGoalDTO> toResponse(List<Goal> goals);
+    @Autowired
+    protected StudyTopicMapper studyTopicMapper;
+
+    public AbstractGoal toEntity(GoalDTO dto) {
+        GoalBase goal;
+        if ("DAILY".equalsIgnoreCase(dto.type())) {
+            DailyGoal daily = new DailyGoal();
+            daily.setResetTime(dto.resetTime());
+            goal = daily;
+        } else {
+            goal = new StaticGoal();
+        }
+
+        goal.setDescription(dto.description());
+        goal.setStatus(GoalStatus.valueOf(dto.status()));
+        goal.setStudyTopics(studyTopicMapper.toEntityList(dto.studyTopics()));
+
+        return goal;
+    }
+
+    public GoalDTO toDTO(AbstractGoal goal) {
+        GoalBase base = (GoalBase) goal;
+
+        String type = (goal instanceof DailyGoal) ? "DAILY" : "STATIC";
+        LocalDateTime resetTime = (goal instanceof DailyGoal d) ? d.getResetTime() : null;
+
+        return new GoalDTO(
+            base.getId(),
+            type,
+            base.getDescription(),
+            studyTopicMapper.toDTOList(base.getStudyTopics()),
+            base.getStatus().name(),
+            resetTime
+        );
+    }
+
+    public List<AbstractGoal> toEntityList(List<GoalDTO> dtos) {
+        return dtos.stream().map(this::toEntity).toList();
+    }
+
+    public List<GoalDTO> toDTOList(List<AbstractGoal> goals) {
+        return goals.stream().map(this::toDTO).toList();
+    }
 }

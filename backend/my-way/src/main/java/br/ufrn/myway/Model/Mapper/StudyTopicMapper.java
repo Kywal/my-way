@@ -1,22 +1,27 @@
 package br.ufrn.myway.Model.Mapper;
 
-import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO;
-import br.ufrn.myway.Model.DTO.Response.ResponseStudyTopicDTO;
-import br.ufrn.myway.Model.Entities.StudyTopic;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
 import java.util.List;
 
+import org.mapstruct.Mapper;
+
+import br.ufrn.myway.Model.DTO.StudyTopicDTO;
+import br.ufrn.myway.Model.Entities.StudyTopic;
+
 @Mapper(componentModel = "spring")
-
 public interface StudyTopicMapper {
-    StudyTopic toEntity(RequestStudyTopicDTO requestStudyTopicDTO);
 
-    RequestStudyTopicDTO toRequest(StudyTopic studyTopic);
+    default StudyTopic toEntity(StudyTopicDTO dto) {
+        StudyTopic entity = new StudyTopic();
+        entity.setId(dto.id());
+        entity.setName(dto.name());
+        return entity;
+    }
 
-    @Mapping(target = "goalId", source = "studyTopic.goal.id")
-    ResponseStudyTopicDTO toResponse(StudyTopic studyTopic);
+    default StudyTopicDTO toDTO(StudyTopic entity) {
+        return new StudyTopicDTO(entity.getId(), entity.getName());
+    }
 
-    List<ResponseStudyTopicDTO> toResponse(List<StudyTopic> studyTopics);
+    List<StudyTopicDTO> toDTOList(List<StudyTopic> list);
+
+    List<StudyTopic> toEntityList(List<StudyTopicDTO> list);
 }
