@@ -1,5 +1,6 @@
 package br.ufrn.myway.Model.Entities;
 
+import br.ufrn.myway.Model.Entities.Goal.AbstractGoal; 
 import br.ufrn.myway.Model.Enums.StudyTopicStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -14,7 +15,7 @@ public class StudyTopic extends AbstractModel {
 
     @ManyToOne
     @JoinColumn(name = "id_goal")
-    private Goal goal;
+    private AbstractGoal goal;
 
     private StudyTopicStatus status;
 
@@ -22,7 +23,7 @@ public class StudyTopic extends AbstractModel {
 
     public StudyTopic() {}
 
-    public StudyTopic(String name, String description, Goal goal) {
+    public StudyTopic(String name, String description, AbstractGoal goal) {
         this.name = name;
         this.description = description;
         this.goal = goal;
@@ -54,11 +55,11 @@ public class StudyTopic extends AbstractModel {
         this.description = description;
     }
 
-    public Goal getGoal() {
+    public AbstractGoal getGoal() {
         return goal;
     }
 
-    public void setGoal(Goal goal) {
+    public void setGoal(AbstractGoal goal) {
         this.goal = goal;
     }
 
