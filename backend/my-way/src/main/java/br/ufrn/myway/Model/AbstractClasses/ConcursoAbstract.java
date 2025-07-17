@@ -9,9 +9,7 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_concurso")public abstract class ConcursoAbstract extends AbstractModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
     private String edital; //isso define qual a prova
 
     @OneToOne
