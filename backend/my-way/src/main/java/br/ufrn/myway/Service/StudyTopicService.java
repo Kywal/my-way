@@ -2,16 +2,17 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
-import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO;
-import br.ufrn.myway.Model.Entities.Goal;
+import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO; 
 import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.StudyTopicRepository;
 import br.ufrn.myway.Service.GoalService.GoalService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.ufrn.myway.Model.Entities.Goal.GoalBase;
 import br.ufrn.myway.Model.Enums.StudyTopicStatus;
 
 @Service
@@ -31,7 +32,7 @@ public class StudyTopicService {
     }
 
     public StudyTopic save(StudyTopic studyTopic, Long id) {
-        Goal goal = goalService.findById(id);
+        GoalBase goal = goalService.findById(id);
         studyTopic.setGoal(goal);
 
         if (studyTopic.getStatus() == null) {

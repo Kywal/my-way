@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.ufrn.myway.Model.DTO.GoalDTO;
+import br.ufrn.myway.Model.DTO.Response.ResponseGenerateGoalDTO;
 import br.ufrn.myway.Model.Entities.Goal.AbstractGoal;
 import br.ufrn.myway.Model.Entities.Goal.DailyGoal;
 import br.ufrn.myway.Model.Entities.Goal.GoalBase;
@@ -55,6 +56,33 @@ public abstract class GoalMapper {
     public List<AbstractGoal> toEntityList(List<GoalDTO> dtos) {
         return dtos.stream().map(this::toEntity).toList();
     }
+
+    public List<AbstractGoal> toEntityListFromResponse(List<ResponseGenerateGoalDTO> responseGoalDTOs) {
+    // Convert each ResponseGenerateGoalDTO to GoalDTO, then reuse the existing method
+    //  String name,
+    //     String description,
+    //     Long roadmapIndex,
+    //     List<ResponseGenerateStudyTopicDTO> studyTopics,
+    //     String tipo //pode ser daily ou normal
+
+    // Long id,
+    //     String type,
+    //     String description,
+    //     List<StudyTopicDTO> studyTopics,
+    //     String status,
+    //     LocalDateTime resetTime
+    List<GoalDTO> goalDTOs = responseGoalDTOs.stream()
+        .map(responseDTO -> new GoalDTO(
+            1L,
+            responseDTO.tipo(),
+            responseDTO.description(),
+            studyTopicMapper.toDTOListFromResponse(responseDTO.studyTopics()),
+            "PENDING",
+            LocalDateTime.now()
+        ))
+        .toList();
+    return toEntityList(goalDTOs);
+}
 
     public List<GoalDTO> toDTOList(List<AbstractGoal> goals) {
         return goals.stream().map(this::toDTO).toList();

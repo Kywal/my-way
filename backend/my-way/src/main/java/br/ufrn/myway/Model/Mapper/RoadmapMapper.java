@@ -35,7 +35,7 @@ public abstract class RoadmapMapper {
         }
 
         roadmap.setMainGoal(dto.mainGoal());
-        roadmap.setGoals(goalMapper.toEntityList(dto.goals()));
+        roadmap.setGoals(goalMapper.toEntityListFromResponse(dto.goals()));
         roadmap.setConcurso(concurso);
 
         return roadmap;

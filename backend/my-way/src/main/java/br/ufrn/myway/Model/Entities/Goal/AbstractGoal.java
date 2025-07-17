@@ -7,6 +7,9 @@ import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Enums.GoalStatus;
 
 public interface AbstractGoal {
+
+    public Long getId();
+    
     public String getName(); 
 
     public String getDescription(); 

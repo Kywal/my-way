@@ -1,25 +1,18 @@
 package br.ufrn.myway.Service.RoadmapService;
 
-import java.util.List;
-import java.util.stream.IntStream;
-
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.DTO.GoalDTO;
 import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
-import br.ufrn.myway.Model.DTO.Response.ResponseGenerateGoalDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseGenerateRoadmapDTO;
+import br.ufrn.myway.Model.Entities.Concurso.AbstractConcurso;
+import br.ufrn.myway.Model.Entities.Concurso.GeneralConcurso;
 import br.ufrn.myway.Model.Entities.Goal.AbstractGoal;
 import br.ufrn.myway.Model.Entities.Goal.GoalBase;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapGeneralConcurso;
 import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Entities.Concurso.AbstractConcurso;
-import br.ufrn.myway.Model.Entities.Concurso.GeneralConcurso;
 import br.ufrn.myway.Model.Enums.GoalStatus;
 import br.ufrn.myway.Model.Mapper.RoadmapMapper;
 import br.ufrn.myway.Service.GoalService.GoalService;
@@ -43,21 +36,6 @@ public class AiRoadmapServiceGeneral extends AiRoadmapService {
 
     @Autowired
     private RoadmapMapper roadmapMapper;
-
-    @Autowired
-    private ChatModel chatModel;
-
-    @Override
-    public ResponseGenerateRoadmapDTO generateRoadmap(String mainGoal, String description, String aditionalInfo) {
-        String prompt = "Gere um roadmap para o objetivo: {mainGoal}, a descrição desse objetivo é: {description}.";
-        final String fullPrompt = prompt.concat(aditionalInfo);
-        return ChatClient.create(chatModel).prompt()
-                .user(u -> u.text(fullPrompt)
-                .param("mainGoal", mainGoal)
-                .param("description", description))
-                .call()
-                .entity(ResponseGenerateRoadmapDTO.class);
-    }
 
     @Override
     public RoadmapBase saveGeneratedRoadmap(RoadmapBase roadmap, Long userId) {
@@ -98,7 +76,7 @@ public class AiRoadmapServiceGeneral extends AiRoadmapService {
     public RoadmapBase generateAndSaveRoadmap(String mainGoal, String description, Long userId) {
         String aditionalPrompt = roadmapService.getRoadmapPreferencesPromptByUser(userId);
 
-        ResponseGenerateRoadmapDTO generatedRoadmap = generateRoadmap(mainGoal, description, aditionalPrompt);
+        ResponseGenerateRoadmapDTO generatedRoadmap = generateRoadmap(mainGoal, description, aditionalPrompt, "General");
         AbstractConcurso concurso = new GeneralConcurso();
         //String mainGoal, String description, List<GoalDTO> goals, Long concursoId
         return saveGeneratedRoadmap(
@@ -114,32 +92,5 @@ public class AiRoadmapServiceGeneral extends AiRoadmapService {
                 ),
                 userId
         );
-
-        return saveGeneratedRoadmap(
-                roadmapMapper.toEntity(generatedRoadmap), userId
-        );
     }
-
-//     public RequestRoadmapDTO toRequestDTO(ResponseGenerateRoadmapDTO response, Long concursoId) {
-//     List<GoalDTO> goalDTOs = IntStream.range(0, response.goals().size())
-//         .mapToObj(i -> {
-//             ResponseGenerateGoalDTO g = response.goals().get(i);
-//             return new GoalDTO(
-//                 (long) i,
-//                 g.name(),
-//                 g.description(),
-//                 g.studyTopics(),
-//                 GoalStatus.ACTIVE 
-//             );
-//         })
-//         .toList();
-
-//     return new RequestRoadmapDTO(
-//         response.mainGoal(),
-//         response.description(),
-//         goalDTOs,
-//         concursoId
-//     );
-// }
-
 }

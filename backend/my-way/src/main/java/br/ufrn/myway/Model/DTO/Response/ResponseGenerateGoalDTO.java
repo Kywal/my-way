@@ -6,6 +6,7 @@ public record ResponseGenerateGoalDTO(
         String name,
         String description,
         Long roadmapIndex,
-        List<ResponseGenerateStudyTopicDTO> studyTopics
+        List<ResponseGenerateStudyTopicDTO> studyTopics,
+        String tipo //pode ser daily ou normal
 ) {
 }
