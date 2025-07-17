@@ -1,19 +1,20 @@
 package br.ufrn.myway.Service.GoalService;
 
-import br.ufrn.myway.Model.DTO.GoalPositionDTO;
-import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
-import br.ufrn.myway.Model.Entities.Goal;
-import br.ufrn.myway.Model.Entities.Roadmap;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
-import br.ufrn.myway.Model.Enums.GoalStatus;
-import br.ufrn.myway.Repository.GoalRepository;
-import br.ufrn.myway.Service.BusinessException;
-import br.ufrn.myway.Service.RoadmapService.RoadmapService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import br.ufrn.myway.Model.DTO.GoalPositionDTO;
+import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
+import br.ufrn.myway.Model.Entities.Goal.GoalBase;
+import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
+import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.Model.Enums.GoalStatus; 
+import br.ufrn.myway.Repository.GoalRepository;
+import br.ufrn.myway.Service.BusinessException;
+import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 
 @Service
 public class GoalService {
@@ -21,28 +22,25 @@ public class GoalService {
     @Autowired
     private GoalRepository goalRepository;
     @Autowired
-    private RoadmapService roadMapService;
+    private RoadmapService roadmapService;
 
-    public Goal findById(Long id) {
-        Goal goal = goalRepository.getById(id);
-        if (goal == null) {
-            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Goal"));
-        }
-        return goal;
+    public GoalBase findById(Long id) {
+        return goalRepository.findById(id)
+                .orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND,
+                ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Goal")));
     }
 
-    public Goal save(Goal goal, Long id) {
-        Roadmap roadMap = roadMapService.findById(id);
-        Long lastIndex = -1L;
-        goal.setRoadmap(roadMap);
+    public GoalBase save(GoalBase goal, Long roadmapId) {
+        RoadmapBase roadmap = roadmapService.findById(roadmapId);
+        goal.setRoadmap(roadmap);
 
-        if (roadMap == null) {
-            lastIndex = null;
-        } else if (!roadMap.getGoals().isEmpty()) {
-            lastIndex = roadMap.getGoals().getLast().getRoadmapIndex();
-            goal.setRoadmapIndex(lastIndex + 1);
-        } else {
-            goal.setRoadmapIndex(0L);
+        if (roadmap != null) {
+            if (!roadmap.getGoals().isEmpty()) {
+                Long lastIndex = roadmap.getGoals().getLast().getRoadmapIndex();
+                goal.setRoadmapIndex(lastIndex + 1);
+            } else {
+                goal.setRoadmapIndex(0L);
+            }
         }
 
         if (goal.getStatus() == null) {
@@ -52,8 +50,8 @@ public class GoalService {
         return goalRepository.save(goal);
     }
 
-    public Goal update(RequestGoalDTO requestGoalDTO, Long id) {
-        Goal oldGoal = findById(id);
+    public GoalBase update(RequestGoalDTO requestGoalDTO, Long id) {
+        GoalBase oldGoal = findById(id);
 
         oldGoal.setName(requestGoalDTO.name());
         oldGoal.setDescription(requestGoalDTO.description());
@@ -62,32 +60,32 @@ public class GoalService {
         return goalRepository.save(oldGoal);
     }
 
-    public List<Goal> listGoals() {
-        return goalRepository.list();
+    public List<GoalBase> listGoals() {
+        return goalRepository.findAll();
     }
 
     public void delete(Long id) {
-        goalRepository.delete(id);
+        goalRepository.deleteById(id);
     }
 
-    public void changeIndexRoadMapFromGoals(Long id, List<GoalPositionDTO> list) {
+    public void changeIndexRoadMapFromGoals(Long roadmapId, List<GoalPositionDTO> list) {
         for (GoalPositionDTO g : list) {
-            Goal goal = findById(g.id());
+            GoalBase goal = findById(g.id());
             goal.setRoadmapIndex(g.updatedPosition());
-            save(goal, id);
+            save(goal, roadmapId);
         }
     }
 
-    public Goal cancelGoal(Long id) {
-        Goal goal = findById(id);
+    public GoalBase cancelGoal(Long id) {
+        GoalBase goal = findById(id);
         goal.setStatus(GoalStatus.CANCELLED);
         return save(goal, goal.getRoadmap().getId());
     }
 
-    public Goal finishGoal(Long id) {
-        Goal goal = findById(id);
+    public GoalBase finishGoal(Long id) {
+        GoalBase goal = findById(id);
         goal.setStatus(GoalStatus.CONCLUDED);
-        return save(goal, goal.getRoadmap().getId());
+        return goalRepository.save(goal);
     }
 
 }

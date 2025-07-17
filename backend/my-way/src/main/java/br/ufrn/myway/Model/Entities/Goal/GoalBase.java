@@ -22,7 +22,6 @@ public class GoalBase extends AbstractModel implements AbstractGoal {
 
     @Column(nullable = false)
     private String name;
-
     private String description;
     private Long roadmapIndex;
     private GoalStatus status;
@@ -43,10 +42,12 @@ public class GoalBase extends AbstractModel implements AbstractGoal {
         this.roadmapIndex = roadmapIndex;
     }
 
+    @Override
     public RoadmapBase getRoadmap() {
         return roadmap;
     }
 
+    @Override
     public void setRoadmap(RoadmapBase roadMap) {
         this.roadmap = roadMap;
     }
@@ -56,6 +57,7 @@ public class GoalBase extends AbstractModel implements AbstractGoal {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -65,14 +67,17 @@ public class GoalBase extends AbstractModel implements AbstractGoal {
         return description;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public List<StudyTopic> getStudyTopics() {
         return studyTopics;
     }
 
+    @Override
     public void setStudyTopics(List<StudyTopic> exercises) {
         this.studyTopics = exercises;
     }
@@ -91,6 +96,7 @@ public class GoalBase extends AbstractModel implements AbstractGoal {
         return status;
     }
 
+    @Override
     public void setStatus(GoalStatus status) {
         this.status = status;
     }

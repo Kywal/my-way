@@ -1,7 +1,9 @@
 package br.ufrn.myway.Repository;
 
-import br.ufrn.myway.Model.Entities.StudyTopic;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import br.ufrn.myway.Model.Entities.StudyTopic; 
+
+@Repository
 public interface StudyTopicRepository extends SoftDeletableRepository<StudyTopic> {
 }

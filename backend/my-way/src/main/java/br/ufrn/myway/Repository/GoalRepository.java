@@ -1,7 +1,10 @@
 package br.ufrn.myway.Repository;
 
-import br.ufrn.myway.Model.Entities.Goal;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+ 
+import br.ufrn.myway.Model.Entities.Goal.GoalBase;
 
-public interface GoalRepository extends SoftDeletableRepository<Goal> {
+@Repository
+public interface GoalRepository extends JpaRepository<GoalBase, Long> { 
 }
