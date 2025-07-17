@@ -7,11 +7,11 @@ import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.ufrn.myway.Model.DTO.GoalDTO;
-import br.ufrn.myway.Model.Entities.Goal.AbstractGoal; 
+import br.ufrn.myway.Model.Entities.Goal.AbstractGoal;
 import br.ufrn.myway.Model.Entities.Goal.DailyGoal;
 import br.ufrn.myway.Model.Entities.Goal.GoalBase;
 import br.ufrn.myway.Model.Entities.Goal.StaticGoal;
-import br.ufrn.myway.Model.Enums.GoalStatus; 
+import br.ufrn.myway.Model.Enums.GoalStatus;
 
 @Mapper(componentModel = "spring", uses = {StudyTopicMapper.class})
 public abstract class GoalMapper {
@@ -43,12 +43,12 @@ public abstract class GoalMapper {
         LocalDateTime resetTime = (goal instanceof DailyGoal d) ? d.getResetTime() : null;
 
         return new GoalDTO(
-            base.getId(),
-            type,
-            base.getDescription(),
-            studyTopicMapper.toDTOList(base.getStudyTopics()),
-            base.getStatus().name(),
-            resetTime
+                base.getId(),
+                type,
+                base.getDescription(),
+                studyTopicMapper.toDTOList(base.getStudyTopics()),
+                base.getStatus().name(),
+                resetTime
         );
     }
 
@@ -59,4 +59,23 @@ public abstract class GoalMapper {
     public List<GoalDTO> toDTOList(List<AbstractGoal> goals) {
         return goals.stream().map(this::toDTO).toList();
     }
+
+    // Add this overloaded method to handle ResponseGenerateGoalDTO
+    // public List<ResponseGenerateGoalDTO> toEntityList(List<ResponseGenerateGoalDTO> dtos) {
+    //     if (dtos == null) {
+    //         return null;
+    //     }
+    //     return dtos.stream().map(this::toEntity).toList();
+    // }
+
+// You must also have a method to convert a single ResponseGenerateGoalDTO to Goal
+    // public AbstractGoal toEntity(ResponseGenerateGoalDTO dto) {
+    //     // Implement the mapping logic here
+    //     // Example:
+    //     AbstractGoal goal = new AbstractGoal();
+    //     goal.setName(dto.getName());
+    //     goal.setDescription(dto.getDescription());
+    //     // Set other fields as needed
+    //     return goal;
+    // }
 }

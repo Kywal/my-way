@@ -37,7 +37,7 @@ public abstract class RoadmapBase extends AbstractModel implements AbstractRoadm
 
     @OrderBy("roadmapIndex")
     @OneToMany(mappedBy = "roadmap", cascade = CascadeType.ALL)
-    public List<GoalBase> goals = new ArrayList<>();
+    public List<AbstractGoal> goals = new ArrayList<>();
 
     private RoadMapStatus status;
 
@@ -66,11 +66,11 @@ public abstract class RoadmapBase extends AbstractModel implements AbstractRoadm
     }
 
     @Override
-    public List<GoalBase> getGoals() {
+    public List<AbstractGoal> getGoals() {
         return goals;
     }
 
-    public void setGoals(List<GoalBase> listGoals) {
+    public void setGoals(List<AbstractGoal> listGoals) {
         this.goals = listGoals;
     }
 
