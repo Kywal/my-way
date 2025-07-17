@@ -9,7 +9,9 @@ public class RoadmapGeneralConcurso extends RoadmapBase {
         super();
     }
 
-    public String getTeste() {
-        return "teste";
+    @Override
+    public String getDescription() {
+        return "Roadmap para concursos gerais";
     }
+
 }

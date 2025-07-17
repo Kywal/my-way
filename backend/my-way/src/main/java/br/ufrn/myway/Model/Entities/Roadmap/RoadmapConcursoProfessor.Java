@@ -11,7 +11,7 @@ public class RoadmapConcursoProfessor extends RoadmapBase {
 
     @Override
     public String getDescription() {
-        return "Roadmap para o concurso de professor";
+        return "Roadmap para o concurso de Professor";
     }
-    
+
 }
