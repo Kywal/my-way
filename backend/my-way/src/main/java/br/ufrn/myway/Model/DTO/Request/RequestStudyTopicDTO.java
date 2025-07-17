@@ -6,6 +6,6 @@ public record RequestStudyTopicDTO(
         String name,
         String description,
         StudyTopicStatus status
-        ) {
-
+        )
+        {
 }

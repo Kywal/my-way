@@ -3,10 +3,7 @@ package br.ufrn.myway.Model.Entities;
 import java.time.LocalDate;
 
 import br.ufrn.myway.Model.Enums.GenderPerson;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_person")
@@ -20,6 +17,8 @@ public class Person extends AbstractModel {
     private GenderPerson gender;
 
     private String historyDescription;
+
+    private String aboutMe;
 
     private String country;
 
@@ -73,12 +72,13 @@ public class Person extends AbstractModel {
         this.region = region;
     }
 
-    public Person(String name, LocalDate birthday, GenderPerson gender, String historyDescription,
-                  String country, String region) {
+    public Person(String name, LocalDate birthday, GenderPerson gender, String historyDescription, String AboutMe, String country, String region) {}
+    {
         this.name = name;
         this.birthday = birthday;
         this.gender = gender;
         this.historyDescription = historyDescription;
+        this.aboutMe = aboutMe;
         this.country = country;
         this.region = region;
     }
