@@ -9,4 +9,6 @@ public interface AbstractConcurso {
     String getCargo();
 
     Nivel getNivel();
+
+    Long getId();
 }

@@ -41,6 +41,19 @@ public abstract class RoadmapMapper {
         return roadmap;
     }
 
+    // @Mapping(target = "id", ignore = true)
+    // @Mapping(target = "mainGoal", source = "mainGoal")
+    // @Mapping(target = "goals", source = "goals")
+    // RoadmapBase toEntity(ResponseGenerateRoadmapDTO dto){
+    //     RoadmapBase roadmap = new RoadmapGeneralConcurso();
+    //     roadmap.setMainGoal(dto.mainGoal());
+    //     roadmap.setDescription(dto.description());
+    //     roadmap.setGoals(goalMapper.toEntityList(dto.goals()));
+    //     roadmap.setStatus(dto.status());
+
+    //     return roadmap;
+    // }
+
     public ResponseRoadmapDTO toDTO(RoadmapBase roadmap) {
         String type = switch (roadmap) {
             case RoadmapConcursoPoliciaCivil ignored ->
@@ -50,7 +63,7 @@ public abstract class RoadmapMapper {
             default ->
                 "GENERAL";
         };
-        
+
         return new ResponseRoadmapDTO(
                 roadmap.getId(),
                 type,
