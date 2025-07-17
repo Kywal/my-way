@@ -1,14 +1,24 @@
 package br.ufrn.myway.Model.Entities;
 
+import br.ufrn.myway.Model.AbstractClasses.ConcursoAbstract;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Entity
 public class Prova {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String nome;
 
     private LocalDateTime firstDay;
     private LocalDateTime lastDay;
+
+    @OneToOne(mappedBy = "bancaConcurso")
+    private ConcursoAbstract concurso;
 
     private List<String> etapa;
 
