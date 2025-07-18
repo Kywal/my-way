@@ -1,41 +1,34 @@
 package br.ufrn.myway.Service.RoadmapService;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
-import br.ufrn.myway.Model.Entities.Goal.AbstractGoal; 
+import br.ufrn.myway.Model.Entities.Goal.AbstractGoal;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
+import br.ufrn.myway.Model.Entities.Roadmap.RoadmapConcursoGeneralista;
 import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Model.Enums.GoalStatus;
 import br.ufrn.myway.Model.Enums.RoadmapStatus;
 import br.ufrn.myway.Model.Enums.StudyTopicStatus;
-import br.ufrn.myway.Repository.RoadmapRepository;
+import br.ufrn.myway.Repository.Roadmap.RoadmapConcursoGeneralistaRepository;
 import br.ufrn.myway.Service.BusinessException;
 import br.ufrn.myway.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
-public class RoadmapService {
+public class RoadmapConcursoGeneralistaService extends RoadmapBaseService implements AbstractRoadmapService<RoadmapConcursoGeneralista> {
 
     @Autowired
-    private RoadmapRepository roadmapRepository;
+    private RoadmapConcursoGeneralistaRepository roadmapRepository;
 
     @Autowired
     private UserService userService;
 
-    public RoadmapBase findById(Long id) {
-        RoadmapBase roadMap = roadmapRepository.getById(id);
-        if (roadMap == null) {
-            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap"));
-        }
-        return roadMap;
-    }
-
-    public RoadmapBase save(RoadmapBase roadmap, Long id) {
+    @Override
+    public RoadmapConcursoGeneralista save(RoadmapConcursoGeneralista roadmap, Long id) {
         User user = userService.findById(id);
         if (roadmap.getUser() == null) {
             roadmap.setUser(user);
@@ -47,40 +40,46 @@ public class RoadmapService {
         return roadmapRepository.save(roadmap);
     }
 
-    public List<RoadmapBase> list() {
+    @Override
+    public RoadmapConcursoGeneralista findById(Long userId) {
+        return roadmapRepository.findById(userId).orElseThrow(
+                () -> new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap")
+        ));
+    }
+
+    @Override
+    public List<RoadmapConcursoGeneralista> findAll() {
         return roadmapRepository.list();
     }
 
-    public void deletar(Long id) {
-        roadmapRepository.delete(id);
+    @Override
+    public List<RoadmapConcursoGeneralista> findRoadmapByUser(Long userId) {
+        return roadmapRepository.findRoadmapByUser(userId);
     }
 
-    public List<RoadmapBase> findRoadMapByUser(Long id) {
-        return roadmapRepository.findRoadMapByUser(id);
-    }
-
-    public RoadmapBase cancelRoadmap(Long id) {
-        RoadmapBase roadmap = findById(id);
+    @Override
+    public RoadmapConcursoGeneralista cancelRoadmap(Long roadmapId) {
+        RoadmapConcursoGeneralista roadmap = findById(roadmapId);
         roadmap.setStatus(RoadmapStatus.CANCELLED);
         return save(roadmap, roadmap.getUser().getId());
     }
 
-    public RoadmapBase finishRoadmap(Long id) {
-        RoadmapBase roadmap = findById(id);
+    @Override
+    public RoadmapConcursoGeneralista finishRoadmap(Long id) {
+        RoadmapConcursoGeneralista roadmap = findById(id);
         roadmap.setStatus(RoadmapStatus.CONCLUDED);
         return save(roadmap, roadmap.getUser().getId());
     }
 
-    public RoadmapBase getByStatus(Long userId, RoadmapStatus status) {
-        RoadmapBase roadmap = roadmapRepository.findByStatus(userId, status);
-        if (roadmap == null) {
-            throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap"));
-        }
-        return roadmap;
+    @Override
+    public RoadmapConcursoGeneralista getByStatus(Long userId, RoadmapStatus status) {
+        return roadmapRepository.findByStatus(userId, status).orElseThrow(
+            () -> new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap"))
+        );
     }
 
     public String getRoadmapPreferencesPromptByUser(Long userId) {
-        List<RoadmapBase> roadmaps = findRoadMapByUser(userId); 
+        List<RoadmapConcursoGeneralista> roadmaps = findRoadmapByUser(userId);
         if (roadmaps.isEmpty()) {
             return "";
         }
