@@ -2,7 +2,7 @@ package br.ufrn.myway.Service.GoalService;
 
 import java.util.List;
 
-import br.ufrn.myway.Service.RoadmapService.RoadmapConcursoGeneralistaService;
+import br.ufrn.myway.hotspots.ConcursoGeneralista.RoadmapConcursoGeneralista.service.RoadmapConcursoGeneralistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import br.ufrn.myway.model.entities.roadmap.RoadmapBase;
 import br.ufrn.myway.model.enums.ErrorMessageUtils;
 import br.ufrn.myway.model.enums.GoalStatus;
 import br.ufrn.myway.Repository.GoalRepository;
-import br.ufrn.myway.Service.BusinessException;
+import br.ufrn.myway.coldspots.Exceptions.BusinessException;
 
 @Service
 public class GoalService {

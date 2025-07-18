@@ -4,9 +4,9 @@ import br.ufrn.myway.model.DTO.Response.ResponseGenerateGoalDTO;
 import br.ufrn.myway.model.entities.StudyTopic;
 import br.ufrn.myway.model.enums.ErrorMessageUtils;
 import br.ufrn.myway.model.mapper.GoalMapper;
-import br.ufrn.myway.Service.BusinessException;
-import br.ufrn.myway.Service.RoadmapService.RoadmapConcursoGeneralistaService;
-import br.ufrn.myway.Service.StudyTopicService;
+import br.ufrn.myway.coldspots.Exceptions.BusinessException;
+import br.ufrn.myway.hotspots.ConcursoGeneralista.RoadmapConcursoGeneralista.service.RoadmapConcursoGeneralistaService;
+import br.ufrn.myway.coldspots.StudyTopics.service.StudyTopicService;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;

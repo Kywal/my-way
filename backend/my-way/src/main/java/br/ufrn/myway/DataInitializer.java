@@ -3,7 +3,7 @@ package br.ufrn.myway;
 import br.ufrn.myway.model.entities.Mission;
 import br.ufrn.myway.model.enums.MissionFrequency;
 import br.ufrn.myway.model.enums.MissionType;
-import br.ufrn.myway.Repository.MissionRepository;
+import br.ufrn.myway.coldspots.Mission.repository.MissionRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
