@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.Entities.Person; 
+import br.ufrn.myway.model.entities.Person;
 import br.ufrn.myway.Repository.PersonRepository;
 
 @Service
@@ -24,7 +24,7 @@ public class PersonService {
 
     public List<Person> list(){
 
-        return personRepository.list();
+        return personRepository.findAll();
     }
 
     public void delete(Long id) {

@@ -1,23 +1,25 @@
 package br.ufrn.myway.Service.RoadmapService;
 
-import br.ufrn.myway.Model.Entities.Goal.AbstractGoal;
-import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
-import br.ufrn.myway.Model.Entities.Roadmap.RoadmapConcursoGeneralista;
-import br.ufrn.myway.Model.Entities.StudyTopic;
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
-import br.ufrn.myway.Model.Enums.GoalStatus;
-import br.ufrn.myway.Model.Enums.RoadmapStatus;
-import br.ufrn.myway.Model.Enums.StudyTopicStatus;
+import br.ufrn.myway.model.entities.Goal.AbstractGoal;
+import br.ufrn.myway.model.entities.roadmap.RoadmapBase;
+import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoGeneralista;
+import br.ufrn.myway.model.entities.StudyTopic;
+import br.ufrn.myway.model.entities.User;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.Enums.GoalStatus;
+import br.ufrn.myway.model.Enums.RoadmapStatus;
+import br.ufrn.myway.model.Enums.StudyTopicStatus;
 import br.ufrn.myway.Repository.Roadmap.RoadmapConcursoGeneralistaRepository;
 import br.ufrn.myway.Service.BusinessException;
 import br.ufrn.myway.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Profile("Generalista")
 @Service
 public class RoadmapConcursoGeneralistaService extends RoadmapBaseService implements AbstractRoadmapService<RoadmapConcursoGeneralista> {
 
@@ -49,7 +51,7 @@ public class RoadmapConcursoGeneralistaService extends RoadmapBaseService implem
 
     @Override
     public List<RoadmapConcursoGeneralista> findAll() {
-        return roadmapRepository.list();
+        return roadmapRepository.findAll();
     }
 
     @Override

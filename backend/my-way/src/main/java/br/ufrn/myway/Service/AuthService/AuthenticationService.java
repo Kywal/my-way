@@ -1,6 +1,6 @@
 package br.ufrn.myway.Service.AuthService;
 
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Service.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.Entities.User;
+import br.ufrn.myway.model.entities.User;
 import br.ufrn.myway.Repository.UserRepository;
 
 @Service

@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Entities.UserMission;
+import br.ufrn.myway.model.entities.User;
+import br.ufrn.myway.model.entities.UserMission;
 
 @Repository
 public interface UserMissionRepository extends SoftDeletableRepository<UserMission> {

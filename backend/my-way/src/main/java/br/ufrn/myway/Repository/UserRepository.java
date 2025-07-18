@@ -3,9 +3,7 @@ package br.ufrn.myway.Repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import br.ufrn.myway.Model.Entities.User;
-
-import java.util.Optional;
+import br.ufrn.myway.model.entities.User;
 
 @Repository
 public interface UserRepository extends SoftDeletableRepository<User> {

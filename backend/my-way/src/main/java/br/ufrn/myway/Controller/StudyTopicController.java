@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO;
-import br.ufrn.myway.Model.DTO.Response.ResponseStudyTopicDTO;
-import br.ufrn.myway.Model.Entities.StudyTopic;
-import br.ufrn.myway.Model.Mapper.StudyTopicMapper;
+import br.ufrn.myway.model.DTO.Request.RequestStudyTopicDTO;
+import br.ufrn.myway.model.DTO.Response.ResponseStudyTopicDTO;
+import br.ufrn.myway.model.entities.StudyTopic;
+import br.ufrn.myway.model.mapper.StudyTopicMapper;
 import br.ufrn.myway.Service.StudyTopicService;
 
 @RestController
@@ -30,18 +30,22 @@ public class StudyTopicController {
     private StudyTopicMapper studyTopicMapper;
 
     @PostMapping("/{goalId}")
-    public ResponseEntity<ResponseStudyTopicDTO> save(@RequestBody RequestStudyTopicDTO requestStudyTopicDto, @PathVariable Long goalId) {
+    public ResponseEntity<ResponseStudyTopicDTO> save(@RequestBody RequestStudyTopicDTO studyTopicDTO, @PathVariable Long goalId) {
         return ResponseEntity.ok(
                 studyTopicMapper.toResponse(
                         studyTopicService.save(
-                                studyTopicMapper.toEntity(requestStudyTopicDto), goalId)
+                                studyTopicMapper.toEntity(studyTopicDTO), goalId)
                 )
         );
     }
 
     @GetMapping("/list")
     public List<ResponseStudyTopicDTO> list(){
-        return studyTopicMapper.toResponse(studyTopicService.list());
+        return studyTopicService.list().stream()
+                .map(
+                        studyTopic -> studyTopicMapper.toResponse(studyTopic)
+                )
+                .toList();
     }
 
     @GetMapping("/{id}")

@@ -1,6 +1,6 @@
 package br.ufrn.myway.Service.AuthService;
 
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Service.BusinessException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;

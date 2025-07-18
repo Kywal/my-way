@@ -1,6 +1,6 @@
 package br.ufrn.myway.Controller;
 
-import br.ufrn.myway.Model.DTO.ExceptionDTO;
+import br.ufrn.myway.model.DTO.ExceptionDTO;
 import br.ufrn.myway.Service.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

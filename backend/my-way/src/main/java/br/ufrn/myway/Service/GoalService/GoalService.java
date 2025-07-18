@@ -2,19 +2,19 @@ package br.ufrn.myway.Service.GoalService;
 
 import java.util.List;
 
+import br.ufrn.myway.Service.RoadmapService.RoadmapConcursoGeneralistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.DTO.GoalPositionDTO;
-import br.ufrn.myway.Model.DTO.Request.RequestGoalDTO;
-import br.ufrn.myway.Model.Entities.Goal.GoalBase;
-import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
-import br.ufrn.myway.Model.Enums.GoalStatus; 
+import br.ufrn.myway.model.DTO.GoalPositionDTO;
+import br.ufrn.myway.model.DTO.Request.RequestGoalDTO;
+import br.ufrn.myway.model.entities.Goal.GoalBase;
+import br.ufrn.myway.model.entities.roadmap.RoadmapBase;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.Enums.GoalStatus;
 import br.ufrn.myway.Repository.GoalRepository;
 import br.ufrn.myway.Service.BusinessException;
-import br.ufrn.myway.Service.RoadmapService.RoadmapService;
 
 @Service
 public class GoalService {
@@ -22,7 +22,7 @@ public class GoalService {
     @Autowired
     private GoalRepository goalRepository;
     @Autowired
-    private RoadmapService roadmapService;
+    private RoadmapConcursoGeneralistaService roadmapConcursoGeneralistaService;
 
     public GoalBase findById(Long id) {
         return goalRepository.findById(id)
@@ -31,7 +31,7 @@ public class GoalService {
     }
 
     public GoalBase save(GoalBase goal, Long roadmapId) {
-        RoadmapBase roadmap = roadmapService.findById(roadmapId);
+        RoadmapBase roadmap = roadmapConcursoGeneralistaService.findById(roadmapId);
         goal.setRoadmap(roadmap);
 
         if (roadmap != null) {

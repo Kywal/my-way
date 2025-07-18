@@ -1,11 +1,11 @@
 package br.ufrn.myway.Service.GoalService;
 
-import br.ufrn.myway.Model.DTO.Response.ResponseGenerateGoalDTO; 
-import br.ufrn.myway.Model.Entities.StudyTopic;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
-import br.ufrn.myway.Model.Mapper.GoalMapper;
+import br.ufrn.myway.model.DTO.Response.ResponseGenerateGoalDTO;
+import br.ufrn.myway.model.entities.StudyTopic;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.mapper.GoalMapper;
 import br.ufrn.myway.Service.BusinessException;
-import br.ufrn.myway.Service.RoadmapService.RoadmapService;
+import br.ufrn.myway.Service.RoadmapService.RoadmapConcursoGeneralistaService;
 import br.ufrn.myway.Service.StudyTopicService;
 
 import org.springframework.ai.chat.client.ChatClient;
@@ -14,14 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.Entities.Goal.GoalBase;
-import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
+import br.ufrn.myway.model.entities.Goal.GoalBase;
+import br.ufrn.myway.model.entities.roadmap.RoadmapBase;
 
 @Service
 public class AiGoalService {
 
     @Autowired
-    private RoadmapService roadmapService;
+    private RoadmapConcursoGeneralistaService roadmapConcursoGeneralistaService;
 
     @Autowired
     private GoalService goalService;
@@ -69,7 +69,7 @@ public class AiGoalService {
 
     public GoalBase generateAndSave(Long roadmapId) {
 
-        RoadmapBase roadmap = roadmapService.findById(roadmapId);
+        RoadmapBase roadmap = roadmapConcursoGeneralistaService.findById(roadmapId);
         if (roadmap == null) throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap"));
 
         ResponseGenerateGoalDTO generatedGoal = generateGoal(roadmap);

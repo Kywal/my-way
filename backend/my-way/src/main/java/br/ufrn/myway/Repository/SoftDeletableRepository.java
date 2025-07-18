@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
 
-import br.ufrn.myway.Model.Entities.AbstractModel;
+import br.ufrn.myway.model.entities.AbstractModel;
 import jakarta.transaction.Transactional;
 
 @NoRepositoryBean
@@ -19,7 +19,7 @@ public interface SoftDeletableRepository<M extends AbstractModel> extends Abstra
     public void delete(@Param("id")Long id);
 
     @Query("SELECT e FROM #{#entityName} e WHERE e.ativo = true")
-    public List<M> list();
+    public List<M> findAll();
 
     @Query("SELECT e FROM #{#entityName} e WHERE e.ativo = true AND e.id = :id")
     @Override

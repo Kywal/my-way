@@ -2,9 +2,9 @@ package br.ufrn.myway.Service;
 
 import java.util.List;
 
-import br.ufrn.myway.Model.DTO.Request.RequestStudyTopicDTO; 
-import br.ufrn.myway.Model.Entities.StudyTopic;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.DTO.Request.RequestStudyTopicDTO;
+import br.ufrn.myway.model.entities.StudyTopic;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.StudyTopicRepository;
 import br.ufrn.myway.Service.GoalService.GoalService;
 
@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.Entities.Goal.GoalBase;
-import br.ufrn.myway.Model.Enums.StudyTopicStatus;
+import br.ufrn.myway.model.entities.Goal.GoalBase;
+import br.ufrn.myway.model.Enums.StudyTopicStatus;
 
 @Service
 public class StudyTopicService {
@@ -52,7 +52,7 @@ public class StudyTopicService {
     }
 
     public List<StudyTopic> list() {
-        return studyTopicRepository.list();
+        return studyTopicRepository.findAll();
     }
 
     public void delete(Long id) {

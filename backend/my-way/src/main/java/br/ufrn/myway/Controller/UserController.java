@@ -1,7 +1,6 @@
 package br.ufrn.myway.Controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import br.ufrn.myway.Service.AuthService.AuthorizationDecoder;
@@ -20,11 +19,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufrn.myway.Model.DTO.LoginDTO;
-import br.ufrn.myway.Model.DTO.UserDTO;
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Enums.Roles;
-import br.ufrn.myway.Model.Mapper.UserMapper;
+import br.ufrn.myway.model.DTO.UserDTO;
+import br.ufrn.myway.model.entities.User;
+import br.ufrn.myway.model.Enums.Roles;
+import br.ufrn.myway.model.mapper.UserMapper;
 import br.ufrn.myway.Service.UserService;
 
 @RestController

@@ -5,14 +5,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.Entities.Mission;
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Entities.UserMission;
+import br.ufrn.myway.model.entities.Mission;
+import br.ufrn.myway.model.entities.User;
+import br.ufrn.myway.model.entities.UserMission;
 import br.ufrn.myway.Repository.MissionRepository;
 import br.ufrn.myway.Repository.UserMissionRepository;
 
@@ -26,7 +26,7 @@ public class MissionService {
     private UserMissionRepository userMissionRepository;
 
     public List<Mission> listAll() {
-        return missionRepository.list();
+        return missionRepository.findAll();
     }
 
     public Mission findById(Long id) {

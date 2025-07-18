@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import br.ufrn.myway.Model.Entities.Mission;
+import br.ufrn.myway.model.entities.Mission;
 
 @Repository
 public interface MissionRepository extends SoftDeletableRepository<Mission> {

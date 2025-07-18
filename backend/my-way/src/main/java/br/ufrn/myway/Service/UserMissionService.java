@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.Entities.Mission;
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Entities.UserMission;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.entities.Mission;
+import br.ufrn.myway.model.entities.User;
+import br.ufrn.myway.model.entities.UserMission;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.UserMissionRepository;
-import br.ufrn.myway.Repository.UserRepository;
 
 @Service
 public class UserMissionService {

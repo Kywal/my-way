@@ -8,12 +8,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.entities.User;
+import br.ufrn.myway.model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.UserRepository;
 
 @Service
@@ -37,7 +36,7 @@ public class UserService {
     }
 
     public List<User> list() {
-        return userRepository.list();
+        return userRepository.findAll();
     }
 
     public void delete(Long id) {
