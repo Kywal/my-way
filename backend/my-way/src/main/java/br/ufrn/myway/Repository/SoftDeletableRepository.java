@@ -1,6 +1,7 @@
 package br.ufrn.myway.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +23,5 @@ public interface SoftDeletableRepository<M extends AbstractModel> extends Abstra
 
     @Query("SELECT e FROM #{#entityName} e WHERE e.ativo = true AND e.id = :id")
     @Override
-    public M getById(@Param("id")Long id);
+    public Optional<M> findById(@Param("id")Long id);
 }
