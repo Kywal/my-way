@@ -2,12 +2,12 @@ package br.ufrn.myway.Model.Mapper;
 
 import java.util.List;
 
+import br.ufrn.myway.Model.Entities.Concurso.ConcursoBase;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseRoadmapDTO;
-import br.ufrn.myway.Model.Entities.Concurso.AbstractConcurso;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapConcursoPoliciaCivil;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapConcursoProfessor;
@@ -22,7 +22,7 @@ public abstract class RoadmapMapper {
     @Autowired
     protected ConcursoMapper concursoMapper;
 
-    public RoadmapBase toEntity(RequestRoadmapDTO dto, AbstractConcurso concurso, String tipo) {
+    public RoadmapBase toEntity(RequestRoadmapDTO dto, ConcursoBase concurso, String tipo) {
         RoadmapBase roadmap;
 
         switch (tipo.toUpperCase()) {

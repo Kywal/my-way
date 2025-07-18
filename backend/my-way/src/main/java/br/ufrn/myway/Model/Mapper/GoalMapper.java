@@ -53,11 +53,11 @@ public abstract class GoalMapper {
         );
     }
 
-    public List<AbstractGoal> toEntityList(List<GoalDTO> dtos) {
+    public List<GoalBase> toEntityList(List<GoalDTO> dtos) {
         return dtos.stream().map(this::toEntity).toList();
     }
 
-    public List<AbstractGoal> toEntityListFromResponse(List<ResponseGenerateGoalDTO> responseGoalDTOs) {
+    public List<GoalBase> toEntityListFromResponse(List<ResponseGenerateGoalDTO> responseGoalDTOs) {
     // Convert each ResponseGenerateGoalDTO to GoalDTO, then reuse the existing method
     //  String name,
     //     String description,
@@ -84,7 +84,7 @@ public abstract class GoalMapper {
     return toEntityList(goalDTOs);
 }
 
-    public List<GoalDTO> toDTOList(List<AbstractGoal> goals) {
+    public List<GoalDTO> toDTOList(List<GoalBase> goals) {
         return goals.stream().map(this::toDTO).toList();
     }
 

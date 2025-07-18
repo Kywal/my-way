@@ -5,7 +5,9 @@ import java.util.List;
 
 import br.ufrn.myway.Model.Entities.AbstractModel;
 import br.ufrn.myway.Model.Entities.Concurso.AbstractConcurso;
+import br.ufrn.myway.Model.Entities.Concurso.ConcursoBase;
 import br.ufrn.myway.Model.Entities.Goal.AbstractGoal;
+import br.ufrn.myway.Model.Entities.Goal.GoalBase;
 import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.RoadmapStatus;
 import jakarta.persistence.CascadeType;
@@ -23,7 +25,7 @@ import jakarta.persistence.OrderBy;
 public abstract class RoadmapBase extends AbstractModel implements AbstractRoadmap {
 
     @ManyToOne
-    private AbstractConcurso concurso;
+    private ConcursoBase concurso;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -36,7 +38,7 @@ public abstract class RoadmapBase extends AbstractModel implements AbstractRoadm
 
     @OrderBy("roadmapIndex")
     @OneToMany(mappedBy = "roadmap", cascade = CascadeType.ALL)
-    public List<AbstractGoal> goals = new ArrayList<>();
+    public List<GoalBase> goals = new ArrayList<GoalBase>();
 
     private RoadmapStatus status;
 
@@ -65,11 +67,11 @@ public abstract class RoadmapBase extends AbstractModel implements AbstractRoadm
     }
 
     @Override
-    public List<AbstractGoal> getGoals() {
+    public List<GoalBase> getGoals() {
         return goals;
     }
 
-    public void setGoals(List<AbstractGoal> listGoals) {
+    public void setGoals(List<GoalBase> listGoals) {
         this.goals = listGoals;
     }
 
@@ -86,7 +88,7 @@ public abstract class RoadmapBase extends AbstractModel implements AbstractRoadm
         return concurso;
     }
 
-    public void setConcurso(AbstractConcurso concurso) {
+    public void setConcurso(ConcursoBase concurso) {
         this.concurso = concurso;
     }
 
