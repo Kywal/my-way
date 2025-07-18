@@ -14,7 +14,7 @@ import br.ufrn.myway.Model.DTO.Request.RequestRoadmapDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseGenerateRoadmapDTO;
 import br.ufrn.myway.Model.DTO.Response.ResponseRoadmapDTO;
 import br.ufrn.myway.Model.Mapper.RoadmapMapper;
-import br.ufrn.myway.Service.RoadmapService.AiRoadmapService;
+import br.ufrn.myway.Service.RoadmapService.Ai.AiRoadmapService;
 
 @RestController
 @RequestMapping("/ai/roadmap")

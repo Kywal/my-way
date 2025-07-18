@@ -7,7 +7,7 @@ import br.ufrn.myway.Model.Entities.Concurso.AbstractConcurso;
 import br.ufrn.myway.Model.Entities.Concurso.ConcursoBase;
 import br.ufrn.myway.Model.Entities.Concurso.ConcursoPoliciaCivil;
 import br.ufrn.myway.Model.Entities.Concurso.ConcursoProfessor;
-import br.ufrn.myway.Model.Entities.Concurso.GeneralConcurso;
+import br.ufrn.myway.Model.Entities.Concurso.ConcursoGeneralista;
 import br.ufrn.myway.Model.Enums.Nivel;
 
 @Mapper(componentModel = "spring")
@@ -42,7 +42,7 @@ public abstract class ConcursoMapper {
             case "PROFESSOR" ->
                 concurso = new ConcursoProfessor();
             default ->
-                concurso = new GeneralConcurso();
+                concurso = new ConcursoGeneralista();
         }
 
         concurso.setOrgao(dto.orgao());

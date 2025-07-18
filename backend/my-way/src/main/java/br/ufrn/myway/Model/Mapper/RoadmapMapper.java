@@ -11,7 +11,7 @@ import br.ufrn.myway.Model.Entities.Concurso.AbstractConcurso;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapConcursoPoliciaCivil;
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapConcursoProfessor;
-import br.ufrn.myway.Model.Entities.Roadmap.RoadmapGeneralConcurso;
+import br.ufrn.myway.Model.Entities.Roadmap.RoadmapConcursoGeneralista;
 
 @Mapper(componentModel = "spring", uses = {GoalMapper.class, ConcursoMapper.class})
 public abstract class RoadmapMapper {
@@ -31,7 +31,7 @@ public abstract class RoadmapMapper {
             case "PROFESSOR" ->
                 roadmap = new RoadmapConcursoProfessor();
             default ->
-                roadmap = new RoadmapGeneralConcurso();
+                roadmap = new RoadmapConcursoGeneralista();
         }
 
         roadmap.setMainGoal(dto.mainGoal());
@@ -45,7 +45,7 @@ public abstract class RoadmapMapper {
     // @Mapping(target = "mainGoal", source = "mainGoal")
     // @Mapping(target = "goals", source = "goals")
     // RoadmapBase toEntity(ResponseGenerateRoadmapDTO dto){
-    //     RoadmapBase roadmap = new RoadmapGeneralConcurso();
+    //     RoadmapBase roadmap = new RoadmapConcursoGeneralista();
     //     roadmap.setMainGoal(dto.mainGoal());
     //     roadmap.setDescription(dto.description());
     //     roadmap.setGoals(goalMapper.toEntityList(dto.goals()));
