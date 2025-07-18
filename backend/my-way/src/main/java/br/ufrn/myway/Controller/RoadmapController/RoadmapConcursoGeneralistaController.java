@@ -124,7 +124,7 @@ public class RoadmapConcursoGeneralistaController implements AbstractRoadmapCont
                 roadmapMapper.toResponse(
                         roadmapService.getByStatus(
                                 userId,
-                                RoadmapStatus.valueOf(RoadmapStatus.ACTIVE.toString())
+                                RoadmapStatus.ACTIVE
                         )
                 )
         );
