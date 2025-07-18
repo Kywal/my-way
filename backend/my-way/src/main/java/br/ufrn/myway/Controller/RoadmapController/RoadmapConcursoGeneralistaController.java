@@ -3,7 +3,7 @@ package br.ufrn.myway.Controller.RoadmapController;
 import br.ufrn.myway.model.DTO.Request.RequestFullRoadmapDTO;
 import br.ufrn.myway.model.DTO.Request.RequestRoadmapDTO;
 import br.ufrn.myway.model.DTO.Response.ResponseRoadmapDTO;
-import br.ufrn.myway.model.Enums.RoadmapStatus;
+import br.ufrn.myway.model.enums.RoadmapStatus;
 import br.ufrn.myway.model.mapper.RoadmapMapper;
 import br.ufrn.myway.Service.RoadmapService.RoadmapConcursoGeneralistaService;
 import org.springframework.beans.factory.annotation.Autowired;

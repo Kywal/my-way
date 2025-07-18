@@ -2,7 +2,7 @@ package br.ufrn.myway.Service.GoalService;
 
 import br.ufrn.myway.model.DTO.Response.ResponseGenerateGoalDTO;
 import br.ufrn.myway.model.entities.StudyTopic;
-import br.ufrn.myway.model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.enums.ErrorMessageUtils;
 import br.ufrn.myway.model.mapper.GoalMapper;
 import br.ufrn.myway.Service.BusinessException;
 import br.ufrn.myway.Service.RoadmapService.RoadmapConcursoGeneralistaService;

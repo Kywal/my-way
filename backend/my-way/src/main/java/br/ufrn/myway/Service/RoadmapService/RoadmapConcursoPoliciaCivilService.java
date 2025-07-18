@@ -2,8 +2,8 @@ package br.ufrn.myway.Service.RoadmapService;
 
 import br.ufrn.myway.Repository.Roadmap.RoadmapConcursoPoliciaCivilRepository;
 import br.ufrn.myway.Service.BusinessException;
-import br.ufrn.myway.model.Enums.ErrorMessageUtils;
-import br.ufrn.myway.model.Enums.RoadmapStatus;
+import br.ufrn.myway.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.model.enums.RoadmapStatus;
 import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoPoliciaCivil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;

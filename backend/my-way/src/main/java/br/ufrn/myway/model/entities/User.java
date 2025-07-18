@@ -1,6 +1,6 @@
 package br.ufrn.myway.model.entities;
 
-import br.ufrn.myway.model.Enums.Roles;
+import br.ufrn.myway.model.enums.Roles;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

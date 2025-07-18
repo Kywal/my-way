@@ -11,8 +11,8 @@ import br.ufrn.myway.model.DTO.GoalPositionDTO;
 import br.ufrn.myway.model.DTO.Request.RequestGoalDTO;
 import br.ufrn.myway.model.entities.Goal.GoalBase;
 import br.ufrn.myway.model.entities.roadmap.RoadmapBase;
-import br.ufrn.myway.model.Enums.ErrorMessageUtils;
-import br.ufrn.myway.model.Enums.GoalStatus;
+import br.ufrn.myway.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.model.enums.GoalStatus;
 import br.ufrn.myway.Repository.GoalRepository;
 import br.ufrn.myway.Service.BusinessException;
 

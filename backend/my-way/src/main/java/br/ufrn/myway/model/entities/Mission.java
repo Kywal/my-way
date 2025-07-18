@@ -1,7 +1,7 @@
 package br.ufrn.myway.model.entities;
 
-import br.ufrn.myway.model.Enums.MissionFrequency;
-import br.ufrn.myway.model.Enums.MissionType;
+import br.ufrn.myway.model.enums.MissionFrequency;
+import br.ufrn.myway.model.enums.MissionType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

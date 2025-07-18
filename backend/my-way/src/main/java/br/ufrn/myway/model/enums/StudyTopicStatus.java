@@ -1,4 +1,4 @@
-package br.ufrn.myway.model.Enums;
+package br.ufrn.myway.model.enums;
 
 public enum StudyTopicStatus {
     ACTIVE,

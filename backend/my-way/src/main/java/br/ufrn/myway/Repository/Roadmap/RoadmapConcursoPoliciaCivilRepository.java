@@ -1,7 +1,7 @@
 package br.ufrn.myway.Repository.Roadmap;
 
 import br.ufrn.myway.Repository.SoftDeletableRepository;
-import br.ufrn.myway.model.Enums.RoadmapStatus;
+import br.ufrn.myway.model.enums.RoadmapStatus;
 import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoPoliciaCivil;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;

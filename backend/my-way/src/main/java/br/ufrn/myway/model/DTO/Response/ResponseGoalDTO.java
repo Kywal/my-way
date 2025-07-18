@@ -3,7 +3,7 @@ package br.ufrn.myway.model.DTO.Response;
 import java.time.LocalDate;
 import java.util.List;
 
-import br.ufrn.myway.model.Enums.GoalStatus;
+import br.ufrn.myway.model.enums.GoalStatus;
 
 public record ResponseGoalDTO(
         Long id,

@@ -4,7 +4,7 @@ import br.ufrn.myway.Service.RoadmapService.RoadmapConcursoPoliciaCivilService;
 import br.ufrn.myway.model.DTO.Request.RequestFullRoadmapDTO;
 import br.ufrn.myway.model.DTO.Request.RequestRoadmapDTO;
 import br.ufrn.myway.model.DTO.Response.ResponseRoadmapDTO;
-import br.ufrn.myway.model.Enums.RoadmapStatus;
+import br.ufrn.myway.model.enums.RoadmapStatus;
 import br.ufrn.myway.model.mapper.RoadmapMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;

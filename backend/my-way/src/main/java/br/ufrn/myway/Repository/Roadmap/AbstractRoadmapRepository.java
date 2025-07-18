@@ -1,6 +1,6 @@
 package br.ufrn.myway.Repository.Roadmap;
 
-import br.ufrn.myway.model.Enums.RoadmapStatus;
+import br.ufrn.myway.model.enums.RoadmapStatus;
 
 import java.util.List;
 import java.util.Optional;

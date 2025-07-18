@@ -8,7 +8,7 @@ import br.ufrn.myway.model.entities.Concurso.ConcursoBase;
 import br.ufrn.myway.model.entities.Concurso.ConcursoPoliciaCivil;
 import br.ufrn.myway.model.entities.Concurso.ConcursoProfessor;
 import br.ufrn.myway.model.entities.Concurso.ConcursoGeneralista;
-import br.ufrn.myway.model.Enums.Nivel;
+import br.ufrn.myway.model.enums.Nivel;
 
 @Mapper(componentModel = "spring")
 public abstract class ConcursoMapper {

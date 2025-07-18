@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.ufrn.myway.model.entities.roadmap.RoadmapBase;
 import br.ufrn.myway.model.entities.StudyTopic;
-import br.ufrn.myway.model.Enums.GoalStatus;
+import br.ufrn.myway.model.enums.GoalStatus;
 
 public interface AbstractGoal {
 

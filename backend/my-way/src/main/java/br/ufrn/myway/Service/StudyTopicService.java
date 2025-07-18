@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.ufrn.myway.model.DTO.Request.RequestStudyTopicDTO;
 import br.ufrn.myway.model.entities.StudyTopic;
-import br.ufrn.myway.model.Enums.ErrorMessageUtils;
+import br.ufrn.myway.model.enums.ErrorMessageUtils;
 import br.ufrn.myway.Repository.StudyTopicRepository;
 import br.ufrn.myway.Service.GoalService.GoalService;
 
@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.ufrn.myway.model.entities.Goal.GoalBase;
-import br.ufrn.myway.model.Enums.StudyTopicStatus;
+import br.ufrn.myway.model.enums.StudyTopicStatus;
 
 @Service
 public class StudyTopicService {

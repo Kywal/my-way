@@ -1,6 +1,6 @@
 package br.ufrn.myway.model.DTO.Request;
 
-import br.ufrn.myway.model.Enums.RoadmapStatus;
+import br.ufrn.myway.model.enums.RoadmapStatus;
 
 import java.util.List;
 

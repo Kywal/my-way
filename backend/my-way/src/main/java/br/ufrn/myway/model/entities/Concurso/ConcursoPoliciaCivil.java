@@ -1,6 +1,6 @@
 package br.ufrn.myway.model.entities.Concurso;
 
-import br.ufrn.myway.model.Enums.Nivel;
+import br.ufrn.myway.model.enums.Nivel;
 import jakarta.persistence.Entity;
 
 @Entity

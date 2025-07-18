@@ -1,7 +1,6 @@
 package br.ufrn.myway.model.entities;
 
-import br.ufrn.myway.model.entities.Goal.AbstractGoal;
-import br.ufrn.myway.model.Enums.StudyTopicStatus;
+import br.ufrn.myway.model.enums.StudyTopicStatus;
 import br.ufrn.myway.model.entities.Goal.GoalBase;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

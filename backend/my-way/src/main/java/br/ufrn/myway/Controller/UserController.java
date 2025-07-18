@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.myway.model.DTO.UserDTO;
 import br.ufrn.myway.model.entities.User;
-import br.ufrn.myway.model.Enums.Roles;
+import br.ufrn.myway.model.enums.Roles;
 import br.ufrn.myway.model.mapper.UserMapper;
 import br.ufrn.myway.Service.UserService;
 

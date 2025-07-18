@@ -9,7 +9,7 @@ import br.ufrn.myway.model.entities.Concurso.ConcursoBase;
 import br.ufrn.myway.model.entities.Goal.AbstractGoal;
 import br.ufrn.myway.model.entities.Goal.GoalBase;
 import br.ufrn.myway.model.entities.User;
-import br.ufrn.myway.model.Enums.RoadmapStatus;
+import br.ufrn.myway.model.enums.RoadmapStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +17,6 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 

@@ -2,7 +2,7 @@ package br.ufrn.myway.model.entities;
 
 import java.time.LocalDate;
 
-import br.ufrn.myway.model.Enums.GenderPerson;
+import br.ufrn.myway.model.enums.GenderPerson;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
