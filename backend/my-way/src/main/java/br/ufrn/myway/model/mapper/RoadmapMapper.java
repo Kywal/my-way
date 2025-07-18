@@ -5,8 +5,11 @@ import br.ufrn.myway.model.DTO.Request.RequestRoadmapDTO;
 import br.ufrn.myway.model.DTO.Response.ResponseRoadmapDTO;
 import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoGeneralista;
 import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoPoliciaCivil;
+
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoProfessor;
 
 @Mapper(componentModel = "spring")
 public abstract class RoadmapMapper {
@@ -24,4 +27,9 @@ public abstract class RoadmapMapper {
 
     public abstract ResponseRoadmapDTO toResponse(RoadmapConcursoPoliciaCivil roadmap);
     public abstract ResponseRoadmapDTO toResponse(RoadmapConcursoGeneralista roadmap);
+    public abstract ResponseRoadmapDTO toResponse(RoadmapConcursoProfessor roadmapConcursoProfessor);
+
+    public abstract RoadmapConcursoProfessor toRoadmapConcursoProfessor(RequestRoadmapDTO request);
+    public abstract RoadmapConcursoProfessor toRoadmapConcursoProfessor(RequestFullRoadmapDTO request);
+
 }
