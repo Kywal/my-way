@@ -10,9 +10,9 @@ public interface AbstractRoadmapController<
         ResponseRoadmapDTO
 > {
 
-    public ResponseEntity<ResponseRoadmapDTO> save(RequestRoadmapDTO roadmapDTO, Long userId);
+    public ResponseEntity<ResponseRoadmapDTO> create(RequestRoadmapDTO roadmapDTO, Long userId);
 
-    public ResponseEntity<ResponseRoadmapDTO> saveDiff(RequestFullRoadmapDTO roadmapDTO, Long userId);
+    public ResponseEntity<ResponseRoadmapDTO> save(RequestFullRoadmapDTO roadmapDTO, Long userId);
 
     public List<ResponseRoadmapDTO> findAll();
 

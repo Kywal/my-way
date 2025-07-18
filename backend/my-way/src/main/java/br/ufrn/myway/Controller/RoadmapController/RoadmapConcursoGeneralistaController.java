@@ -37,7 +37,7 @@ public class RoadmapConcursoGeneralistaController implements AbstractRoadmapCont
 
     @Override
     @PostMapping("/{userId}")
-    public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestRoadmapDTO roadmapDTO, @PathVariable Long userId) {
+    public ResponseEntity<ResponseRoadmapDTO> create(@RequestBody RequestRoadmapDTO roadmapDTO, @PathVariable Long userId) {
         return ResponseEntity.ok(
                 roadmapMapper.toResponse(
                         roadmapService.save(
@@ -49,7 +49,7 @@ public class RoadmapConcursoGeneralistaController implements AbstractRoadmapCont
 
     @Override
     @PostMapping("/save/{userId}")
-    public ResponseEntity<ResponseRoadmapDTO> saveDiff(@RequestBody RequestFullRoadmapDTO roadmapDTO, @PathVariable Long userId) {
+    public ResponseEntity<ResponseRoadmapDTO> save(@RequestBody RequestFullRoadmapDTO roadmapDTO, @PathVariable Long userId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 roadmapMapper.toResponse(
                         roadmapService.save(
