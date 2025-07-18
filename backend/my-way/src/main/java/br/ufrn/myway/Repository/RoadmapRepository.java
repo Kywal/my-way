@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.ufrn.myway.Model.Entities.Roadmap.RoadmapBase;
-import br.ufrn.myway.Model.Enums.RoadMapStatus; 
+import br.ufrn.myway.Model.Enums.RoadmapStatus;
 
 @Repository
 public interface RoadmapRepository extends SoftDeletableRepository<RoadmapBase> {
@@ -15,6 +15,6 @@ public interface RoadmapRepository extends SoftDeletableRepository<RoadmapBase> 
     List<RoadmapBase> findRoadMapByUser(Long id);
 
     @Query("SELECT r FROM Roadmap r WHERE r.user.id = :userId AND r.status = :status")
-    RoadmapBase findByStatus(@Param("userId") Long userId, @Param("status") RoadMapStatus status);
+    RoadmapBase findByStatus(@Param("userId") Long userId, @Param("status") RoadmapStatus status);
 
 }

@@ -12,7 +12,7 @@ import br.ufrn.myway.Model.Entities.StudyTopic;
 import br.ufrn.myway.Model.Entities.User;
 import br.ufrn.myway.Model.Enums.ErrorMessageUtils;
 import br.ufrn.myway.Model.Enums.GoalStatus;
-import br.ufrn.myway.Model.Enums.RoadMapStatus;
+import br.ufrn.myway.Model.Enums.RoadmapStatus;
 import br.ufrn.myway.Model.Enums.StudyTopicStatus;
 import br.ufrn.myway.Repository.RoadmapRepository;
 import br.ufrn.myway.Service.BusinessException;
@@ -41,7 +41,7 @@ public class RoadmapService {
             roadmap.setUser(user);
         }
         if (roadmap.getStatus() == null) {
-            roadmap.setStatus(RoadMapStatus.ACTIVE);
+            roadmap.setStatus(RoadmapStatus.ACTIVE);
         }
 
         return roadmapRepository.save(roadmap);
@@ -61,17 +61,17 @@ public class RoadmapService {
 
     public RoadmapBase cancelRoadmap(Long id) {
         RoadmapBase roadmap = findById(id);
-        roadmap.setStatus(RoadMapStatus.CANCELLED);
+        roadmap.setStatus(RoadmapStatus.CANCELLED);
         return save(roadmap, roadmap.getUser().getId());
     }
 
     public RoadmapBase finishRoadmap(Long id) {
         RoadmapBase roadmap = findById(id);
-        roadmap.setStatus(RoadMapStatus.CONCLUDED);
+        roadmap.setStatus(RoadmapStatus.CONCLUDED);
         return save(roadmap, roadmap.getUser().getId());
     }
 
-    public RoadmapBase getByStatus(Long userId, RoadMapStatus status) {
+    public RoadmapBase getByStatus(Long userId, RoadmapStatus status) {
         RoadmapBase roadmap = roadmapRepository.findByStatus(userId, status);
         if (roadmap == null) {
             throw new BusinessException(HttpStatus.NOT_FOUND, ErrorMessageUtils.ERROR_NOT_FOUND.getMessage("Roadmap"));
@@ -90,9 +90,9 @@ public class RoadmapService {
         prompt = prompt.concat("Se o usuário cancelou um roadmap/goal/studyTopic, pode ser um assunto que não lhe interessa, ou que ele já saiba, ou até mesmo que ele ache avançado, avalie.\n");
 
         for (RoadmapBase roadmap : roadmaps) {
-            if (roadmap.getStatus() == RoadMapStatus.CANCELLED) {
+            if (roadmap.getStatus() == RoadmapStatus.CANCELLED) {
                 prompt = prompt.concat("O usuário cancelou o roadmap de objetivo principal: " + roadmap.getMainGoal() + ".\n");
-            } else if (roadmap.getStatus() == RoadMapStatus.CONCLUDED) {
+            } else if (roadmap.getStatus() == RoadmapStatus.CONCLUDED) {
                 prompt = prompt.concat("O usuário concluiu o roadmap de objetivo principal: " + roadmap.getMainGoal() + ".\n");
             }
 

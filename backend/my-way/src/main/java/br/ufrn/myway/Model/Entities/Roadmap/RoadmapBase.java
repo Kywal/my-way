@@ -6,9 +6,8 @@ import java.util.List;
 import br.ufrn.myway.Model.Entities.AbstractModel;
 import br.ufrn.myway.Model.Entities.Concurso.AbstractConcurso;
 import br.ufrn.myway.Model.Entities.Goal.AbstractGoal;
-import br.ufrn.myway.Model.Entities.Goal.GoalBase;
 import br.ufrn.myway.Model.Entities.User;
-import br.ufrn.myway.Model.Enums.RoadMapStatus;
+import br.ufrn.myway.Model.Enums.RoadmapStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,7 +38,7 @@ public abstract class RoadmapBase extends AbstractModel implements AbstractRoadm
     @OneToMany(mappedBy = "roadmap", cascade = CascadeType.ALL)
     public List<AbstractGoal> goals = new ArrayList<>();
 
-    private RoadMapStatus status;
+    private RoadmapStatus status;
 
     public User getUser() {
         return user;
@@ -74,11 +73,11 @@ public abstract class RoadmapBase extends AbstractModel implements AbstractRoadm
         this.goals = listGoals;
     }
 
-    public RoadMapStatus getStatus() {
+    public RoadmapStatus getStatus() {
         return status;
     }
 
-    public void setStatus(RoadMapStatus status) {
+    public void setStatus(RoadmapStatus status) {
         this.status = status;
     }
 
