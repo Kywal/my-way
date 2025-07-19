@@ -22,9 +22,12 @@ public abstract class RoadmapMapper {
 
     public abstract RoadmapConcursoPoliciaCivil toRoadmapConcursoPoliciaCivilEntity(RequestRoadmapDTO request);
     public abstract RoadmapConcursoPoliciaCivil toRoadmapConcursoPoliciaCivilEntity(RequestFullRoadmapDTO request);
-    public abstract RoadmapConcursoGeneralista toEntity(RequestRoadmapDTO roadmapDTO);
-    public abstract RoadmapConcursoGeneralista toEntity(RequestFullRoadmapDTO roadmapDTO);
+    public abstract RoadmapConcursoGeneralista toRoadmapConcursoGeneralistaEntity(RequestRoadmapDTO roadmapDTO);
+    public abstract RoadmapConcursoGeneralista toRoadmapConcursoGeneralistaEntity(RequestFullRoadmapDTO roadmapDTO);
 
+    public abstract RoadmapConcursoProfessor toRoadmapConcursoProfessorEntity(RequestRoadmapDTO roadmapDTO);
+    public abstract RoadmapConcursoProfessor toRoadmapConcursoProfessorEntity(RequestFullRoadmapDTO roadmapDTO);
+ 
     public abstract ResponseRoadmapDTO toResponse(RoadmapConcursoPoliciaCivil roadmap);
     public abstract ResponseRoadmapDTO toResponse(RoadmapConcursoGeneralista roadmap);
     public abstract ResponseRoadmapDTO toResponse(RoadmapConcursoProfessor roadmapConcursoProfessor);
