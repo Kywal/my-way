@@ -1,8 +1,8 @@
 package br.ufrn.myway.coldspots.Roadmap.service;
 
-public interface AbstractAiRoadmapService<RoadmapType> {
+public interface AbstractAiRoadmapService<RoadmapType, RoadmapDTOType> {
 
-    RoadmapType generateRoadmap(
+    RoadmapDTOType generateRoadmap(
             String mainGoal,
             String description,
             String aditionalInfo,
