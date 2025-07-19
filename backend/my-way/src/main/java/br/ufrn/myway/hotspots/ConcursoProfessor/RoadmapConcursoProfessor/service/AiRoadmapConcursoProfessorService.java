@@ -1,25 +1,25 @@
 package br.ufrn.myway.hotspots.ConcursoProfessor.RoadmapConcursoProfessor.service;
 
+import br.ufrn.myway.coldspots.model.DTO.Request.RequestRoadmapDTO;
+import br.ufrn.myway.coldspots.model.DTO.Response.ResponseGenerateRoadmapDTO;
+import br.ufrn.myway.coldspots.model.entities.Concurso.ConcursoBase;
+import br.ufrn.myway.coldspots.model.entities.Concurso.ConcursoPoliciaCivil;
+import br.ufrn.myway.coldspots.model.entities.Goal.AbstractGoal;
+import br.ufrn.myway.coldspots.model.entities.Goal.GoalBase;
+import br.ufrn.myway.coldspots.model.entities.StudyTopic;
+import br.ufrn.myway.coldspots.model.entities.User;
+import br.ufrn.myway.coldspots.model.entities.roadmap.RoadmapConcursoProfessor;
+import br.ufrn.myway.coldspots.model.enums.GoalStatus;
+import br.ufrn.myway.coldspots.model.mapper.RoadmapMapper;
+import br.ufrn.myway.hotspots.Goal.service.GoalService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.Service.GoalService.GoalService;
 import br.ufrn.myway.coldspots.Roadmap.service.AbstractAiRoadmapService;
 import br.ufrn.myway.coldspots.StudyTopics.service.StudyTopicService;
 import br.ufrn.myway.coldspots.User.service.UserService;
-import br.ufrn.myway.model.DTO.Request.RequestRoadmapDTO;
-import br.ufrn.myway.model.DTO.Response.ResponseGenerateRoadmapDTO;
-import br.ufrn.myway.model.entities.Concurso.ConcursoBase;
-import br.ufrn.myway.model.entities.Concurso.ConcursoPoliciaCivil;
-import br.ufrn.myway.model.entities.Goal.AbstractGoal;
-import br.ufrn.myway.model.entities.Goal.GoalBase;
-import br.ufrn.myway.model.entities.StudyTopic;
-import br.ufrn.myway.model.entities.User;
-import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoProfessor;
-import br.ufrn.myway.model.enums.GoalStatus;
-import br.ufrn.myway.model.mapper.RoadmapMapper;
 
 @Service
 public class AiRoadmapConcursoProfessorService implements AbstractAiRoadmapService<RoadmapConcursoProfessor, ResponseGenerateRoadmapDTO> {

@@ -2,8 +2,8 @@ package br.ufrn.myway.hotspots.ConcursoPoliciaCivil.RoadmapConcursoPoliciaCivil.
 
 import br.ufrn.myway.coldspots.Common.repository.SoftDeletableRepository;
 import br.ufrn.myway.coldspots.Roadmap.repository.AbstractRoadmapRepository;
-import br.ufrn.myway.model.enums.RoadmapStatus;
-import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoPoliciaCivil;
+import br.ufrn.myway.coldspots.model.enums.RoadmapStatus;
+import br.ufrn.myway.coldspots.model.entities.roadmap.RoadmapConcursoPoliciaCivil;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

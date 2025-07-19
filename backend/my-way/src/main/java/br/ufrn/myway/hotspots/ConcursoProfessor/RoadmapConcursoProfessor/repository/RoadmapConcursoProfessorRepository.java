@@ -3,6 +3,8 @@ package br.ufrn.myway.hotspots.ConcursoProfessor.RoadmapConcursoProfessor.reposi
 import java.util.List;
 import java.util.Optional;
 
+import br.ufrn.myway.coldspots.model.entities.roadmap.RoadmapConcursoProfessor;
+import br.ufrn.myway.coldspots.model.enums.RoadmapStatus;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,8 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import br.ufrn.myway.coldspots.Common.repository.SoftDeletableRepository;
 import br.ufrn.myway.coldspots.Roadmap.repository.AbstractRoadmapRepository;
-import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoProfessor;
-import br.ufrn.myway.model.enums.RoadmapStatus;
+
 
 @Profile("Professor")
 @Repository

@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.model.entities.User;
-import br.ufrn.myway.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.coldspots.model.entities.User;
+import br.ufrn.myway.coldspots.model.enums.ErrorMessageUtils;
 import br.ufrn.myway.coldspots.User.repository.UserRepository;
 
 @Service

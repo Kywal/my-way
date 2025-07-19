@@ -1,27 +1,25 @@
 package br.ufrn.myway.hotspots.ConcursoGeneralista.RoadmapConcursoGeneralista.service;
 
+import br.ufrn.myway.coldspots.Exceptions.BusinessException;
 import br.ufrn.myway.coldspots.Roadmap.service.AbstractRoadmapService;
 import br.ufrn.myway.coldspots.Roadmap.service.RoadmapBaseService;
-import br.ufrn.myway.model.entities.Goal.AbstractGoal;
-import br.ufrn.myway.model.entities.roadmap.RoadmapBase;
-import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoGeneralista;
-import br.ufrn.myway.model.entities.StudyTopic;
-import br.ufrn.myway.model.entities.User;
-import br.ufrn.myway.model.enums.ErrorMessageUtils;
-import br.ufrn.myway.model.enums.GoalStatus;
-import br.ufrn.myway.model.enums.RoadmapStatus;
-import br.ufrn.myway.model.enums.StudyTopicStatus;
-import br.ufrn.myway.hotspots.ConcursoGeneralista.RoadmapConcursoGeneralista.repository.RoadmapConcursoGeneralistaRepository;
-import br.ufrn.myway.coldspots.Exceptions.BusinessException;
 import br.ufrn.myway.coldspots.User.service.UserService;
+import br.ufrn.myway.coldspots.model.entities.Goal.AbstractGoal;
+import br.ufrn.myway.coldspots.model.entities.StudyTopic;
+import br.ufrn.myway.coldspots.model.entities.User;
+import br.ufrn.myway.coldspots.model.entities.roadmap.RoadmapBase;
+import br.ufrn.myway.coldspots.model.entities.roadmap.RoadmapConcursoGeneralista;
+import br.ufrn.myway.coldspots.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.coldspots.model.enums.GoalStatus;
+import br.ufrn.myway.coldspots.model.enums.RoadmapStatus;
+import br.ufrn.myway.coldspots.model.enums.StudyTopicStatus;
+import br.ufrn.myway.hotspots.ConcursoGeneralista.RoadmapConcursoGeneralista.repository.RoadmapConcursoGeneralistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Profile("Generalista")
 @Service
 public class RoadmapConcursoGeneralistaService extends RoadmapBaseService implements AbstractRoadmapService<RoadmapConcursoGeneralista> {
 

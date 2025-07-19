@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
 
-import br.ufrn.myway.model.entities.AbstractModel;
+import br.ufrn.myway.coldspots.model.entities.AbstractModel;
 import jakarta.transaction.Transactional;
 
 @NoRepositoryBean

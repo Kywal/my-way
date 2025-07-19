@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.model.entities.Person;
+import br.ufrn.myway.coldspots.model.entities.Person;
 import br.ufrn.myway.coldspots.Person.repository.PersonRepository;
 
 @Service

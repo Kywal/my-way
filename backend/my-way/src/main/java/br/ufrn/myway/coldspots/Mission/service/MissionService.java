@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Optional;
 
 import br.ufrn.myway.coldspots.Exceptions.BusinessException;
-import br.ufrn.myway.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.coldspots.model.enums.ErrorMessageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.model.entities.Mission;
-import br.ufrn.myway.model.entities.User;
-import br.ufrn.myway.model.entities.UserMission;
+import br.ufrn.myway.coldspots.Mission.model.Mission;
+import br.ufrn.myway.coldspots.model.entities.User;
+import br.ufrn.myway.coldspots.Mission.model.UserMission;
 import br.ufrn.myway.coldspots.Mission.repository.MissionRepository;
 import br.ufrn.myway.coldspots.Mission.repository.UserMissionRepository;
 

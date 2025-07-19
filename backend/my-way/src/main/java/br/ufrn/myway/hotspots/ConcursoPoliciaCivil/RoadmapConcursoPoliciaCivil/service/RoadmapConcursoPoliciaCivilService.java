@@ -1,24 +1,23 @@
 package br.ufrn.myway.hotspots.ConcursoPoliciaCivil.RoadmapConcursoPoliciaCivil.service;
 
-import java.util.List;
-
+import br.ufrn.myway.coldspots.Exceptions.BusinessException;
+import br.ufrn.myway.coldspots.Roadmap.service.AbstractRoadmapService;
+import br.ufrn.myway.coldspots.Roadmap.service.RoadmapBaseService;
+import br.ufrn.myway.coldspots.model.entities.Goal.AbstractGoal;
+import br.ufrn.myway.coldspots.model.entities.StudyTopic;
+import br.ufrn.myway.coldspots.model.entities.roadmap.RoadmapBase;
+import br.ufrn.myway.coldspots.model.entities.roadmap.RoadmapConcursoPoliciaCivil;
+import br.ufrn.myway.coldspots.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.coldspots.model.enums.GoalStatus;
+import br.ufrn.myway.coldspots.model.enums.RoadmapStatus;
+import br.ufrn.myway.coldspots.model.enums.StudyTopicStatus;
+import br.ufrn.myway.hotspots.ConcursoPoliciaCivil.RoadmapConcursoPoliciaCivil.repository.RoadmapConcursoPoliciaCivilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.coldspots.Exceptions.BusinessException;
-import br.ufrn.myway.coldspots.Roadmap.service.AbstractRoadmapService;
-import br.ufrn.myway.coldspots.Roadmap.service.RoadmapBaseService;
-import br.ufrn.myway.hotspots.ConcursoPoliciaCivil.RoadmapConcursoPoliciaCivil.repository.RoadmapConcursoPoliciaCivilRepository;
-import br.ufrn.myway.model.entities.Goal.AbstractGoal;
-import br.ufrn.myway.model.entities.StudyTopic;
-import br.ufrn.myway.model.entities.roadmap.RoadmapBase;
-import br.ufrn.myway.model.entities.roadmap.RoadmapConcursoPoliciaCivil;
-import br.ufrn.myway.model.enums.ErrorMessageUtils;
-import br.ufrn.myway.model.enums.GoalStatus;
-import br.ufrn.myway.model.enums.RoadmapStatus;
-import br.ufrn.myway.model.enums.StudyTopicStatus;
+import java.util.List;
 
 @Profile("Policia-civil")
 @Service

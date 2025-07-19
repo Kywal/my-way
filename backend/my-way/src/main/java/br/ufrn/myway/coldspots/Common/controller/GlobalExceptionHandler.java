@@ -1,6 +1,6 @@
 package br.ufrn.myway.coldspots.Common.controller;
 
-import br.ufrn.myway.model.DTO.ExceptionDTO;
+import br.ufrn.myway.coldspots.model.DTO.ExceptionDTO;
 import br.ufrn.myway.coldspots.Exceptions.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

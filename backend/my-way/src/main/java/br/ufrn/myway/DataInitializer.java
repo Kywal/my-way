@@ -1,8 +1,8 @@
 package br.ufrn.myway;
 
-import br.ufrn.myway.model.entities.Mission;
-import br.ufrn.myway.model.enums.MissionFrequency;
-import br.ufrn.myway.model.enums.MissionType;
+import br.ufrn.myway.coldspots.Mission.model.Mission;
+import br.ufrn.myway.coldspots.model.enums.MissionFrequency;
+import br.ufrn.myway.coldspots.model.enums.MissionType;
 import br.ufrn.myway.coldspots.Mission.repository.MissionRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

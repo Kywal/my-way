@@ -3,18 +3,18 @@ package br.ufrn.myway.coldspots.StudyTopics.service;
 import java.util.List;
 
 import br.ufrn.myway.coldspots.Exceptions.BusinessException;
-import br.ufrn.myway.model.DTO.Request.RequestStudyTopicDTO;
-import br.ufrn.myway.model.entities.StudyTopic;
-import br.ufrn.myway.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.coldspots.model.DTO.Request.RequestStudyTopicDTO;
+import br.ufrn.myway.coldspots.model.entities.StudyTopic;
+import br.ufrn.myway.coldspots.model.enums.ErrorMessageUtils;
 import br.ufrn.myway.coldspots.StudyTopics.repository.StudyTopicRepository;
-import br.ufrn.myway.Service.GoalService.GoalService;
+import br.ufrn.myway.hotspots.Goal.service.GoalService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.model.entities.Goal.GoalBase;
-import br.ufrn.myway.model.enums.StudyTopicStatus;
+import br.ufrn.myway.coldspots.model.entities.Goal.GoalBase;
+import br.ufrn.myway.coldspots.model.enums.StudyTopicStatus;
 
 @Service
 public class StudyTopicService {

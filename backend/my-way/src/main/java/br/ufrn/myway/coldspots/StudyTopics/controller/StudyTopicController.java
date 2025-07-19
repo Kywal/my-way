@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufrn.myway.model.DTO.Request.RequestStudyTopicDTO;
-import br.ufrn.myway.model.DTO.Response.ResponseStudyTopicDTO;
-import br.ufrn.myway.model.entities.StudyTopic;
-import br.ufrn.myway.model.mapper.StudyTopicMapper;
+import br.ufrn.myway.coldspots.model.DTO.Request.RequestStudyTopicDTO;
+import br.ufrn.myway.coldspots.model.DTO.Response.ResponseStudyTopicDTO;
+import br.ufrn.myway.coldspots.model.entities.StudyTopic;
+import br.ufrn.myway.coldspots.model.mapper.StudyTopicMapper;
 import br.ufrn.myway.coldspots.StudyTopics.service.StudyTopicService;
 
 @RestController

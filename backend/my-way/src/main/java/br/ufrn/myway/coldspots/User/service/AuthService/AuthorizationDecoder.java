@@ -1,6 +1,6 @@
 package br.ufrn.myway.coldspots.User.service.AuthService;
 
-import br.ufrn.myway.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.coldspots.model.enums.ErrorMessageUtils;
 import br.ufrn.myway.coldspots.Exceptions.BusinessException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;

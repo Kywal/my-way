@@ -2,6 +2,11 @@ package br.ufrn.myway.hotspots.ConcursoProfessor.RoadmapConcursoProfessor.contro
 
 import java.util.List;
 
+import br.ufrn.myway.coldspots.model.DTO.Request.RequestFullRoadmapDTO;
+import br.ufrn.myway.coldspots.model.DTO.Request.RequestRoadmapDTO;
+import br.ufrn.myway.coldspots.model.DTO.Response.ResponseRoadmapDTO;
+import br.ufrn.myway.coldspots.model.enums.RoadmapStatus;
+import br.ufrn.myway.coldspots.model.mapper.RoadmapMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -16,11 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.myway.coldspots.Roadmap.controller.AbstractRoadmapController;
 import br.ufrn.myway.hotspots.ConcursoProfessor.RoadmapConcursoProfessor.service.RoadmapConcursoProfessorService;
-import br.ufrn.myway.model.DTO.Request.RequestFullRoadmapDTO;
-import br.ufrn.myway.model.DTO.Request.RequestRoadmapDTO;
-import br.ufrn.myway.model.DTO.Response.ResponseRoadmapDTO;
-import br.ufrn.myway.model.enums.RoadmapStatus;
-import br.ufrn.myway.model.mapper.RoadmapMapper;
 
 @Profile("Professor")
 @RestController

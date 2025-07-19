@@ -1,6 +1,6 @@
 package br.ufrn.myway.coldspots.User.service.AuthService;
 
-import br.ufrn.myway.model.enums.ErrorMessageUtils;
+import br.ufrn.myway.coldspots.model.enums.ErrorMessageUtils;
 import br.ufrn.myway.coldspots.Exceptions.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.ufrn.myway.model.entities.User;
+import br.ufrn.myway.coldspots.model.entities.User;
 import br.ufrn.myway.coldspots.User.repository.UserRepository;
 
 @Service
